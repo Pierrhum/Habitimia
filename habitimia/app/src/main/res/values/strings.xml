@@ -2,6 +2,7 @@
     <string name="app_name">Habitimia</string>
     <!-- Strings related to login -->
     <string name="No_account">Don\'t you have an account ?</string>
+    <string name="Already_account">Already have an account ?</string>
     <string name="Username">Username</string>
     <string name="Email">Email</string>
     <string name="Password">Password</string>

@@ -6,4 +6,127 @@
     android:layout_height="match_parent"
     tools:context=".ui.login.RegisterActivity">
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="110dp"
+        android:layout_marginEnd="110dp"
+        android:layout_marginBottom="7dp"
+        android:text="@string/Already_account"
+        android:textColor="@color/blue_btn"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/login_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/register_box" />
+
+    <ImageView
+        android:id="@+id/background2"
+        android:layout_width="442dp"
+        android:layout_height="430dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/habitimia_title2"
+        app:srcCompat="@drawable/background_1" />
+
+    <ImageView
+        android:id="@+id/habitimia_title2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/title" />
+
+    <ImageView
+        android:id="@+id/register_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@id/background2"
+        app:layout_constraintStart_toStartOf="@id/background2"
+        app:layout_constraintTop_toTopOf="@id/background2"
+        app:srcCompat="@drawable/whitebox" />
+
+    <EditText
+        android:id="@+id/register_username"
+        android:layout_width="280dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/btn_3"
+        android:hint="@string/Username"
+        android:inputType="textEmailAddress"
+        android:selectAllOnFocus="true"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@id/register_box"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@id/register_box"
+        app:layout_constraintTop_toTopOf="@id/register_box" />
+
+    <EditText
+        android:id="@+id/register_email"
+        android:layout_width="280dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/btn_3"
+        android:hint="@string/Email"
+        android:inputType="textEmailAddress"
+        android:selectAllOnFocus="true"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@id/register_box"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="@id/register_box"
+        app:layout_constraintTop_toBottomOf="@id/register_username" />
+
+    <EditText
+        android:id="@+id/register_password"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/btn_3"
+        android:hint="@string/Password"
+        android:imeActionLabel="@string/Sign_in"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:selectAllOnFocus="true"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@id/register_box"
+        app:layout_constraintStart_toStartOf="@id/register_box"
+        app:layout_constraintTop_toBottomOf="@id/register_email" />
+
+    <Button
+        android:id="@+id/register_btn"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/btn_2"
+        android:enabled="true"
+        android:text="@string/Register"
+        android:textSize="18sp"
+        app:backgroundTint="@color/orange_btn"
+        app:layout_constraintBottom_toBottomOf="@id/register_box"
+        app:layout_constraintEnd_toEndOf="@id/register_box"
+        app:layout_constraintStart_toStartOf="@id/register_box" />
+
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="66dp"
+        android:layout_marginEnd="66dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/btn_1"
+        android:backgroundTintMode="add"
+        android:text="@string/Sign_in"
+        android:textColor="@color/blue_btn"
+        android:textSize="18sp"
+        app:backgroundTint="@color/blue_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

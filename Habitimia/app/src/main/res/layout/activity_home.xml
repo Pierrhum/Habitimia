@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue_btn"
+    android:backgroundTint="@color/blue_btn"
+    tools:context=".ui.home.HomeActivity">
+
+    <ImageView
+        android:id="@+id/home_top_box"
+        android:layout_width="433dp"
+        android:layout_height="333dp"
+        android:layout_marginTop="-60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/home_top_box" />
+
+    <ImageButton
+        android:id="@+id/home_quests_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="-15dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/home_dailies_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_top_box"
+        app:srcCompat="@drawable/home_quests_btn"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/home_dailies_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-15dp"
+        android:layout_marginEnd="10dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/home_quests_btn"
+        app:layout_constraintTop_toBottomOf="@+id/home_top_box"
+        app:srcCompat="@drawable/home_dailies_btn"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/home_guild_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/home_arena_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_quests_btn"
+        app:srcCompat="@drawable/home_guild_btn"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/home_arena_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/home_guild_btn"
+        app:layout_constraintTop_toBottomOf="@+id/home_dailies_btn"
+        app:srcCompat="@drawable/home_arena_btn"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageView
+        android:id="@+id/bottom_box"
+        android:layout_width="420dp"
+        android:layout_height="85dp"
+        android:layout_marginBottom="-30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/bottom_box" />
+
+    <ImageButton
+        android:id="@+id/add_quest_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@id/bottom_box"
+        app:layout_constraintEnd_toEndOf="@id/bottom_box"
+        app:layout_constraintStart_toStartOf="@id/bottom_box"
+        app:srcCompat="@drawable/button_plus"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#00FFFFFF"
+        app:srcCompat="@drawable/home_image"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="681dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

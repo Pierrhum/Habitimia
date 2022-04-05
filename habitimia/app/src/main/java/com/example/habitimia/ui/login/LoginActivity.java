@@ -79,7 +79,16 @@ public class LoginActivity extends AppCompatActivity {
                 setResult(Activity.RESULT_OK);
 
                 //Complete and destroy login activity once successful
-                finish();
+                /***
+                 * TODO : Connexion
+                 * 1 - Lire base de données
+                 * 2 - Récupérer données
+                 * Trouver la ligne où usernameEditText.getText().toString() == USER.Username
+                 * Si introuvable : erreur : Aucun compte associé à ce pseudo
+                 * Sinon si passwordEditText.getText().toString() == USER.password
+                 * Instancier User avec les données de la ligne et ouvrir intent HomeActivity
+                 * Sinon : erreur : Mot de passe incorrect
+                 */
             }
         });
 

@@ -76,7 +76,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="64dp"
         android:background="@drawable/btn_2"
-        android:enabled="true"
+        android:enabled="false"
         android:text="@string/Sign_in"
         android:textSize="18sp"
         app:backgroundTint="@color/orange_btn"

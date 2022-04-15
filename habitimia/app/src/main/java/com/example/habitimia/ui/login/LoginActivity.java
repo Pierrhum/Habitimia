@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.habitimia.R;
+import com.example.habitimia.ui.MainActivity;
 import com.example.habitimia.ui.SplashActivity;
 import com.example.habitimia.ui.home.HomeActivity;
 import com.example.habitimia.ui.login.LoginViewModel;
@@ -90,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                  * Instancier User avec les données de la ligne et ouvrir intent HomeActivity
                  * Sinon : erreur : Mot de passe incorrect
                  */
-                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }

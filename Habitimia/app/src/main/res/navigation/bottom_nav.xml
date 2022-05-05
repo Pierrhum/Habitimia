@@ -11,18 +11,18 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/arenaFragment"
-        android:name="com.example.habitimia.ArenaFragment"
-        android:label="fragment_arena"
-        tools:layout="@layout/fragment_arena" />
+        android:id="@+id/questFragment"
+        android:name="com.example.habitimia.ui.QuestFragment"
+        android:label="fragment_quest"
+        tools:layout="@layout/fragment_quest" />
     <fragment
         android:id="@+id/dailyFragment"
-        android:name="com.example.habitimia.DailyFragment"
+        android:name="com.example.habitimia.ui.DailyFragment"
         android:label="fragment_daily"
         tools:layout="@layout/fragment_daily" />
     <fragment
-        android:id="@+id/guildFragment"
-        android:name="com.example.habitimia.GuildFragment"
-        android:label="fragment_guild"
-        tools:layout="@layout/fragment_guild" />
+        android:id="@+id/arenaFragment"
+        android:name="com.example.habitimia.ui.ArenaFragment"
+        android:label="fragment_arena"
+        tools:layout="@layout/fragment_arena" />
 </navigation>

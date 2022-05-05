@@ -3,14 +3,21 @@
 
     <item android:title=""
         android:id="@+id/homeFragment"
-        android:icon="@drawable/home_image"
-        />
+        android:icon="@drawable/home_image" />
+
     <item android:title=""
-    android:icon="@drawable/quest_image"
-    />
+    android:id="@+id/questFragment"
+    android:icon="@drawable/quest_image" />
+
+    <item android:id="@+id/mplaceholder"
+        android:title=""
+        />
+
     <item android:title=""
         android:id="@+id/dailyFragment"
         android:icon="@drawable/dailies_image" />
+
+
     <item android:title=""
         android:id="@+id/arenaFragment"
         android:icon="@drawable/arena_image" />

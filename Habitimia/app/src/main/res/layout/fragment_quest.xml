@@ -4,11 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.GuildFragment">
+    tools:context=".ui.QuestFragment">
+
+    <!-- TODO: Update blank fragment layout -->
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="407dp"
-        android:src="@drawable/home_guild_btn" />
+        android:layout_height="437dp"
+        android:src="@drawable/quest_image" />
+
 </FrameLayout>

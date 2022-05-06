@@ -29,6 +29,10 @@ import com.example.habitimia.ui.SplashActivity;
 import com.example.habitimia.ui.home.HomeActivity;
 import com.example.habitimia.ui.login.LoginViewModel;
 import com.example.habitimia.ui.login.LoginViewModelFactory;
+import com.example.habitimia.util.Server;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -91,9 +95,27 @@ public class LoginActivity extends AppCompatActivity {
                  * Instancier User avec les données de la ligne et ouvrir intent HomeActivity
                  * Sinon : erreur : Mot de passe incorrect
                  */
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                //1
+                String request_params = "username=" + usernameEditText.getText().toString()
+                                        + "&" +
+                                         "password=" + passwordEditText.getText().toString();
+
+                JSONObject response = Server.sendRequest("login", request_params);
+                if (response == null){
+                    Integer errorString = null;
+                    showLoginFailed(errorString);
+                }else{
+                    LoggedInUserView model = null;
+                    updateUiWithUser(model);
+
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
+//                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                startActivity(intent);
+//                finish();
             }
         });
 

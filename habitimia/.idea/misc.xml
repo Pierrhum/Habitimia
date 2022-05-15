@@ -3,16 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Albena/Documents/Habitimia/habitimia/app/src/main/res/layout/activity_home.xml" value="0.21302083333333333" />
-        <entry key="..\:/Users/Albena/Documents/Habitimia/habitimia/app/src/main/res/layout/activity_login.xml" value="0.21302083333333333" />
-        <entry key="..\:/Users/Albena/Documents/Habitimia/habitimia/app/src/main/res/layout/activity_main.xml" value="0.2441123188405797" />
-        <entry key="..\:/Users/Albena/Documents/Habitimia/habitimia/app/src/main/res/layout/activity_register.xml" value="0.2441123188405797" />
-        <entry key="..\:/Users/Albena/Documents/Habitimia/habitimia/app/src/main/res/layout/activity_splash.xml" value="0.16458333333333333" />
-        <entry key="..\:/Users/Albena/Documents/Habitimia/habitimia/app/src/main/res/layout/fragment_arena.xml" value="0.2441123188405797" />
-        <entry key="..\:/Users/Albena/Documents/Habitimia/habitimia/app/src/main/res/layout/fragment_daily.xml" value="0.2441123188405797" />
-        <entry key="..\:/Users/Albena/Documents/Habitimia/habitimia/app/src/main/res/layout/fragment_guild.xml" value="0.2441123188405797" />
-        <entry key="..\:/Users/Albena/Documents/Habitimia/habitimia/app/src/main/res/layout/fragment_home.xml" value="0.2441123188405797" />
-        <entry key="..\:/Users/Albena/Documents/Habitimia/habitimia/app/src/main/res/layout/fragment_quest.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/drawable/rectangle.xml" value="0.2675" />
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/drawable/round_button.xml" value="0.306" />
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout-w936dp/activity_login.xml" value="0.141015625" />
@@ -25,8 +16,11 @@
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/activity_splash.xml" value="0.264" />
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/content_guild.xml" value="0.22" />
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/fragment_arena.xml" value="0.1947463768115942" />
+        <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/fragment_daily.xml" value="0.20425724637681159" />
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/fragment_first.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/fragment_guild.xml" value="0.20425724637681159" />
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/fragment_quest.xml" value="0.20425724637681159" />
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/fragment_second.xml" value="0.16032608695652173" />
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/menu/bottom_menu.xml" value="0.25" />
       </map>

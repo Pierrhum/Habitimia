@@ -25,7 +25,7 @@ public class Server {
         URL url = null;
         try {
 //            url = new URL("https://api.chucknorris.io/jokes/random");
-            url = new URL("http://10.192.94.54:8080/" + endpoint
+            url = new URL("http://10.192.94.187:8080/" + endpoint
                     + "?" + params); // 10.0.2.2 10.192.94.54
         } catch (MalformedURLException e) {
             e.printStackTrace();

@@ -4,11 +4,17 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Debug;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.example.habitimia.R;
+import com.example.habitimia.ui.ArenaFragment;
+import com.example.habitimia.ui.DailyFragment;
+import com.example.habitimia.ui.GuildFragment;
+import com.example.habitimia.ui.QuestFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,6 +27,11 @@ public class HomeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private ImageButton ArenaBtn;
+    private ImageButton DailyBtn;
+    private ImageButton GuildBtn;
+    private ImageButton QuestBtn;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -55,12 +66,49 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        ArenaBtn = (ImageButton) view.findViewById(R.id.home_arena_btn);
+        DailyBtn = (ImageButton) view.findViewById(R.id.home_dailies_btn);
+        GuildBtn = (ImageButton) view.findViewById(R.id.home_guild_btn);
+        QuestBtn = (ImageButton) view.findViewById(R.id.home_quests_btn);
+
+        ArenaBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer,new ArenaFragment()).commit();
+            }
+        });
+
+        DailyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer,new DailyFragment()).commit();
+            }
+        });
+
+        GuildBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer,new GuildFragment()).commit();
+            }
+        });
+
+        QuestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer,new QuestFragment()).commit();
+            }
+        });
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return view;
+
     }
 }

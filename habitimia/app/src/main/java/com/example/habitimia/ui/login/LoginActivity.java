@@ -101,11 +101,11 @@ public class LoginActivity extends AppCompatActivity {
 
                 JSONObject response = Server.sendRequest("login", request_params);
                 if (response == null){
-                    Integer errorString = null;
+                    Integer errorString = R.string.invalid_password_or_username;
                     showLoginFailed(errorString);
                 }else{
-                    LoggedInUserView model = null;
-                    updateUiWithUser(model);
+//                    LoggedInUserView model = null;
+//                    updateUiWithUser(model);
 
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);

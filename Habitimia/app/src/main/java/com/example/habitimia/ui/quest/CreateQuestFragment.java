@@ -7,8 +7,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.example.habitimia.R;
+import com.example.habitimia.ui.MainActivity;
+import com.example.habitimia.ui.home.HomeFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +28,8 @@ public class CreateQuestFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private ImageButton Back;
 
     public CreateQuestFragment() {
         // Required empty public constructor
@@ -61,6 +66,16 @@ public class CreateQuestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_quest, container, false);
+        View view = inflater.inflate(R.layout.fragment_create_quest, container, false);
+        Back = (ImageButton) view.findViewById(R.id.back_create_quest);
+
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer, new QuestFragment()).commit();
+            }
+        });
+        ((MainActivity) getActivity()).setBackgroundColor(getResources().getColor(R.color.white));
+        return view;
     }
 }

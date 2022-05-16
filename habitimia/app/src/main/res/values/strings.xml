@@ -26,6 +26,7 @@
 
     <!-- TODO: Quests -->
     <string name="quests">Quests</string>
+    <string name="create_quest">Create Quest</string>
 
     <!-- TODO: Dailies -->
     <string name="dailies">Dailies</string>

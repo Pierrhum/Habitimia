@@ -23,6 +23,7 @@ import com.example.habitimia.R;
 import com.example.habitimia.data.model.User;
 import com.example.habitimia.ui.arena.ArenaFragment;
 import com.example.habitimia.ui.home.HomeFragment;
+import com.example.habitimia.ui.quest.CreateQuestFragment;
 import com.example.habitimia.ui.quest.DailyFragment;
 import com.example.habitimia.ui.quest.QuestFragment;
 import com.example.habitimia.util.MyNotification;
@@ -41,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton FAB;
     private android.hardware.SensorManager sensorManager;
 
-    private Fragment mCurrentFragment = null;
+    private Fragment mOldFragment = null;
+    private Fragment mCurrentFragment = new HomeFragment();
     private float mAccel;
     private float mAccelCurrent;
     private float mAccelLast;
@@ -68,8 +70,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(mCurrentFragment instanceof QuestFragment) {
-
+                    mCurrentFragment = new CreateQuestFragment();
                 }
+                LoadFragment();
             }
         });
 
@@ -87,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.arenaFragment : mCurrentFragment = new ArenaFragment();
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer,mCurrentFragment).commit();
+                LoadFragment();
                 return true;
             }
         });
@@ -101,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
         createTimedNotification(getApplicationContext());
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer,new HomeFragment()).commit();
+        LoadFragment();
     }
 
     @Override
@@ -168,5 +171,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void setBackgroundColor(@ColorInt int color) {
         Root.setBackgroundColor(color);
+    }
+
+    public void setCurrentFragment(Fragment fragment) {
+        mCurrentFragment = fragment;
+    }
+
+    public void LoadFragment() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer, mCurrentFragment).commit();
+    }
+
+    public void LoadFragment(Fragment fragment) {
+        mOldFragment = mCurrentFragment;
+        mCurrentFragment = fragment;
+        LoadFragment();
     }
 }

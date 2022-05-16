@@ -82,28 +82,28 @@ public class HomeFragment extends Fragment {
         ArenaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer,new ArenaFragment()).commit();
+                ((MainActivity) getActivity()).LoadFragment(new ArenaFragment());
             }
         });
 
         DailyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer,new DailyFragment()).commit();
+                ((MainActivity) getActivity()).LoadFragment(new DailyFragment());
             }
         });
 
         GuildBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer,new GuildFragment()).commit();
+                ((MainActivity) getActivity()).LoadFragment(new GuildFragment());
             }
         });
 
         QuestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer,new QuestFragment()).commit();
+                ((MainActivity) getActivity()).LoadFragment(new QuestFragment());
             }
         });
 

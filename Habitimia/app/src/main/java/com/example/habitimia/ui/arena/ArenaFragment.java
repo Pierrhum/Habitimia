@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import com.example.habitimia.R;
 import com.example.habitimia.data.model.User;
 import com.example.habitimia.ui.DailyFragment;
+import com.example.habitimia.ui.MainActivity;
 import com.example.habitimia.ui.home.HomeFragment;
 
 import java.util.ArrayList;
@@ -113,6 +114,8 @@ public class ArenaFragment extends Fragment {
         }
 
         fragTransaction.commit();
+
+        ((MainActivity) getActivity()).setBackgroundColor(getResources().getColor(R.color.white));
         return view;
     }
 }

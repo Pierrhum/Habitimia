@@ -1,13 +1,16 @@
 package com.example.habitimia.ui;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -30,7 +33,8 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    BottomNavigationView bottomNavigationView;
+    private BottomNavigationView bottomNavigationView;
+    private ConstraintLayout Root;
     private android.hardware.SensorManager sensorManager;
 
     private float mAccel;
@@ -48,9 +52,11 @@ public class MainActivity extends AppCompatActivity {
         if (intent != null)
             user = (User) intent.getSerializableExtra("user");
         setContentView(R.layout.activity_main);
+        Root = (ConstraintLayout) findViewById(R.id.MainRoot);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomnavigationbar);
         bottomNavigationView.setBackground(null);
         bottomNavigationView.getMenu().getItem(2).setEnabled(false);
+
         getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer,new HomeFragment()).commit();
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -141,5 +147,9 @@ public class MainActivity extends AppCompatActivity {
         if (isWorking) {
         } else {}
 
+    }
+
+    public void setBackgroundColor(@ColorInt int color) {
+        Root.setBackgroundColor(color);
     }
 }

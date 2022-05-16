@@ -74,6 +74,7 @@ public class GuildFragment extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer, new HomeFragment()).commit();
             }
         });
+        ((MainActivity) getActivity()).setBackgroundColor(getResources().getColor(R.color.white));
         return view;
     }
 }

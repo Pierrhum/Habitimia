@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.example.habitimia.R;
+import com.example.habitimia.ui.MainActivity;
 import com.example.habitimia.ui.arena.ArenaFragment;
 import com.example.habitimia.ui.DailyFragment;
 import com.example.habitimia.ui.GuildFragment;
@@ -105,6 +106,8 @@ public class HomeFragment extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer,new QuestFragment()).commit();
             }
         });
+
+        ((MainActivity) getActivity()).setBackgroundColor(getResources().getColor(R.color.teal_200));
 
         // Inflate the layout for this fragment
         return view;

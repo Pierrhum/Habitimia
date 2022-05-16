@@ -41,8 +41,8 @@
 
             <ImageButton
                 android:id="@+id/back_arena"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginStart="10dp"
                 android:background="#00FFFFFF"
                 android:scaleType="fitCenter"

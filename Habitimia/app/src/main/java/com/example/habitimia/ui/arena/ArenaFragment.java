@@ -9,10 +9,13 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.example.habitimia.R;
 import com.example.habitimia.data.model.User;
+import com.example.habitimia.ui.DailyFragment;
+import com.example.habitimia.ui.home.HomeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,8 @@ public class ArenaFragment extends Fragment {
 
     private LinearLayout Ranking;
     private ArrayList<User> users;
+
+    private ImageButton Back;
 
     public ArenaFragment() {
         // Required empty public constructor
@@ -73,6 +78,14 @@ public class ArenaFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_arena, container, false);
         Ranking = (LinearLayout) view.findViewById(R.id.ranking_content);
+        Back = (ImageButton) view.findViewById(R.id.back_arena);
+
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer, new HomeFragment()).commit();
+            }
+        });
 
         users = new ArrayList<User>();
         User u = new User();

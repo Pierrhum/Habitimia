@@ -11,25 +11,47 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
-        <ImageView
-            android:id="@+id/background_top_bar_arena"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/top_bar_guild"
             android:layout_width="0dp"
-            android:layout_height="125dp"
-            android:src="@drawable/rectangle"
+            android:layout_height="75dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/orange_btn" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/title_arena"
-            android:layout_width="43dp"
-            android:layout_height="27dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="40dp"
-            android:text="@string/guild"
-            app:layout_constraintStart_toStartOf="@id/background_top_bar_arena"
-            app:layout_constraintTop_toTopOf="@id/background_top_bar_arena" />
+            <ImageView
+                android:id="@+id/background_top_bar_guild"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/rectangle"
+                app:tint="@color/orange_btn" />
 
+            <TextView
+                android:id="@+id/title_guild"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="19dp"
+                android:text="@string/guild"
+                android:textColor="@color/text_red"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/background_top_bar_guild"
+                app:layout_constraintStart_toEndOf="@+id/back_guild"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/back_guild"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="10dp"
+                android:background="#00FFFFFF"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_arrow_left"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/dark_blue" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

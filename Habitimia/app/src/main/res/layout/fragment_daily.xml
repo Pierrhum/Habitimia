@@ -12,7 +12,7 @@
         android:background="@color/white">
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/background_top_bar_arena"
             android:layout_width="0dp"
             android:layout_height="125dp"
             android:src="@drawable/rectangle"
@@ -22,14 +22,14 @@
             app:tint="@color/orange_btn" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/title_arena"
             android:layout_width="43dp"
             android:layout_height="27dp"
             android:layout_marginStart="40dp"
             android:layout_marginTop="40dp"
             android:text="@string/dailies"
-            app:layout_constraintStart_toStartOf="@id/imageView5"
-            app:layout_constraintTop_toTopOf="@id/imageView5" />
+            app:layout_constraintStart_toStartOf="@id/background_top_bar_arena"
+            app:layout_constraintTop_toTopOf="@id/background_top_bar_arena" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.habitimia.R;
+import com.example.habitimia.data.model.User;
 import com.example.habitimia.ui.home.HomeFragment;
 import com.example.habitimia.util.MyNotification;
 import com.example.habitimia.util.NotificationReceiver;
@@ -38,11 +39,15 @@ public class MainActivity extends AppCompatActivity {
     private float mAccelLast;
     int sensor = Sensor.TYPE_ACCELEROMETER;
 
+    User user;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        if (intent != null)
+            user = (User) intent.getSerializableExtra("user");
         setContentView(R.layout.activity_main);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomnavigationbar);
         bottomNavigationView.setBackground(null);

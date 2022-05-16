@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -24,12 +25,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.habitimia.R;
+import com.example.habitimia.data.model.Statistics;
+import com.example.habitimia.data.model.User;
 import com.example.habitimia.ui.MainActivity;
 import com.example.habitimia.ui.SplashActivity;
 import com.example.habitimia.ui.login.LoginViewModel;
 import com.example.habitimia.ui.login.LoginViewModelFactory;
 import com.example.habitimia.util.Server;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -99,22 +105,53 @@ public class LoginActivity extends AppCompatActivity {
                                         + "&" +
                                          "password=" + passwordEditText.getText().toString();
 
-                JSONObject response = Server.sendRequest("login", request_params);
+//                JSONObject response = Server.sendRequest("login", request_params);
+                JSONObject response = null;
+                JSONArray response_all_params = null;
+                try {
+                    response = new JSONObject(
+                            "{\"id\": \"1\",\n" +
+                            "\"username\": \"Mia\",\n" +
+                            "\"email\": \"mia@love.pierre\",\n" +
+                            "\"password\": \"123456\",\n" +
+                            "\"avatar\": \"MAGICIAN\",\n" +
+                            "\"statistics\": {\n" +
+                            "   \"id\": \"1\",\n" +
+                            "   \"adventurerClass\": \"A\",\n" +
+                            "   \"battlesWon\": 0,\n" +
+                            "   \"allBattles\": 0,\n" +
+                            "   \"hp\": 10\n" +
+                            "    },\n" +
+                            "\"guild\": {\n" +
+                            "   \"id\": 1,\n" +
+                            "   \"name\": \"Dead End\"\n" +
+                            "    }\n" +
+                            "}");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 if (response == null){
                     Integer errorString = R.string.invalid_password_or_username;
                     showLoginFailed(errorString);
                 }else{
-//                    LoggedInUserView model = null;
-//                    updateUiWithUser(model);
 
+                    Statistics stats = null;
+                    User user = null;
+                    try {
+                        JSONObject statsJSON = response.getJSONObject("statistics");
+                        stats = new Statistics(statsJSON);
+                        user = new User(response);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    user.setStatistics(stats);
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("user",  user);
                     startActivity(intent);
                     finish();
                 }
 
-//                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                startActivity(intent);
-//                finish();
             }
         });
 

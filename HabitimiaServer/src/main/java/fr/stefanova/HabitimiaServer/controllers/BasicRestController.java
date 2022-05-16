@@ -1,5 +1,6 @@
 package fr.stefanova.HabitimiaServer.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.stefanova.HabitimiaServer.entities.AdventurerClass;
@@ -77,7 +79,7 @@ public class BasicRestController {
 												String name,
 												String details,
 												AdventurerClass difficulty,
-												List<Day> days
+												@RequestParam(value="days")List<Day> days
 												) {
 		User user = userRepository.findById(userId).get();
 		Daily daily = new Daily(user, name, details, difficulty);
@@ -89,6 +91,19 @@ public class BasicRestController {
 		daily = dailyRepository.findById(daily.getId()).get();
 		return new ResponseEntity<Object>(daily ,HttpStatus.OK);
 	}
+	
+//	@RequestMapping(value = "/add-days-for-daily", method = RequestMethod.GET, produces = {"application/json"})
+//	public ResponseEntity<Object> addDaysForDaily(Long userId, Long dailyId,@RequestParam(value="days")ArrayList<Day> days) {
+//		User user = userRepository.findById(userId).get();
+//		Daily daily = dailyRepository.findById(dailyId).get();
+//		for (Day day:days) {
+//			Repetition repetition = new Repetition(user, daily, day);
+//			repetitionRepository.save(repetition);			
+//		}
+//		
+//		return new ResponseEntity<Object>(null ,HttpStatus.OK);
+//	}
+//	
 	
 	@RequestMapping(value = "/repetitions-for-daily", method = RequestMethod.GET, produces = {"application/json"})
 	public ResponseEntity<Object> repetitionsForDaily(Long dailyId) {

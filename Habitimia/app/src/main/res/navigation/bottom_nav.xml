@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_daily" />
     <fragment
         android:id="@+id/arenaFragment"
-        android:name="com.example.habitimia.ui.ArenaFragment"
+        android:name="com.example.habitimia.ui.arena.ArenaFragment"
         android:label="fragment_arena"
         tools:layout="@layout/fragment_arena" />
 </navigation>

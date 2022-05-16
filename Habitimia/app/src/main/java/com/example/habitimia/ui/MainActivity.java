@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -15,11 +14,11 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.habitimia.R;
 import com.example.habitimia.data.model.User;
+import com.example.habitimia.ui.arena.ArenaFragment;
 import com.example.habitimia.ui.home.HomeFragment;
 import com.example.habitimia.util.MyNotification;
 import com.example.habitimia.util.NotificationReceiver;

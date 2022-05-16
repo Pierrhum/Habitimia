@@ -4,14 +4,13 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.os.Debug;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.example.habitimia.R;
-import com.example.habitimia.ui.ArenaFragment;
+import com.example.habitimia.ui.arena.ArenaFragment;
 import com.example.habitimia.ui.DailyFragment;
 import com.example.habitimia.ui.GuildFragment;
 import com.example.habitimia.ui.QuestFragment;

@@ -19,7 +19,13 @@ public class User implements Serializable {
 
     private Guild guild;
 
+    // Debug constructor
     public User() {
+        username = "Username";
+        email = "Email@blabla.oui";
+        password = "motdepasse";
+        avatar = Avatar.MAGICIAN;
+        statistics = new Statistics();
     }
 
     public User(String username) {

@@ -33,6 +33,9 @@
     <!-- TODO: Arena -->
     <string name="arena">Arena</string>
     <string name="duel">Duel</string>
+    <string name="adventurer">Adventurer</string>
+    <string name="battles">Battles</string>
+    <string name="rate">Rate</string>
     <string name="username_placeholder">Theodore Mia</string>
     <string name="battles_placeholder">5,333</string>
     <string name="rate_placeholder">98%</string>

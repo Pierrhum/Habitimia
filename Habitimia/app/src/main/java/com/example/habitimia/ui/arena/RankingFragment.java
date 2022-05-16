@@ -7,8 +7,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.habitimia.R;
+import com.example.habitimia.data.model.User;
+import com.example.habitimia.ui.DailyFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +30,24 @@ public class RankingFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private TextView Number;
+    private TextView Username;
+    private TextView Battles;
+    private TextView Rate;
+    private Button Duel;
+
+    private User user;
+    private int number;
+
+    public static RankingFragment newInstance(User user, int number) {
+
+        RankingFragment frag = new RankingFragment();
+        frag.user = user;
+        frag.number = number;
+
+        return frag;
+    }
 
     public RankingFragment() {
         // Required empty public constructor
@@ -61,6 +84,27 @@ public class RankingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ranking, container, false);
+        View view = inflater.inflate(R.layout.fragment_ranking, container, false);
+        Number = (TextView) view.findViewById(R.id.number_ranking);
+        Username = (TextView) view.findViewById(R.id.username_ranking);
+        Battles = (TextView) view.findViewById(R.id.battles_ranking);
+        Rate = (TextView) view.findViewById(R.id.rate_ranking);
+        Duel = (Button) view.findViewById(R.id.duel_btn);
+
+        if(user != null) {
+            Number.setText(number + ".");
+            Username.setText(user.getUsername());
+
+            Duel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // TODO : DUEL
+                    System.out.println(user.getUsername());
+                }
+            });
+
+        }
+
+        return view;
     }
 }

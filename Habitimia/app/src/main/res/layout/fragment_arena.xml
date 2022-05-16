@@ -65,25 +65,80 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/top_bar_arena" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/RankingItemNames"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/RankingScrollBox"
+            app:layout_constraintEnd_toEndOf="@id/RankingScrollBox"
+            app:layout_constraintStart_toStartOf="@id/RankingScrollBox"
+            app:layout_constraintTop_toBottomOf="@+id/ranking_image">
+
+            <TextView
+                android:id="@+id/textView39"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="@string/adventurer"
+                android:textAlignment="center"
+                android:textColor="@color/light_gray"
+                android:textStyle="bold"
+                app:flow_horizontalAlign="center"
+                app:flow_verticalAlign="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/textView40"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="@string/battles"
+                android:textAlignment="center"
+                android:textColor="@color/light_gray"
+                android:textStyle="bold"
+                app:flow_horizontalAlign="center"
+                app:flow_verticalAlign="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/textView41"
+                app:layout_constraintStart_toEndOf="@id/textView39"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView41"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="@string/rate"
+                android:textAlignment="center"
+                android:textColor="@color/light_gray"
+                android:textStyle="bold"
+                app:flow_horizontalAlign="center"
+                app:flow_verticalAlign="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textView40"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <ScrollView
+            android:id="@+id/RankingScrollBox"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ranking_image"
+            app:layout_constraintTop_toBottomOf="@id/RankingItemNames"
             tools:ignore="SpeakableTextPresentCheck">
 
             <LinearLayout
                 android:id="@+id/ranking_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                />
+                android:orientation="vertical" />
         </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,8 @@ package com.example.habitimia.ui.arena;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.example.habitimia.R;
+import com.example.habitimia.data.model.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +34,7 @@ public class ArenaFragment extends Fragment {
     private String mParam2;
 
     private LinearLayout Ranking;
+    private ArrayList<User> users;
 
     public ArenaFragment() {
         // Required empty public constructor
@@ -66,10 +73,33 @@ public class ArenaFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_arena, container, false);
         Ranking = (LinearLayout) view.findViewById(R.id.ranking_content);
-        View child1 = getLayoutInflater().inflate(R.layout.fragment_ranking, null);
-        View child2 = getLayoutInflater().inflate(R.layout.fragment_ranking, null);
-        Ranking.addView(child1);
-        Ranking.addView(child2);
+
+        users = new ArrayList<User>();
+        User u = new User();
+        u.setUsername("Theodore Mia");
+        users.add(u);
+        User u1 = new User();
+        u1.setUsername("Ian Burton");
+        users.add(u1);
+        User u2 = new User();
+        u2.setUsername("Roxy Hansen");
+        users.add(u2);
+        users.add(u1);
+        users.add(u2);
+        users.add(u1);
+        users.add(u2);
+
+        FragmentManager fragMan = getFragmentManager();
+        FragmentTransaction fragTransaction = fragMan.beginTransaction();
+
+        for(int fragCount=0; fragCount < users.size(); fragCount++) {
+            RankingFragment ranking = RankingFragment.newInstance(users.get(fragCount), fragCount+1);
+
+            fragTransaction.add(Ranking.getId(), ranking , "fragment" + fragCount);
+
+        }
+
+        fragTransaction.commit();
         return view;
     }
 }

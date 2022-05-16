@@ -10,22 +10,25 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.habitimia.R;
 import com.example.habitimia.data.model.User;
 import com.example.habitimia.ui.arena.ArenaFragment;
 import com.example.habitimia.ui.home.HomeFragment;
+import com.example.habitimia.ui.quest.DailyFragment;
+import com.example.habitimia.ui.quest.QuestFragment;
 import com.example.habitimia.util.MyNotification;
 import com.example.habitimia.util.NotificationReceiver;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -35,8 +38,10 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private ConstraintLayout Root;
+    private FloatingActionButton FAB;
     private android.hardware.SensorManager sensorManager;
 
+    private Fragment mCurrentFragment = null;
     private float mAccel;
     private float mAccelCurrent;
     private float mAccelLast;
@@ -52,27 +57,37 @@ public class MainActivity extends AppCompatActivity {
         if (intent != null)
             user = (User) intent.getSerializableExtra("user");
         setContentView(R.layout.activity_main);
+
         Root = (ConstraintLayout) findViewById(R.id.MainRoot);
+        FAB = (FloatingActionButton) findViewById(R.id.fab);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomnavigationbar);
         bottomNavigationView.setBackground(null);
         bottomNavigationView.getMenu().getItem(2).setEnabled(false);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer,new HomeFragment()).commit();
+        FAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mCurrentFragment instanceof QuestFragment) {
+
+                }
+            }
+        });
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment temp = null;
+                mCurrentFragment = null;
                 switch (item.getItemId())
                 {
-                    case R.id.homeFragment : temp = new HomeFragment();
+                    case R.id.homeFragment : mCurrentFragment = new HomeFragment();
                         break;
-                    case R.id.dailyFragment : temp = new DailyFragment();
+                    case R.id.dailyFragment : mCurrentFragment = new DailyFragment();
                         break;
-                    case R.id.questFragment : temp = new QuestFragment();
+                    case R.id.questFragment : mCurrentFragment = new QuestFragment();
                         break;
-                    case R.id.arenaFragment : temp = new ArenaFragment();
+                    case R.id.arenaFragment : mCurrentFragment = new ArenaFragment();
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer,temp).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer,mCurrentFragment).commit();
                 return true;
             }
         });
@@ -85,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
         mAccelLast = SensorManager.GRAVITY_EARTH;
 
         createTimedNotification(getApplicationContext());
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer,new HomeFragment()).commit();
     }
 
     @Override

@@ -12,9 +12,9 @@ import android.widget.ImageButton;
 import com.example.habitimia.R;
 import com.example.habitimia.ui.MainActivity;
 import com.example.habitimia.ui.arena.ArenaFragment;
-import com.example.habitimia.ui.DailyFragment;
-import com.example.habitimia.ui.GuildFragment;
-import com.example.habitimia.ui.QuestFragment;
+import com.example.habitimia.ui.quest.DailyFragment;
+import com.example.habitimia.ui.guild.GuildFragment;
+import com.example.habitimia.ui.quest.QuestFragment;
 
 /**
  * A simple {@link Fragment} subclass.

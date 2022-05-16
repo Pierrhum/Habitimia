@@ -12,12 +12,12 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/questFragment"
-        android:name="com.example.habitimia.ui.QuestFragment"
+        android:name="com.example.habitimia.ui.quest.QuestFragment"
         android:label="fragment_quest"
         tools:layout="@layout/fragment_quest" />
     <fragment
         android:id="@+id/dailyFragment"
-        android:name="com.example.habitimia.ui.DailyFragment"
+        android:name="com.example.habitimia.ui.quest.DailyFragment"
         android:label="fragment_daily"
         tools:layout="@layout/fragment_daily" />
     <fragment

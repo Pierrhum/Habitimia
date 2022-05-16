@@ -1,4 +1,4 @@
-package com.example.habitimia.ui;
+package com.example.habitimia.ui.guild;
 
 import android.os.Bundle;
 
@@ -10,14 +10,15 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.example.habitimia.R;
+import com.example.habitimia.ui.MainActivity;
 import com.example.habitimia.ui.home.HomeFragment;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link QuestFragment#newInstance} factory method to
+ * Use the {@link GuildFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class QuestFragment extends Fragment {
+public class GuildFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,7 +31,7 @@ public class QuestFragment extends Fragment {
 
     private ImageButton Back;
 
-    public QuestFragment() {
+    public GuildFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +41,11 @@ public class QuestFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment QuestFragment.
+     * @return A new instance of fragment GuildFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static QuestFragment newInstance(String param1, String param2) {
-        QuestFragment fragment = new QuestFragment();
+    public static GuildFragment newInstance(String param1, String param2) {
+        GuildFragment fragment = new GuildFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,8 +66,8 @@ public class QuestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_quest, container, false);
-        Back = (ImageButton) view.findViewById(R.id.back_quest);
+        View view = inflater.inflate(R.layout.fragment_guild, container, false);
+        Back = (ImageButton) view.findViewById(R.id.back_guild);
 
         Back.setOnClickListener(new View.OnClickListener() {
             @Override

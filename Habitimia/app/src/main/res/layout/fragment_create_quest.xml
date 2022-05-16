@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.quest.DailyFragment">
+    tools:context=".ui.quest.CreateQuestFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -12,7 +12,7 @@
         android:background="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/top_bar_daily"
+            android:id="@+id/top_bar_quest"
             android:layout_width="0dp"
             android:layout_height="75dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -20,27 +20,27 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/background_top_bar_daily"
+                android:id="@+id/background_top_bar_quest"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/rectangle"
                 app:tint="@color/orange_btn" />
 
             <TextView
-                android:id="@+id/title_daily"
+                android:id="@+id/title_quest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="19dp"
-                android:text="@string/dailies"
+                android:text="@string/quests"
                 android:textColor="@color/text_red"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@id/background_top_bar_daily"
-                app:layout_constraintStart_toEndOf="@+id/back_daily"
+                app:layout_constraintBottom_toBottomOf="@id/background_top_bar_quest"
+                app:layout_constraintStart_toEndOf="@+id/back_quest"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/back_daily"
+                android:id="@+id/back_quest"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="10dp"

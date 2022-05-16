@@ -1,4 +1,4 @@
-package com.example.habitimia.ui;
+package com.example.habitimia.ui.quest;
 
 import android.os.Bundle;
 
@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.example.habitimia.R;
+import com.example.habitimia.ui.MainActivity;
 import com.example.habitimia.ui.home.HomeFragment;
 
 /**

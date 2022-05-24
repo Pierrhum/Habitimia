@@ -68,7 +68,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/createquest_background"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleType="fitXY"
@@ -77,6 +77,188 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/QuestName"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rectangle"
+                android:backgroundTint="@color/plus_btn"
+                android:ems="10"
+                android:hint="@string/name"
+                android:inputType="textPersonName"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toTopOf="@+id/QuestDetails"
+                app:layout_constraintEnd_toEndOf="@id/createquest_background"
+                app:layout_constraintStart_toStartOf="@id/createquest_background"
+                app:layout_constraintTop_toTopOf="@id/createquest_background" />
+
+            <EditText
+                android:id="@+id/QuestDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="120dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rectangle"
+                android:backgroundTint="@color/plus_btn"
+                android:ems="10"
+                android:hint="@string/details"
+                android:inputType="textCapSentences|textMultiLine"
+                android:maxLength="2000"
+                android:maxLines="4"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toTopOf="@+id/difficulty_class_title"
+                app:layout_constraintEnd_toEndOf="@id/createquest_background"
+                app:layout_constraintStart_toStartOf="@id/createquest_background"
+                app:layout_constraintTop_toBottomOf="@id/QuestName" />
+
+            <TextView
+                android:id="@+id/difficulty_class_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="7dp"
+                android:text="@string/difficulty_class"
+                android:textColor="@color/gray"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                app:layout_constraintEnd_toEndOf="@id/createquest_background"
+                app:layout_constraintStart_toStartOf="@id/createquest_background"
+                app:layout_constraintTop_toBottomOf="@+id/QuestDetails" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="19dp"
+                android:background="@drawable/rectangle"
+                android:backgroundTint="@color/plus_btn"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                app:layout_constraintBottom_toTopOf="@id/duration_title"
+                app:layout_constraintEnd_toEndOf="@id/DurationBar"
+                app:layout_constraintStart_toStartOf="@id/DurationBar"
+                app:layout_constraintTop_toBottomOf="@id/difficulty_class_title">
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/difficulty_btn_1"
+                    android:text="F"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/difficulty_btn_2"
+                    android:text="E"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/difficulty_btn_3"
+                    android:text="D"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/difficulty_btn_4"
+                    android:text="C"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/button5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/difficulty_btn_5"
+                    android:text="B"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/button6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/difficulty_btn_6"
+                    android:text="A"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/button7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/difficulty_btn_7"
+                    android:text="S"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/duration_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/duration"
+                android:textColor="@color/gray"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/DurationBar"
+                app:layout_constraintEnd_toEndOf="@id/createquest_background"
+                app:layout_constraintStart_toStartOf="@id/createquest_background"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+            <SeekBar
+                android:id="@+id/DurationBar"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                android:layout_width="0dp"
+                android:layout_height="27dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="19dp"
+                android:max="30"
+                android:progress="15"
+                app:layout_constraintBottom_toTopOf="@id/createQuest"
+                app:layout_constraintEnd_toEndOf="@id/createquest_background"
+                app:layout_constraintStart_toStartOf="@id/createquest_background"
+                app:layout_constraintTop_toBottomOf="@id/duration_title" />
+
+            <Button
+                android:id="@+id/createQuest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/btn_1"
+                android:backgroundTintMode="add"
+                android:text="@string/create"
+                android:textColor="@color/orange_btn"
+                android:textSize="18sp"
+                app:backgroundTint="@color/orange_btn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/DurationBar" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

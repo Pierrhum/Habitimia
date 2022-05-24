@@ -27,6 +27,11 @@
     <!-- TODO: Quests -->
     <string name="quests">Quests</string>
     <string name="create_quest">Create Quest</string>
+    <string name="name">Name</string>
+    <string name="details">Details</string>
+    <string name="difficulty_class">Difficulty Class</string>
+    <string name="duration">Duration</string>
+    <string name="create">Create</string>
 
     <!-- TODO: Dailies -->
     <string name="dailies">Dailies</string>

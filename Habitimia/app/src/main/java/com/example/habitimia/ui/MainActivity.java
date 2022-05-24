@@ -20,6 +20,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.habitimia.R;
+import com.example.habitimia.data.model.AdventurerClass;
+import com.example.habitimia.data.model.Statistics;
 import com.example.habitimia.data.model.User;
 import com.example.habitimia.ui.arena.ArenaFragment;
 import com.example.habitimia.ui.home.HomeFragment;
@@ -61,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
 
         user = new User();
         user.setId(1L);
+        user.setUsername("Mia");
+        user.setStatistics(new Statistics());
+        user.getStatistics().setAdventurerClass(AdventurerClass.A);
+        user.getStatistics().setHP(10L);
+        user.getStatistics().setExperience(0L);
         Root = (ConstraintLayout) findViewById(R.id.MainRoot);
         FAB = (FloatingActionButton) findViewById(R.id.fab);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomnavigationbar);
@@ -141,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
             if (mAccel > 12) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer, new QuestFragment()).commit();
                 Toast.makeText(getApplicationContext(), "Shake event detected", Toast.LENGTH_SHORT).show();
-                MyNotification.createNotification(MainActivity.this, getApplicationContext());
                 MyNotification.createNotification(MainActivity.this, getApplicationContext());
             }
         }

@@ -47,7 +47,7 @@ public class QuestAdapter extends RecyclerView.Adapter<QuestAdapter.ViewHolder> 
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     System.out.println("checked");
-                    Server.updateUserHP(activity.user, 15L);
+//                    Server.updateUserHP(activity.user, 15L);
                     deleteItem(p);
 //                    db.updateStatus(item.getId(), 1);
                 } else {
@@ -74,7 +74,7 @@ public class QuestAdapter extends RecyclerView.Adapter<QuestAdapter.ViewHolder> 
 
     public void deleteItem(int position) {
         Quest item = questList.get(position);
-        Server.deleteQuest(item.getId().toString());
+//        Server.deleteQuest(item.getId().toString());
         questList.remove(position);
         notifyItemRemoved(position);
     }

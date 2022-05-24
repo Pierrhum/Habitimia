@@ -27,6 +27,9 @@ public class Statistics {
 	
 	@Column(name = "all_battles")
 	private Long allBattles;
+	
+	@Column(name = "experince")
+	private long experience;
 
 	public Statistics() {
 		super();
@@ -34,6 +37,7 @@ public class Statistics {
 		this.HP = 10L;
 		this.battlesWon = 0L;
 		this.allBattles = 0L;
+		this.experience = 0L;
 	}
 
 	public Long getId() {
@@ -74,6 +78,14 @@ public class Statistics {
 
 	public void setAllBattles(Long allBattles) {
 		this.allBattles = allBattles;
+	}
+
+	public long getExperience() {
+		return experience;
+	}
+
+	public void setExperience(long experience) {
+		this.experience = experience;
 	}
 	
 }

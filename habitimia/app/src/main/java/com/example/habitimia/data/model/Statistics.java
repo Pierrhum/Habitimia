@@ -15,20 +15,23 @@ public class Statistics implements Serializable {
     private Long battlesWon;
 
     private Long allBattles;
+    private Long experience;
 
     public Statistics() {
         this.adventurerClass = AdventurerClass.A;
         this.HP = 10L;
         this.battlesWon = 0L;
         this.allBattles = 0L;
+        this.experience = 0L;
     }
 
-    public Statistics(Long id, AdventurerClass adventurerClass, Long HP, Long battlesWon, Long allBattles) {
+    public Statistics(Long id, AdventurerClass adventurerClass, Long HP, Long battlesWon, Long allBattles, Long experience) {
         this.id = id;
         this.adventurerClass = adventurerClass;
         this.HP = HP;
         this.battlesWon = battlesWon;
         this.allBattles = allBattles;
+        this.experience = experience;
     }
 
     public Statistics(JSONObject statsJSON) {
@@ -38,11 +41,10 @@ public class Statistics implements Serializable {
             this.HP = statsJSON.getLong("hp");
             this.battlesWon = statsJSON.getLong("battlesWon");
             this.allBattles = statsJSON.getLong("allBattles");
+            this.experience = statsJSON.getLong("experience");;
         } catch (JSONException e) {
             e.printStackTrace();
         }
-//        this.battlesWon = battlesWon;
-//        this.allBattles = allBattles;
     }
 
     public Long getId() {
@@ -84,4 +86,8 @@ public class Statistics implements Serializable {
     public void setAllBattles(Long allBattles) {
         this.allBattles = allBattles;
     }
+
+    public Long getExperience() { return experience;  }
+
+    public void setExperience(Long experience) {this.experience = experience;  }
 }

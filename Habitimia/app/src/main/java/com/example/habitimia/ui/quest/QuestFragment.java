@@ -44,7 +44,6 @@ public class QuestFragment extends Fragment implements DialogCloseListener {
     private String mParam1;
     private String mParam2;
 
-    private User user;
     private ImageButton Back;
 
     private RecyclerView tasksRecyclerView;
@@ -88,14 +87,8 @@ public class QuestFragment extends Fragment implements DialogCloseListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-//        super.onCreate(savedInstanceState);
-//        Intent intent = getIntent();
-//        if (intent != null)
-//            user = (User) intent.getSerializableExtra("user");
-        user = new User();
-        user.setId(1l);
+
         View view = inflater.inflate(R.layout.fragment_quest, container, false);
-//
 
         Back = (ImageButton) view.findViewById(R.id.back_quest);
 
@@ -126,7 +119,7 @@ public class QuestFragment extends Fragment implements DialogCloseListener {
         questList.add(dummy_quest);
         questList.add(dummy_quest);
 
-        questList = Server.getQuests(user);
+//        questList = Server.getQuests(((MainActivity) getActivity()).user);
 
         adapter.setTasks(questList);
 

@@ -1,8 +1,11 @@
 package com.example.habitimia.ui.quest;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,10 +17,15 @@ import android.widget.ImageButton;
 import com.example.habitimia.R;
 import com.example.habitimia.data.adapter.QuestAdapter;
 import com.example.habitimia.data.model.Quest;
+import com.example.habitimia.data.model.User;
 import com.example.habitimia.ui.MainActivity;
 import com.example.habitimia.ui.home.HomeFragment;
+import com.example.habitimia.util.DialogCloseListener;
+import com.example.habitimia.util.RecyclerItemTouchHelper;
+import com.example.habitimia.util.Server;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,7 +33,7 @@ import java.util.List;
  * Use the {@link QuestFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class QuestFragment extends Fragment {
+public class QuestFragment extends Fragment implements DialogCloseListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,6 +44,7 @@ public class QuestFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private User user;
     private ImageButton Back;
 
     private RecyclerView tasksRecyclerView;
@@ -79,7 +88,15 @@ public class QuestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+//        super.onCreate(savedInstanceState);
+//        Intent intent = getIntent();
+//        if (intent != null)
+//            user = (User) intent.getSerializableExtra("user");
+        user = new User();
+        user.setId(1l);
         View view = inflater.inflate(R.layout.fragment_quest, container, false);
+//
+
         Back = (ImageButton) view.findViewById(R.id.back_quest);
 
         Back.setOnClickListener(new View.OnClickListener() {
@@ -94,8 +111,12 @@ public class QuestFragment extends Fragment {
         tasksRecyclerView = view.findViewById(R.id.tasksRecyclerView);
         tasksRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        adapter = new QuestAdapter(getActivity());
+        adapter = new QuestAdapter(((MainActivity) getActivity()));
         tasksRecyclerView.setAdapter(adapter);
+
+        ItemTouchHelper itemTouchHelper = new
+                ItemTouchHelper(new RecyclerItemTouchHelper(adapter));
+        itemTouchHelper.attachToRecyclerView(tasksRecyclerView);
 
         Quest dummy_quest = new Quest();
         dummy_quest.setId(1l);
@@ -105,8 +126,26 @@ public class QuestFragment extends Fragment {
         questList.add(dummy_quest);
         questList.add(dummy_quest);
 
+        questList = Server.getQuests(user);
+
         adapter.setTasks(questList);
 
         return view;
+    }
+
+    @Override
+    public void handleDialogClose(DialogInterface dialog){
+        Quest dummy_quest = new Quest();
+        dummy_quest.setId(1l);
+        dummy_quest.setName("Dummy Quest");
+
+        questList.add(dummy_quest);
+        questList.add(dummy_quest);
+        questList.add(dummy_quest);
+
+//        questList = Server.getQuests(user);
+        Collections.reverse(questList);
+        adapter.setTasks(questList);
+        adapter.notifyDataSetChanged();
     }
 }

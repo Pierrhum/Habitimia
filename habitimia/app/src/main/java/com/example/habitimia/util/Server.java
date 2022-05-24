@@ -3,6 +3,11 @@ package com.example.habitimia.util;
 import android.os.StrictMode;
 import android.widget.Toast;
 
+import com.example.habitimia.data.model.Quest;
+import com.example.habitimia.data.model.Statistics;
+import com.example.habitimia.data.model.User;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,6 +18,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Server {
 
@@ -24,7 +31,6 @@ public class Server {
         HttpURLConnection urlConnection = null;
         URL url = null;
         try {
-//            url = new URL("https://api.chucknorris.io/jokes/random");
             url = new URL("http://10.192.94.187:8080/" + endpoint
                     + "?" + params); // 10.0.2.2 10.192.94.54
         } catch (MalformedURLException e) {
@@ -81,6 +87,175 @@ public class Server {
         }
         return jsonData;
     }
+
+    public static JSONArray sendRequestForList(String endpoint, String params) {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                .permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        int duration = Toast.LENGTH_SHORT;
+        HttpURLConnection urlConnection = null;
+        URL url = null;
+        try {
+            url = new URL("http://10.192.94.187:8080/" + endpoint
+                    + "?" + params); // 10.0.2.2 10.192.94.54
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        try {
+            urlConnection = (HttpURLConnection) url.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            urlConnection.setRequestMethod("GET");
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        }
+        urlConnection.setReadTimeout(10000);
+        urlConnection.setConnectTimeout(15000);
+        urlConnection.setDoOutput(true);
+        try {
+            urlConnection.connect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new InputStreamReader(url.openStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        StringBuilder sb = new StringBuilder();
+
+        String line = "";
+        while (true) {
+            try {
+                if ((line = br.readLine()) == null) break;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            sb.append(line + "\n");
+        }
+        try {
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String jsonString = sb.toString();
+        JSONArray jsonData = null;
+        try {
+            jsonData = new JSONArray(jsonString);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonData;
+    }
+
+    public static User login(String username, String password){
+        String request_params = "username=" + username
+                + "&" +
+                "password=" +password;
+        JSONObject response = Server.sendRequest("login", request_params);
+
+        if (response == null){
+            return null;
+        }
+        Statistics stats = null;
+        User user = null;
+        try {
+            JSONObject statsJSON = response.getJSONObject("statistics");
+            stats = new Statistics(statsJSON);
+            user = new User(response);
+            user.setStatistics(stats);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return user;
+    }
+
+    public static User register(String username, String email, String password, String avatar){
+        String request_params = "username=" + username
+                + "&" +
+                "password=" +password
+                + "&" +
+                "email=" +email
+                + "&" +
+                "avatar=" +avatar
+                ;
+        JSONObject response = Server.sendRequest("register", request_params);
+
+        if (response == null){
+            return null;
+        }
+        Statistics stats = null;
+        User user = null;
+        try {
+            JSONObject statsJSON = response.getJSONObject("statistics");
+            stats = new Statistics(statsJSON);
+            user = new User(response);
+            user.setStatistics(stats);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return user;
+    }
+
+    public static User updateUserHP(User user, Long HP){
+        String request_params = "userId=" + user.getId().toString()
+                + "&" +
+                "HP=" +HP;
+        JSONObject response = Server.sendRequest("update-user", request_params);
+
+        if (response == null){
+            return null;
+        }
+        Statistics stats = null;
+        User updated_user = null;
+        try {
+            JSONObject statsJSON = response.getJSONObject("statistics");
+            stats = new Statistics(statsJSON);
+            updated_user = new User(response);
+            updated_user.setStatistics(stats);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return updated_user;
+    }
+
+    public static List<Quest> getQuests(User user){
+        String request_params = "userId=" + user.getId();                ;
+        JSONArray response = Server.sendRequestForList("all-quests", request_params);
+
+        if (response == null){
+            return null;
+        }
+        Statistics stats = null;
+        List<Quest> quests = new ArrayList<>();
+        try {
+            for(int i = 0; i < response.length(); i++){
+                JSONObject quest = response.getJSONObject(i);
+                quests.add(new Quest(quest));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return quests;
+    }
+
+    public static void deleteQuest(String questId){
+        String request_params = "questId=" + questId;
+        JSONObject response = Server.sendRequest("remove-quest", request_params);
+
+        return ;
+    }
+
 
 
 }

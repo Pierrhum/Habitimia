@@ -1,5 +1,8 @@
 package com.example.habitimia.data.model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 public class Quest {
@@ -23,6 +26,18 @@ public class Quest {
         this.name = name;
         this.details = details;
         this.difficulty = difficulty;
+    }
+
+    public Quest(JSONObject quest) {
+        try {
+            this.id = quest.getLong("id");
+            this.name = quest.getString("name");
+            this.details = quest.getString("details");
+            this.difficulty = AdventurerClass.valueOf(quest.getString("difficulty"));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public Long getId() {

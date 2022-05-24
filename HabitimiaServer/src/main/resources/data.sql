@@ -17,3 +17,7 @@ INSERT INTO repetition ( daily_id, day) values (1, 'TUESDAY');
 INSERT INTO repetition ( daily_id, day) values (1, 'WEDNESDAY');
 INSERT INTO repetition ( daily_id, day) values (1, 'THURSDAY');
 INSERT INTO repetition ( daily_id, day) values (1, 'FRIDAY');
+
+-- quest for user 1
+INSERT INTO quest (name, user_id, details, difficulty) VALUES ('Frodo', 1, 'Buy new food.', 'C');
+INSERT INTO quest (name, user_id, details, difficulty) VALUES ('Frodo has a b-day', 1, 'Buy some presents.', 'B');

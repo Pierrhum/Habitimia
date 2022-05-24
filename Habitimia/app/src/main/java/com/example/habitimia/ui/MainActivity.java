@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
             user = (User) intent.getSerializableExtra("user");
         setContentView(R.layout.activity_main);
 
+        user = new User();
+        user.setId(1L);
         Root = (ConstraintLayout) findViewById(R.id.MainRoot);
         FAB = (FloatingActionButton) findViewById(R.id.fab);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomnavigationbar);

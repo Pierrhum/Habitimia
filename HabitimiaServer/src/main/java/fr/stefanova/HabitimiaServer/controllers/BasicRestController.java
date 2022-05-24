@@ -19,10 +19,12 @@ import fr.stefanova.HabitimiaServer.entities.AdventurerClass;
 import fr.stefanova.HabitimiaServer.entities.Avatar;
 import fr.stefanova.HabitimiaServer.entities.Daily;
 import fr.stefanova.HabitimiaServer.entities.Day;
+import fr.stefanova.HabitimiaServer.entities.Quest;
 import fr.stefanova.HabitimiaServer.entities.Repetition;
 import fr.stefanova.HabitimiaServer.entities.Statistics;
 import fr.stefanova.HabitimiaServer.entities.User;
 import fr.stefanova.HabitimiaServer.repo.DailyRepository;
+import fr.stefanova.HabitimiaServer.repo.QuestRepository;
 import fr.stefanova.HabitimiaServer.repo.RepetitionRepository;
 import fr.stefanova.HabitimiaServer.repo.StatisticsRepository;
 import fr.stefanova.HabitimiaServer.repo.UserRepository;
@@ -38,6 +40,8 @@ public class BasicRestController {
 	StatisticsRepository statisticsRepository;	
 	@Autowired
 	RepetitionRepository repetitionRepository;
+	@Autowired
+	QuestRepository questRepository;
 	
 	public BasicRestController() {
 		System.err.println("hello");
@@ -45,8 +49,6 @@ public class BasicRestController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET, produces = {"application/json"})
 	public ResponseEntity<Object> login(String username, String password) {
-//		boolean user_identified = userRepository.findByUsernameAndPassword(username, password) != null; 
-////		User user = userRepository.findByUsernameAndPassword("Mia", "12345") ; 
 		return new ResponseEntity<Object>( userRepository.findByUsernameAndPassword(username, password) ,HttpStatus.OK);
 	}
 	
@@ -60,6 +62,18 @@ public class BasicRestController {
 		//user with stats
 		User user_created = userRepository.findTop1ByOrderByIdDesc();
 		return new ResponseEntity<Object>(user_created ,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/update-user", method = RequestMethod.GET, produces = {"application/json"})
+	public ResponseEntity<Object> updateUserStatistics(Long userId, 
+												Long HP) {
+		User user = userRepository.findById(userId).get();
+		if (HP != null) {
+			user.getStatistics().setHP(HP);
+		}
+		statisticsRepository.save(user.getStatistics());
+		
+		return new ResponseEntity<Object>(userRepository.findById(userId) ,HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/all-users", method = RequestMethod.GET, produces = {"application/json"})
@@ -92,18 +106,6 @@ public class BasicRestController {
 		return new ResponseEntity<Object>(daily ,HttpStatus.OK);
 	}
 	
-//	@RequestMapping(value = "/add-days-for-daily", method = RequestMethod.GET, produces = {"application/json"})
-//	public ResponseEntity<Object> addDaysForDaily(Long userId, Long dailyId,@RequestParam(value="days")ArrayList<Day> days) {
-//		User user = userRepository.findById(userId).get();
-//		Daily daily = dailyRepository.findById(dailyId).get();
-//		for (Day day:days) {
-//			Repetition repetition = new Repetition(user, daily, day);
-//			repetitionRepository.save(repetition);			
-//		}
-//		
-//		return new ResponseEntity<Object>(null ,HttpStatus.OK);
-//	}
-//	
 	
 	@RequestMapping(value = "/repetitions-for-daily", method = RequestMethod.GET, produces = {"application/json"})
 	public ResponseEntity<Object> repetitionsForDaily(Long dailyId) {
@@ -114,7 +116,7 @@ public class BasicRestController {
 	
 	@Transactional
 	@RequestMapping(value = "/remove-daily", method = RequestMethod.GET, produces = {"application/json"})
-	public ResponseEntity<Object> removeDailies(Long dailyId) {
+	public ResponseEntity<Object> removeDaily(Long dailyId) {
 		repetitionRepository.deleteAllByDailyId(dailyId);
 		dailyRepository.deleteById(dailyId);
 		return new ResponseEntity<Object>(null ,HttpStatus.OK);
@@ -122,6 +124,51 @@ public class BasicRestController {
 	
 	
 	
+	@RequestMapping(value = "/all-quests", method = RequestMethod.GET, produces = {"application/json"})
+	public ResponseEntity<List<Quest> > allQuests(Long userId) {
+		List<Quest> quests = questRepository.findAllByUserId(userId);
+		return new ResponseEntity<List<Quest> >(quests ,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/create-quest", method = RequestMethod.GET, produces = {"application/json"})
+	public ResponseEntity<Object> createQuest(Long userId, 
+												String name,
+												String details,
+												AdventurerClass difficulty
+												) {
+		User user = userRepository.findById(userId).get();
+		Quest quest = new Quest(user, name, details, difficulty);
+		quest = questRepository.save(quest);
+		return new ResponseEntity<Object>(quest ,HttpStatus.OK);
+	}
+	
+	@Transactional
+	@RequestMapping(value = "/edit-quest", method = RequestMethod.GET, produces = {"application/json"})
+	public ResponseEntity<Object> editQuest(Long questId,
+											String name,
+											String details,
+											AdventurerClass difficulty) {
+		
+		Quest quest = questRepository.findById(questId).get();
+		if (name != null) {
+			quest.setName(name);
+		}		
+		if (details != null) {
+			quest.setDetails(details);
+		}
+		if (difficulty != null) {
+			quest.setDifficulty(difficulty);
+		}
+		quest = questRepository.save(quest);
+		return new ResponseEntity<Object>(quest ,HttpStatus.OK);
+	}
+	
+	@Transactional
+	@RequestMapping(value = "/remove-quest", method = RequestMethod.GET, produces = {"application/json"})
+	public ResponseEntity<Object> removeQuest(Long questId) {
+		questRepository.deleteById(questId);
+		return new ResponseEntity<Object>(null ,HttpStatus.OK);
+	}
 	
 
 

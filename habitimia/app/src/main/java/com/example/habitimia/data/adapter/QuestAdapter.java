@@ -15,15 +15,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.habitimia.R;
 import com.example.habitimia.data.model.Quest;
 import com.example.habitimia.ui.MainActivity;
+import com.example.habitimia.util.Server;
 
 import java.util.List;
 
 public class QuestAdapter extends RecyclerView.Adapter<QuestAdapter.ViewHolder> {
 
     private List<Quest> questList;
-    private FragmentActivity activity;
+    private MainActivity activity;
 
-    public QuestAdapter(FragmentActivity activity) {
+    public QuestAdapter(MainActivity activity) {
         this.activity = activity;
     }
 
@@ -38,14 +39,19 @@ public class QuestAdapter extends RecyclerView.Adapter<QuestAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull QuestAdapter.ViewHolder holder, int position) {
         final Quest item = questList.get(position);
+        int p = position;
         holder.task.setText(item.getName());
         holder.task.setChecked(false);
         holder.task.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    System.out.println("checked");
+                    Server.updateUserHP(activity.user, 15L);
+                    deleteItem(p);
 //                    db.updateStatus(item.getId(), 1);
                 } else {
+                    System.out.println("not checked");
 //                    db.updateStatus(item.getId(), 0);
                 }
             }
@@ -63,14 +69,14 @@ public class QuestAdapter extends RecyclerView.Adapter<QuestAdapter.ViewHolder> 
 
     public void setTasks(List<Quest> questList) {
         this.questList = questList;
-//        notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 
     public void deleteItem(int position) {
         Quest item = questList.get(position);
-//        db.deleteTask(item.getId());
+        Server.deleteQuest(item.getId().toString());
         questList.remove(position);
-//        notifyItemRemoved(position);
+        notifyItemRemoved(position);
     }
 
     public void editItem(int position) {
@@ -81,6 +87,7 @@ public class QuestAdapter extends RecyclerView.Adapter<QuestAdapter.ViewHolder> 
 //        AddNewTask fragment = new AddNewTask();
 //        fragment.setArguments(bundle);
 //        fragment.show(activity.getSupportFragmentManager(), AddNewTask.TAG);
+        notifyDataSetChanged();
     }
     public static class ViewHolder extends RecyclerView.ViewHolder {
         CheckBox task;

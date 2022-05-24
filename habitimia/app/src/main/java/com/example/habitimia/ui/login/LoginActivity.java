@@ -146,6 +146,8 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
                     user.setStatistics(stats);
+
+//                    user = Server.login(usernameEditText.getText().toString(), passwordEditText.getText().toString());
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra("user",  user);
                     startActivity(intent);

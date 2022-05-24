@@ -44,6 +44,7 @@ public class QuestFragment extends Fragment implements DialogCloseListener {
     private String mParam1;
     private String mParam2;
 
+    private User user;
     private ImageButton Back;
 
     private RecyclerView tasksRecyclerView;

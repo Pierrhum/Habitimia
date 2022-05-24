@@ -3,6 +3,8 @@ package com.example.habitimia.ui.quest;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +12,13 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.example.habitimia.R;
+import com.example.habitimia.data.adapter.QuestAdapter;
+import com.example.habitimia.data.model.Quest;
 import com.example.habitimia.ui.MainActivity;
 import com.example.habitimia.ui.home.HomeFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,6 +37,11 @@ public class QuestFragment extends Fragment {
     private String mParam2;
 
     private ImageButton Back;
+
+    private RecyclerView tasksRecyclerView;
+    private QuestAdapter adapter;
+
+    private List<Quest> questList;
 
     public QuestFragment() {
         // Required empty public constructor
@@ -60,6 +72,7 @@ public class QuestFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -76,6 +89,24 @@ public class QuestFragment extends Fragment {
             }
         });
         ((MainActivity) getActivity()).setBackgroundColor(getResources().getColor(R.color.white));
+
+        questList = new ArrayList<>();
+        tasksRecyclerView = view.findViewById(R.id.tasksRecyclerView);
+        tasksRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        adapter = new QuestAdapter(getActivity());
+        tasksRecyclerView.setAdapter(adapter);
+
+        Quest dummy_quest = new Quest();
+        dummy_quest.setId(1l);
+        dummy_quest.setName("Dummy Quest");
+
+        questList.add(dummy_quest);
+        questList.add(dummy_quest);
+        questList.add(dummy_quest);
+
+        adapter.setTasks(questList);
+
         return view;
     }
 }

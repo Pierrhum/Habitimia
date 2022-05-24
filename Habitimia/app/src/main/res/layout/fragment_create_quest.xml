@@ -237,6 +237,8 @@
                 android:layout_marginBottom="19dp"
                 android:max="30"
                 android:progress="15"
+                android:progressTint="@color/orange_btn"
+                android:thumbTint="@color/orange_btn"
                 app:layout_constraintBottom_toTopOf="@id/createQuest"
                 app:layout_constraintEnd_toEndOf="@id/createquest_background"
                 app:layout_constraintStart_toStartOf="@id/createquest_background"

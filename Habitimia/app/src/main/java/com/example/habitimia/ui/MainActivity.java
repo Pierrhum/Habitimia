@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private float mAccelLast;
     int sensor = Sensor.TYPE_ACCELEROMETER;
 
-    User user;
+    public User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

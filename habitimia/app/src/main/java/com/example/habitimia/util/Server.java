@@ -256,6 +256,27 @@ public class Server {
         return ;
     }
 
+    public static List<User> getUsers(){
+
+        JSONArray response = Server.sendRequestForList("all-users", "");
+
+        if (response == null){
+            return null;
+        }
+
+        List<User> users = new ArrayList<>();
+        try {
+            for(int i = 0; i < response.length(); i++){
+                JSONObject user = response.getJSONObject(i);
+                users.add(new User(user));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return users;
+    }
 
 
 }

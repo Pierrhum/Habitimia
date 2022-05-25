@@ -16,8 +16,10 @@ import com.example.habitimia.R;
 import com.example.habitimia.data.model.User;
 import com.example.habitimia.ui.MainActivity;
 import com.example.habitimia.ui.home.HomeFragment;
+import com.example.habitimia.util.Server;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,7 +38,7 @@ public class ArenaFragment extends Fragment {
     private String mParam2;
 
     private LinearLayout Ranking;
-    private ArrayList<User> users;
+    private List<User> users;
 
     private ImageButton Back;
 
@@ -100,6 +102,8 @@ public class ArenaFragment extends Fragment {
         users.add(u2);
         users.add(u1);
         users.add(u2);
+
+//        users = Server.getUsers();
 
         FragmentManager fragMan = getFragmentManager();
         FragmentTransaction fragTransaction = fragMan.beginTransaction();

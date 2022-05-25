@@ -28,7 +28,7 @@ public class Statistics {
 	@Column(name = "all_battles")
 	private Long allBattles;
 	
-	@Column(name = "experince")
+	@Column(name = "experience")
 	private long experience;
 
 	public Statistics() {

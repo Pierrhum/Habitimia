@@ -1,10 +1,12 @@
 package com.example.habitimia.util;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.habitimia.R;
 import com.example.habitimia.data.adapter.QuestAdapter;
+import com.example.habitimia.ui.MainActivity;
+import com.example.habitimia.ui.login.LoginActivity;
+import com.example.habitimia.ui.quest.CreateQuestFragment;
 
 public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
 
@@ -59,7 +64,14 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
             AlertDialog dialog = builder.create();
             dialog.show();
         } else {
-            adapter.editItem(position);
+
+                CreateQuestFragment newFragment = new CreateQuestFragment();
+                Bundle args = new Bundle();
+                args.putSerializable("quest",  adapter.getItem(position));
+                newFragment.setArguments(args);
+
+                adapter.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer, newFragment).commit();
+
         }
     }
 

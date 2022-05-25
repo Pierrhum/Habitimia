@@ -1,5 +1,6 @@
 package com.example.habitimia.ui.quest;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import com.example.habitimia.data.model.Quest;
 import com.example.habitimia.data.model.User;
 import com.example.habitimia.ui.MainActivity;
 import com.example.habitimia.ui.home.HomeFragment;
+import com.example.habitimia.util.Server;
 
 import java.util.ArrayList;
 
@@ -47,6 +49,9 @@ public class CreateQuestFragment extends Fragment {
     private Button Create;
 
     private int previousClassID = -1;
+
+    private Quest quest;
+    private boolean isNewQuest=true;
 
     public CreateQuestFragment() {
         // Required empty public constructor
@@ -132,15 +137,34 @@ public class CreateQuestFragment extends Fragment {
             public void onClick(View v) {
                 String name=Name.getText().toString(), details=Details.getText().toString();
                 if(name != "" && previousClassID != -1) {
-                    Quest quest = new Quest(((MainActivity) getActivity()).user, name, details, AdventurerClass.values()[previousClassID]);
+                    Quest new_quest = new Quest(((MainActivity) getActivity()).user, name, details, AdventurerClass.values()[previousClassID]);
+                    if (isNewQuest){
+//                        Server.createQuest(((MainActivity) getActivity()).user, new_quest);
+                    }else{
+                        new_quest.setId(quest.getId());
+//                        Server.updateQuest(new_quest);
+                        isNewQuest=true;
+                    }
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer, new QuestFragment()).commit();
                 }
             }
         });
 
         ((MainActivity) getActivity()).setBackgroundColor(getResources().getColor(R.color.white));
+
+        Bundle bundle = this.getArguments();
+        try {
+            quest = (Quest) bundle.getSerializable("quest");
+            fillData();
+            isNewQuest = false;
+        }catch (Exception e){}
+
+//        if (intent != null)
+//            user = (User) intent.getSerializableExtra("user");
+
         return view;
     }
+
 
     private void UpdateChosenClass(int id) {
         if(previousClassID != -1)
@@ -151,5 +175,11 @@ public class CreateQuestFragment extends Fragment {
         previousClassID = id;
         ClassBtn.get(id).setBackgroundColor(getResources().getColor(R.color.difficulty_btn_on));
         ClassBtn.get(id).setTextColor(getResources().getColor(R.color.white));
+    }
+
+    private void fillData() {
+        Name.setText(quest.getName());
+        Details.setText(quest.getDetails());
+        UpdateChosenClass(quest.getDifficulty().ordinal());
     }
 }

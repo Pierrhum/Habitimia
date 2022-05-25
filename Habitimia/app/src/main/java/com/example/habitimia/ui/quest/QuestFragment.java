@@ -115,7 +115,8 @@ public class QuestFragment extends Fragment implements DialogCloseListener {
 
         Quest dummy_quest = new Quest();
         dummy_quest.setId(1l);
-        dummy_quest.setName("Dummy Quest");
+        dummy_quest.setName("Dummy Quest Name");
+        dummy_quest.setDetails("Dummy Quest Details");
         dummy_quest.setDifficulty(AdventurerClass.B);
 
         questList.add(dummy_quest);

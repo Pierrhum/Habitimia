@@ -204,6 +204,49 @@ public class Server {
         return updated_user;
     }
 
+    public static Quest createQuest(User user,Quest quest){
+        String request_params = "userId=" + user.getId()
+                + "&" +
+                "name=" +quest.getName()
+                + "&" +
+                "details=" +quest.getDetails()
+                + "&" +
+                "difficulty=" +quest.getDifficulty()
+                ;
+        JSONObject response = Server.sendRequest("create-quest", request_params);
+
+        if (response == null){
+            return null;
+        }
+        Quest new_quest = new Quest(response);
+
+        return new_quest;
+    }
+
+    public static Quest updateQuest(Quest quest){
+        String request_params = "questId=" + quest.getId();
+        if (quest.getName() != null){
+            request_params += "&" +
+                    "name=" + quest.getName();
+        }
+        if (quest.getDetails() != null){
+            request_params += "&" +
+                    "details=" + quest.getDetails();
+        }
+        if (quest.getDifficulty() != null){
+            request_params += "&" +
+                    "difficulty=" + quest.getDifficulty();
+        }
+        JSONObject response = Server.sendRequest("update-quest", request_params);
+
+        if (response == null){
+            return null;
+        }
+        Quest new_quest = new Quest(response);
+
+        return new_quest;
+    }
+
     public static List<Quest> getQuests(User user){
         String request_params = "userId=" + user.getId();                ;
         JSONArray response = Server.sendRequestForList("all-quests", request_params);

@@ -3,9 +3,10 @@ package com.example.habitimia.data.model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Quest {
+public class Quest implements Serializable {
 
     private Long id;
 

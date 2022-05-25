@@ -107,16 +107,16 @@ public class QuestAdapter extends RecyclerView.Adapter<QuestAdapter.ViewHolder> 
         notifyItemRemoved(position);
     }
 
-    public void editItem(int position) {
-        Quest item = questList.get(position);
-        Bundle bundle = new Bundle();
-        bundle.putInt("id", Integer.parseInt(item.getId().toString()));
-        bundle.putString("task", item.getName());
-//        AddNewTask fragment = new AddNewTask();
-//        fragment.setArguments(bundle);
-//        fragment.show(activity.getSupportFragmentManager(), AddNewTask.TAG);
-        notifyDataSetChanged();
-    }
+//    public void editItem(int position) {
+//        Quest item = questList.get(position);
+//        Bundle bundle = new Bundle();
+//        bundle.putInt("id", Integer.parseInt(item.getId().toString()));
+//        bundle.putString("task", item.getName());
+////        AddNewTask fragment = new AddNewTask();
+////        fragment.setArguments(bundle);
+////        fragment.show(activity.getSupportFragmentManager(), AddNewTask.TAG);
+//        notifyDataSetChanged();
+//    }
 
     public Quest getItem(int position) {
         Quest item = questList.get(position);

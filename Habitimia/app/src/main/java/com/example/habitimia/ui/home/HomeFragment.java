@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.habitimia.R;
 import com.example.habitimia.ui.MainActivity;
@@ -32,6 +33,10 @@ public class HomeFragment extends Fragment {
     private ImageButton DailyBtn;
     private ImageButton GuildBtn;
     private ImageButton QuestBtn;
+
+    private TextView PlayerName;
+    private TextView PlayerLevel;
+    private TextView PlayerLife;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -78,6 +83,14 @@ public class HomeFragment extends Fragment {
         DailyBtn = (ImageButton) view.findViewById(R.id.home_dailies_btn);
         GuildBtn = (ImageButton) view.findViewById(R.id.home_guild_btn);
         QuestBtn = (ImageButton) view.findViewById(R.id.home_quests_btn);
+
+        PlayerName = (TextView) view.findViewById(R.id.PlayerName_home);
+        PlayerLevel = (TextView) view.findViewById(R.id.PlayerLevel);
+        PlayerLife = (TextView) view.findViewById(R.id.PlayerLife);
+
+        PlayerName.setText(((MainActivity) getActivity()).user.getUsername());
+        //PlayerLevel.setText(((MainActivity) getActivity()).user.getStatistics().get);
+        PlayerLife.setText("" + ((MainActivity) getActivity()).user.getStatistics().getHP());
 
         ArenaBtn.setOnClickListener(new View.OnClickListener() {
             @Override

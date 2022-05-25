@@ -132,7 +132,7 @@ public class CreateQuestFragment extends Fragment {
             public void onClick(View v) {
                 String name=Name.getText().toString(), details=Details.getText().toString();
                 if(name != "" && previousClassID != -1) {
-                    Quest quest = new Quest(new User(), name, details, AdventurerClass.values()[previousClassID]);
+                    Quest quest = new Quest(((MainActivity) getActivity()).user, name, details, AdventurerClass.values()[previousClassID]);
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer, new QuestFragment()).commit();
                 }
             }

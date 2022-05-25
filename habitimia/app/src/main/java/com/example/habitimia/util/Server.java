@@ -3,7 +3,10 @@ package com.example.habitimia.util;
 import android.os.StrictMode;
 import android.widget.Toast;
 
+import com.example.habitimia.data.model.AdventurerClass;
+import com.example.habitimia.data.model.Daily;
 import com.example.habitimia.data.model.Quest;
+import com.example.habitimia.data.model.Repetition;
 import com.example.habitimia.data.model.Statistics;
 import com.example.habitimia.data.model.User;
 
@@ -249,9 +252,83 @@ public class Server {
         return quests;
     }
 
+
     public static void deleteQuest(String questId){
         String request_params = "questId=" + questId;
         JSONObject response = Server.sendRequest("remove-quest", request_params);
+
+        return ;
+    }
+
+    public static List<Daily> getDailies(User user){
+        String request_params = "userId=" + user.getId();                ;
+        JSONArray response = Server.sendRequestForList("all-dailies", request_params);
+
+        if (response == null){
+            return null;
+        }
+        List<Daily> dailies = new ArrayList<>();
+        try {
+            for(int i = 0; i < response.length(); i++){
+                JSONObject daily = response.getJSONObject(i);
+                dailies.add(new Daily(daily));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return dailies;
+    }
+
+    public static Daily updateDaily(Daily daily,
+                                   String name,
+                                   String details,
+                                   AdventurerClass difficulty,
+                                   List<Repetition> repetitions){
+        String request_params = "dailyId=" + daily.getId();
+        if (name != null){
+            request_params += "&" +
+                    "name=" + name;
+        }
+        if (details != null){
+            request_params += "&" +
+                    "details=" + details;
+        }
+        if (difficulty != null){
+            request_params += "&" +
+                    "difficulty=" + difficulty;
+        }
+        request_params += "&" +
+                "days=";
+        if (repetitions != null && repetitions.size() > 0){
+
+            for (Repetition rep:repetitions){
+                request_params += rep + ",";
+            }
+            request_params = request_params.substring(0, request_params.length() - 1);
+        }
+
+        JSONObject response = Server.sendRequest("update-daily", request_params);
+
+        if (response == null){
+            return null;
+        }
+        Daily new_daily = null;
+        try {
+
+            new_daily = new Daily(response);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return new_daily;
+    }
+
+    public static void deleteDaily(String dailyId){
+        String request_params = "dailyId=" + dailyId;
+        JSONObject response = Server.sendRequest("remove-daily", request_params);
 
         return ;
     }

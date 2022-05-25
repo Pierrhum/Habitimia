@@ -15,5 +15,7 @@ public interface RepetitionRepository extends JpaRepository<Repetition, Long> {
 
 	void deleteAllByDailyId(Long dailyId);
 
+	List<Repetition> findByDaily(Daily daily);
+
 }
 

@@ -1,5 +1,9 @@
 package com.example.habitimia.data.model;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Repetition {
     private Long id;
 
@@ -24,6 +28,17 @@ public class Repetition {
         this.daily = daily;
         this.day = day;
     }
+
+    public Repetition(JSONObject repetition) {
+        try {
+            this.id = repetition.getLong("id");
+            this.day =  Day.valueOf(repetition.getString("day"));
+        } catch (JSONException jsonException) {
+            jsonException.printStackTrace();
+        }
+
+    }
+
     public Long getId() {
         return id;
     }

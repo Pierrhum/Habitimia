@@ -1,5 +1,10 @@
 package com.example.habitimia.data.model;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Daily {
@@ -14,7 +19,7 @@ public class Daily {
 
     private AdventurerClass difficulty;
 
-    private List<Repetition> repetitions;
+    private List<Repetition> repetitions = new ArrayList<>();
 
     public Daily() {
     }
@@ -23,6 +28,23 @@ public class Daily {
         this.name = name;
         this.details = details;
         this.difficulty = difficulty;
+    }
+
+    public Daily(JSONObject quest) {
+        try {
+            this.id = quest.getLong("id");
+            this.name = quest.getString("name");
+            this.details = quest.getString("details");
+            this.difficulty = AdventurerClass.valueOf(quest.getString("difficulty"));
+            JSONArray repetitions_JSONArray =  new JSONArray(quest.getString("repetitions"));
+            for(int i = 0; i < repetitions_JSONArray.length(); i++){
+                JSONObject repetition = repetitions_JSONArray.getJSONObject(i);
+                if (repetition.getString("day") != null)
+                this.repetitions.add(new Repetition(repetition));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public Long getId() {

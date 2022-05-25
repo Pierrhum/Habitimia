@@ -84,8 +84,15 @@ public class BasicRestController {
 	
 	@RequestMapping(value = "/all-dailies", method = RequestMethod.GET, produces = {"application/json"})
 	public ResponseEntity<List<Daily> > allDailies(Long userId) {
-		List<Daily> users = dailyRepository.findAllByUserId(userId);
-		return new ResponseEntity<List<Daily> >(users ,HttpStatus.OK);
+		List<Daily> dailies = dailyRepository.findAllByUserId(userId);
+		for (Daily daily: dailies) {
+			List<Repetition> repetitions = repetitionRepository.findByDailyId(daily.getId());
+			for (Repetition repetition: repetitions) {
+				repetition.setDaily(null);
+			}
+			daily.setRepetitions(repetitions);
+		}
+		return new ResponseEntity<List<Daily> >(dailies ,HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/create-daily", method = RequestMethod.GET, produces = {"application/json"})
@@ -100,9 +107,54 @@ public class BasicRestController {
 		daily = dailyRepository.save(daily);
 		for (Day day:days) {
 			Repetition repetition = new Repetition(user, daily, day);
-			repetitionRepository.save(repetition);			
+			repetitionRepository.save(repetition);	
+			repetition.setDaily(null);
+			daily.getRepetitions().add(repetition);
 		}
-		daily = dailyRepository.findById(daily.getId()).get();
+		
+
+		return new ResponseEntity<Object>(daily ,HttpStatus.OK);
+	}
+	
+	@Transactional
+	@RequestMapping(value = "/update-daily", method = RequestMethod.GET, produces = {"application/json"})
+	public ResponseEntity<Object> updateDailies(Long dailyId, 
+												String name,
+												String details,
+												AdventurerClass difficulty,
+												@RequestParam(value="days")List<Day> days
+												) {
+
+		Daily daily = dailyRepository.findById(dailyId).get();
+		if (name != null) {
+			daily.setName(name);
+		}		
+		if (details != null) {
+			daily.setDetails(details);
+		}
+		if (difficulty != null) {
+			daily.setDifficulty(difficulty);
+		}
+		daily = dailyRepository.save(daily);
+		if (days.size() != 0) {
+			repetitionRepository.deleteAllByDailyId(dailyId);
+			daily.setRepetitions(new ArrayList<>());
+			for (Day day:days) {
+				Repetition repetition = new Repetition(daily.getUser(), daily, day);
+				repetitionRepository.save(repetition);	
+				repetition.setDaily(null);
+				daily.getRepetitions().add(repetition);
+			}
+		}else {
+			List<Repetition> repetitions = repetitionRepository.findByDailyId(daily.getId());
+			for (Repetition repetition: repetitions) {
+				repetition.setDaily(null);
+			}
+			daily.setRepetitions(repetitions);
+		}
+		
+		
+//		daily = dailyRepository.findById(daily.getId()).get();
 		return new ResponseEntity<Object>(daily ,HttpStatus.OK);
 	}
 	
@@ -121,6 +173,8 @@ public class BasicRestController {
 		dailyRepository.deleteById(dailyId);
 		return new ResponseEntity<Object>(null ,HttpStatus.OK);
 	}
+	
+	
 	
 	
 	
@@ -143,7 +197,7 @@ public class BasicRestController {
 	}
 	
 	@Transactional
-	@RequestMapping(value = "/edit-quest", method = RequestMethod.GET, produces = {"application/json"})
+	@RequestMapping(value = "/update-quest", method = RequestMethod.GET, produces = {"application/json"})
 	public ResponseEntity<Object> editQuest(Long questId,
 											String name,
 											String details,

@@ -1,5 +1,6 @@
 package fr.stefanova.HabitimiaServer.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Access;
@@ -51,6 +52,7 @@ public class Daily {
 		this.name = name;
 		this.details = details;
 		this.difficulty = difficulty;
+		this.repetitions= new ArrayList<>() ;
 	}
 
 	public Long getId() {

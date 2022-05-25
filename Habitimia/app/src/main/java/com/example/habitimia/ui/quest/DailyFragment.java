@@ -10,8 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.example.habitimia.R;
+import com.example.habitimia.data.model.Daily;
 import com.example.habitimia.ui.MainActivity;
 import com.example.habitimia.ui.home.HomeFragment;
+import com.example.habitimia.util.Server;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,8 +33,9 @@ public class DailyFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private ImageButton Back;
 
+    private ImageButton Back;
+    private List<Daily> dailies;
     public DailyFragment() {
         // Required empty public constructor
     }
@@ -77,6 +82,9 @@ public class DailyFragment extends Fragment {
             }
         });
         ((MainActivity) getActivity()).setBackgroundColor(getResources().getColor(R.color.white));
+
+//        dailies = Server.getDailies(((MainActivity) getActivity()).user);
+//        Daily daily = Server.updateDaily(dailies.get(0), "renaming test", null, null, null);
         return view;
     }
 }

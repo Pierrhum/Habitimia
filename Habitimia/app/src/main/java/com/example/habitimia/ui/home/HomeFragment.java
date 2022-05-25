@@ -108,6 +108,7 @@ public class HomeFragment extends Fragment {
         });
 
         ((MainActivity) getActivity()).setBackgroundColor(getResources().getColor(R.color.teal_200));
+        ((MainActivity) getActivity()).UpdateFABIcon(R.drawable.logout);
 
         // Inflate the layout for this fragment
         return view;

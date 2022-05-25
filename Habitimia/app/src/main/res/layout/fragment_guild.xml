@@ -12,7 +12,7 @@
         android:background="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/top_bar_quest"
+            android:id="@+id/top_bar_guild"
             android:layout_width="0dp"
             android:layout_height="300dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -157,22 +157,15 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ScrollView
-            android:id="@+id/GuildQuestScrollBox"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/GuildRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:nestedScrollingEnabled="true"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/top_bar_quest">
-
-            <LinearLayout
-                android:id="@+id/guild_quest_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" />
-        </ScrollView>
+            app:layout_constraintTop_toBottomOf="@+id/top_bar_guild" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

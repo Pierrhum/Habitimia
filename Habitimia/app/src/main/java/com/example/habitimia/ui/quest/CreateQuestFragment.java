@@ -131,7 +131,8 @@ public class CreateQuestFragment extends Fragment {
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer, new QuestFragment()).commit();
+                ((MainActivity) getActivity()).LoadFragment(new QuestFragment());
+//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer, new QuestFragment()).commit();
             }
         });
 
@@ -142,13 +143,15 @@ public class CreateQuestFragment extends Fragment {
                 if(name != "" && previousClassID != -1) {
                     Quest new_quest = new Quest(((MainActivity) getActivity()).user, name, details, AdventurerClass.values()[previousClassID]);
                     if (isNewQuest){
-                        if (ownerType == OwnerType.User)
-                            Server.createQuest(((MainActivity) getActivity()).user, new_quest);
-                        else
-                            Server.createQuest(((MainActivity) getActivity()).user.getGuild(), new_quest);
+                        if (ownerType == OwnerType.User) {
+//                            Server.createQuest(((MainActivity) getActivity()).user, new_quest);
+                        }
+                        else{
+//                            Server.createQuest(((MainActivity) getActivity()).user.getGuild(), new_quest);
+                        }
                     }else{
                         new_quest.setId(quest.getId());
-                        Server.updateQuest(new_quest);
+//                        Server.updateQuest(new_quest);
                         isNewQuest=true;
                     }
                     if (ownerType == OwnerType.User) {

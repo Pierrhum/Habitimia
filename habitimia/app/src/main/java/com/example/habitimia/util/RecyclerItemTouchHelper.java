@@ -48,8 +48,8 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            adapter.getActivity().user = Server.updateUserHP(adapter.getActivity().user,
-                                    -Long.valueOf(adapter.getItem(position).getDifficulty().ordinal() ));
+//                            adapter.getActivity().user = Server.updateUserHP(adapter.getActivity().user,
+//                                    -Long.valueOf(adapter.getItem(position).getDifficulty().ordinal() ));
                             MyNotification.createNotification(adapter.getActivity(), adapter.getContext(),
                                     "Oh no, you have lost "
                                             + adapter.getItem(position).getDifficulty().ordinal() + " HP!");

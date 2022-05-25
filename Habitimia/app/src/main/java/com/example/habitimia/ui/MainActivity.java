@@ -22,9 +22,11 @@ import android.widget.Toast;
 import com.example.habitimia.R;
 import com.example.habitimia.data.model.AdventurerClass;
 import com.example.habitimia.data.model.Guild;
+import com.example.habitimia.data.model.OwnerType;
 import com.example.habitimia.data.model.Statistics;
 import com.example.habitimia.data.model.User;
 import com.example.habitimia.ui.arena.ArenaFragment;
+import com.example.habitimia.ui.guild.GuildFragment;
 import com.example.habitimia.ui.home.HomeFragment;
 import com.example.habitimia.ui.login.LoginActivity;
 import com.example.habitimia.ui.quest.CreateQuestFragment;
@@ -94,6 +96,12 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
+                } else if(mCurrentFragment instanceof GuildFragment) {
+                    CreateQuestFragment newFragment = new CreateQuestFragment();
+                    Bundle args = new Bundle();
+                    args.putSerializable("onwerType", OwnerType.Guild);
+                    newFragment.setArguments(args);
+                    LoadFragment(newFragment);
                 }
                 LoadFragment();
             }

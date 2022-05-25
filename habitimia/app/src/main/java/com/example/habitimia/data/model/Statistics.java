@@ -92,8 +92,8 @@ public class Statistics implements Serializable {
     public void setExperience(Long experience) {this.experience = experience;  }
 
     public String getLevelName() {
-        if(experience < 50)
-            return getResources();
+//        if(experience < 50)
+//            return getResources();
         return "";
     }
 }

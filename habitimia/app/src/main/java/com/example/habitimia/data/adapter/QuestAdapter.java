@@ -57,7 +57,7 @@ public class QuestAdapter extends RecyclerView.Adapter<QuestAdapter.ViewHolder> 
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     deleteItem(p);
-                                    activity.user = Server.updateUserHP(activity.user,Long.valueOf(item.getDifficulty().ordinal() ));
+//                                    activity.user = Server.updateUserHP(activity.user,Long.valueOf(item.getDifficulty().ordinal() ));
                                     MyNotification.createNotification(activity, getContext(),
                                             "Congrats! You have claimed "
                                             + item.getDifficulty().ordinal()  + " XP!");

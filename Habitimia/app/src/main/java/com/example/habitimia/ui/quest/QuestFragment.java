@@ -125,7 +125,7 @@ public class QuestFragment extends Fragment implements DialogCloseListener {
         questList.add(dummy_quest);
         questList.add(dummy_quest);
 
-        questList = Server.getQuests(((MainActivity) getActivity()).user);
+//        questList = Server.getQuests(((MainActivity) getActivity()).user);
 
         adapter.setTasks(questList);
 

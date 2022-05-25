@@ -129,7 +129,7 @@ public class GuildFragment extends Fragment {
         questList.add(dummy_quest);
         questList.add(dummy_quest);
 
-        questList = Server.getQuests(((MainActivity) getActivity()).user.getGuild());
+//        questList = Server.getQuests(((MainActivity) getActivity()).user.getGuild());
 
         adapter.setTasks(questList);
 

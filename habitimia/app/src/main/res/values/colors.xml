@@ -23,5 +23,6 @@
     <color name="difficulty_btn_5">#FFDD2D</color>
     <color name="difficulty_btn_6">#FFDA16</color>
     <color name="difficulty_btn_7">#FFD700</color>
+    <color name="difficulty_btn_on">#343131</color>
 
 </resources>

@@ -90,7 +90,7 @@
                     android:id="@+id/guildName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Dead End"
+                    android:text="Guild Name"
                     android:textAlignment="center"
                     android:textColor="@color/dark_gray"
                     android:textSize="34sp"

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.habitimia.R;
 import com.example.habitimia.data.adapter.QuestAdapter;
@@ -18,6 +19,8 @@ import com.example.habitimia.data.model.Quest;
 import com.example.habitimia.ui.MainActivity;
 import com.example.habitimia.ui.home.HomeFragment;
 import com.example.habitimia.util.RecyclerItemTouchHelper;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +42,8 @@ public class GuildFragment extends Fragment {
     private String mParam2;
 
     private ImageButton Back;
+    private TextView Name;
+    private TextView Members;
 
     private RecyclerView GuildRecyclerView;
     private QuestAdapter adapter;
@@ -82,6 +87,11 @@ public class GuildFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_guild, container, false);
         Back = (ImageButton) view.findViewById(R.id.back_guild);
+        Name = (TextView) view.findViewById(R.id.guildName);
+        Members = (TextView) view.findViewById(R.id.guildMembers);
+
+        Name.setText(((MainActivity) getActivity()).user.getGuild().getName());
+        Members.setText("" + ((MainActivity) getActivity()).user.getGuild().getMembers().size());
 
         Back.setOnClickListener(new View.OnClickListener() {
             @Override

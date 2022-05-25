@@ -16,6 +16,7 @@
     <color name="colorPrimaryDark">#339C5D</color>
     <color name="gray">#707070</color>
     <color name="dark_gray">#5C6165</color>
+    <color name="purple">#A061FF</color>
 
     <color name="difficulty_btn_1">#FFEB86</color>
     <color name="difficulty_btn_2">#FFE66A</color>

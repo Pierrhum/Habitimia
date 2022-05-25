@@ -102,6 +102,7 @@ public class QuestFragment extends Fragment implements DialogCloseListener {
             }
         });
         ((MainActivity) getActivity()).setBackgroundColor(getResources().getColor(R.color.white));
+        ((MainActivity) getActivity()).UpdateFABIcon(R.drawable.ic_add);
 
         questList = new ArrayList<>();
         tasksRecyclerView = view.findViewById(R.id.tasksRecyclerView);

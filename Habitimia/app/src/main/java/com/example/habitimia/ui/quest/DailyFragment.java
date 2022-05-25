@@ -83,6 +83,7 @@ public class DailyFragment extends Fragment {
             }
         });
         ((MainActivity) getActivity()).setBackgroundColor(getResources().getColor(R.color.white));
+        ((MainActivity) getActivity()).UpdateFABIcon(R.drawable.ic_add);
 
 //        dailies = Server.getDailies(((MainActivity) getActivity()).user);
 //        Daily daily = Server.updateDaily(dailies.get(0), "renaming test", null, null, null);

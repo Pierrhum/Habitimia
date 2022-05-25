@@ -118,6 +118,7 @@ public class ArenaFragment extends Fragment {
         fragTransaction.commit();
 
         ((MainActivity) getActivity()).setBackgroundColor(getResources().getColor(R.color.white));
+        ((MainActivity) getActivity()).UpdateFABIcon(R.drawable.arena_image);
         return view;
     }
 }

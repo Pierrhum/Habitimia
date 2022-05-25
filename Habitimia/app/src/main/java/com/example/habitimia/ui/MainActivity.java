@@ -26,6 +26,7 @@ import com.example.habitimia.data.model.Statistics;
 import com.example.habitimia.data.model.User;
 import com.example.habitimia.ui.arena.ArenaFragment;
 import com.example.habitimia.ui.home.HomeFragment;
+import com.example.habitimia.ui.login.LoginActivity;
 import com.example.habitimia.ui.quest.CreateQuestFragment;
 import com.example.habitimia.ui.quest.DailyFragment;
 import com.example.habitimia.ui.quest.QuestFragment;
@@ -88,6 +89,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(mCurrentFragment instanceof QuestFragment) {
                     mCurrentFragment = new CreateQuestFragment();
+                } else if(mCurrentFragment instanceof HomeFragment) {
+                    // Déconnexion
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
                 LoadFragment();
             }
@@ -201,5 +207,9 @@ public class MainActivity extends AppCompatActivity {
         mOldFragment = mCurrentFragment;
         mCurrentFragment = fragment;
         LoadFragment();
+    }
+
+    public void UpdateFABIcon(int resId) {
+        FAB.setImageResource(resId);
     }
 }

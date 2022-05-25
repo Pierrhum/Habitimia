@@ -102,6 +102,7 @@ public class GuildFragment extends Fragment {
             }
         });
         ((MainActivity) getActivity()).setBackgroundColor(getResources().getColor(R.color.white));
+        ((MainActivity) getActivity()).UpdateFABIcon(R.drawable.ic_add);
 
         questList = new ArrayList<>();
         GuildRecyclerView = view.findViewById(R.id.GuildRecyclerView);

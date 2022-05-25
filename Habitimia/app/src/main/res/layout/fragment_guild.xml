@@ -12,9 +12,9 @@
         android:background="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/top_bar_guild"
+            android:id="@+id/top_bar_quest"
             android:layout_width="0dp"
-            android:layout_height="75dp"
+            android:layout_height="300dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -52,6 +52,128 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/dark_blue" />
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/guild_informations"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="40dp"
+                app:layout_constraintBottom_toBottomOf="@id/background_top_bar_guild"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_guild">
+
+                <ImageView
+                    android:id="@+id/infoguild_background"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/rounded_rectangle"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/guild_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/guild"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toTopOf="@id/guildName"
+                    app:layout_constraintEnd_toEndOf="@id/guildName"
+                    app:layout_constraintStart_toStartOf="@id/guildName" />
+
+                <TextView
+                    android:id="@+id/guildName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Dead End"
+                    android:textAlignment="center"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="34sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/members_box"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/members_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/members"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toTopOf="@id/members_box"
+                    app:layout_constraintEnd_toEndOf="@id/members_box"
+                    app:layout_constraintStart_toStartOf="@id/members_box"
+                    app:layout_constraintTop_toTopOf="@id/guild_txt" />
+
+                <ImageView
+                    android:id="@+id/members_box"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/small_rounded_box"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/guildName"
+                    app:layout_constraintTop_toBottomOf="@id/members_txt" />
+
+                <TextView
+                    android:id="@+id/guildMembers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="354"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/members_box"
+                    app:layout_constraintEnd_toEndOf="@id/members_box"
+                    app:layout_constraintStart_toStartOf="@id/members_box"
+                    app:layout_constraintTop_toTopOf="@id/members_box" />
+
+                <Button
+                    android:id="@+id/JoinChat"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/btn_1"
+                    android:backgroundTint="@color/dark_gray"
+                    android:backgroundTintMode="add"
+                    android:maxLines="1"
+                    android:text="@string/join_chat"
+                    android:textAlignment="center"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/members_box"
+                    app:layout_constraintStart_toStartOf="@id/members_box"
+                    app:layout_constraintTop_toBottomOf="@id/members_box" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ScrollView
+            android:id="@+id/GuildQuestScrollBox"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_bar_quest">
+
+            <LinearLayout
+                android:id="@+id/guild_quest_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </ScrollView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>

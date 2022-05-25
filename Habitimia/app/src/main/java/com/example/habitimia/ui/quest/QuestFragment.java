@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 
 import com.example.habitimia.R;
 import com.example.habitimia.data.adapter.QuestAdapter;
+import com.example.habitimia.data.model.AdventurerClass;
 import com.example.habitimia.data.model.Quest;
 import com.example.habitimia.data.model.User;
 import com.example.habitimia.ui.MainActivity;
@@ -115,6 +116,7 @@ public class QuestFragment extends Fragment implements DialogCloseListener {
         Quest dummy_quest = new Quest();
         dummy_quest.setId(1l);
         dummy_quest.setName("Dummy Quest");
+        dummy_quest.setDifficulty(AdventurerClass.B);
 
         questList.add(dummy_quest);
         questList.add(dummy_quest);

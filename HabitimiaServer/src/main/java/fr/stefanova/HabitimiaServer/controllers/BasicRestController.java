@@ -69,7 +69,7 @@ public class BasicRestController {
 												Long HP) {
 		User user = userRepository.findById(userId).get();
 		if (HP != null) {
-			user.getStatistics().setHP(HP);
+			user.getStatistics().setHP(HP + user.getStatistics().getHP());
 		}
 		statisticsRepository.save(user.getStatistics());
 		

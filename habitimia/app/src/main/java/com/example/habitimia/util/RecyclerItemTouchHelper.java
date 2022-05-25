@@ -36,12 +36,17 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
         final int position = viewHolder.getAdapterPosition();
         if (direction == ItemTouchHelper.LEFT) {
             AlertDialog.Builder builder = new AlertDialog.Builder(adapter.getContext());
-            builder.setTitle("Delete Task");
-            builder.setMessage("Are you sure you want to delete this Task?");
+            builder.setTitle("Delete Quest");
+            builder.setMessage("Are you sure you want to delete this quest?");
             builder.setPositiveButton("Confirm",
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            adapter.getActivity().user = Server.updateUserHP(adapter.getActivity().user,
+                                    -Long.valueOf(adapter.getItem(position).getDifficulty().ordinal() ));
+                            MyNotification.createNotification(adapter.getActivity(), adapter.getContext(),
+                                    "Oh no, you have lost "
+                                            + adapter.getItem(position).getDifficulty().ordinal() + " HP!");
                             adapter.deleteItem(position);
                         }
                     });

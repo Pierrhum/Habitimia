@@ -26,6 +26,11 @@ public class MyNotification {
         createHighImportanceChannel(title, content, activity, context);
     }
 
+    public static void createNotification( Activity activity, Context context, String message){
+        String title = "Habitimia";
+        String content = message;
+        createHighImportanceChannel(title, content, activity, context);
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private static NotificationChannel createHighImportanceChannel(Activity activity){

@@ -131,7 +131,11 @@ public class CreateQuestFragment extends Fragment {
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).LoadFragment(new QuestFragment());
+                if(ownerType == OwnerType.User)
+                    ((MainActivity) getActivity()).LoadFragment(new QuestFragment());
+                else
+                    ((MainActivity) getActivity()).LoadFragment(new GuildFragment());
+
 //                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer, new QuestFragment()).commit();
             }
         });

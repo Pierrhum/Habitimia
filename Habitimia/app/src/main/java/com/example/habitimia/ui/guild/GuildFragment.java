@@ -18,6 +18,7 @@ import com.example.habitimia.data.adapter.QuestAdapter;
 import com.example.habitimia.data.model.Quest;
 import com.example.habitimia.ui.MainActivity;
 import com.example.habitimia.ui.home.HomeFragment;
+import com.example.habitimia.ui.quest.QuestFragment;
 import com.example.habitimia.util.RecyclerItemGuildQuestTouchHelper;
 import com.example.habitimia.util.RecyclerItemTouchHelper;
 import com.example.habitimia.util.Server;
@@ -98,7 +99,7 @@ public class GuildFragment extends Fragment {
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer, new HomeFragment()).commit();
+                ((MainActivity) getActivity()).LoadFragment(new HomeFragment());
             }
         });
         ((MainActivity) getActivity()).setBackgroundColor(getResources().getColor(R.color.white));

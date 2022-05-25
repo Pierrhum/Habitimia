@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import com.example.habitimia.R;
 import com.example.habitimia.data.model.User;
 import com.example.habitimia.ui.MainActivity;
+import com.example.habitimia.ui.guild.GuildFragment;
 import com.example.habitimia.ui.home.HomeFragment;
 import com.example.habitimia.util.Server;
 
@@ -84,7 +85,7 @@ public class ArenaFragment extends Fragment {
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer, new HomeFragment()).commit();
+                ((MainActivity) getActivity()).LoadFragment(new HomeFragment());
             }
         });
 

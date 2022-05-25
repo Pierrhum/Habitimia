@@ -79,7 +79,7 @@ public class DailyFragment extends Fragment {
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer, new HomeFragment()).commit();
+                ((MainActivity) getActivity()).LoadFragment(new HomeFragment());
             }
         });
         ((MainActivity) getActivity()).setBackgroundColor(getResources().getColor(R.color.white));

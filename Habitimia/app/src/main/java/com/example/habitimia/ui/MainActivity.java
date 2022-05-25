@@ -214,6 +214,7 @@ public class MainActivity extends AppCompatActivity {
     public void LoadFragment(Fragment fragment) {
         mOldFragment = mCurrentFragment;
         mCurrentFragment = fragment;
+        System.out.println("Fragment " + mCurrentFragment);
         LoadFragment();
     }
 

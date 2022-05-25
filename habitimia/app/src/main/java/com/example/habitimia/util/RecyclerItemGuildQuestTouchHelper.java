@@ -1,7 +1,6 @@
 package com.example.habitimia.util;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -18,15 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.habitimia.R;
 import com.example.habitimia.data.adapter.QuestAdapter;
 import com.example.habitimia.data.model.OwnerType;
-import com.example.habitimia.ui.MainActivity;
-import com.example.habitimia.ui.login.LoginActivity;
 import com.example.habitimia.ui.quest.CreateQuestFragment;
 
-public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
+public class RecyclerItemGuildQuestTouchHelper extends ItemTouchHelper.SimpleCallback {
 
     private QuestAdapter adapter;
 
-    public RecyclerItemTouchHelper(QuestAdapter adapter) {
+    public RecyclerItemGuildQuestTouchHelper(QuestAdapter adapter) {
         super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
         this.adapter = adapter;
     }
@@ -48,11 +45,11 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            adapter.getActivity().user = Server.updateUserHP(adapter.getActivity().user,
-                                    -Long.valueOf(adapter.getItem(position).getDifficulty().ordinal() ));
-                            MyNotification.createNotification(adapter.getActivity(), adapter.getContext(),
-                                    "Oh no, you have lost "
-                                            + adapter.getItem(position).getDifficulty().ordinal() + " HP!");
+//                            adapter.getActivity().user = Server.updateUserHP(adapter.getActivity().user,
+//                                    -Long.valueOf(adapter.getItem(position).getDifficulty().ordinal() ));
+//                            MyNotification.createNotification(adapter.getActivity(), adapter.getContext(),
+//                                    "Oh no, you have lost "
+//                                            + adapter.getItem(position).getDifficulty().ordinal() + " HP!");
                             adapter.deleteItem(position);
                         }
                     });
@@ -69,7 +66,7 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
                 CreateQuestFragment newFragment = new CreateQuestFragment();
                 Bundle args = new Bundle();
                 args.putSerializable("quest",  adapter.getItem(position));
-                args.putSerializable("ownerType", OwnerType.User);
+                args.putSerializable("onwerType", OwnerType.Guild);
                 newFragment.setArguments(args);
 
                 adapter.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer, newFragment).commit();

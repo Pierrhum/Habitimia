@@ -17,9 +17,11 @@ import android.widget.ImageButton;
 
 import com.example.habitimia.R;
 import com.example.habitimia.data.model.AdventurerClass;
+import com.example.habitimia.data.model.OwnerType;
 import com.example.habitimia.data.model.Quest;
 import com.example.habitimia.data.model.User;
 import com.example.habitimia.ui.MainActivity;
+import com.example.habitimia.ui.guild.GuildFragment;
 import com.example.habitimia.ui.home.HomeFragment;
 import com.example.habitimia.util.Server;
 
@@ -51,7 +53,8 @@ public class CreateQuestFragment extends Fragment {
     private int previousClassID = -1;
 
     private Quest quest;
-    private boolean isNewQuest=true;
+    private boolean isNewQuest = true;
+    public OwnerType ownerType = OwnerType.User;
 
     public CreateQuestFragment() {
         // Required empty public constructor
@@ -139,13 +142,22 @@ public class CreateQuestFragment extends Fragment {
                 if(name != "" && previousClassID != -1) {
                     Quest new_quest = new Quest(((MainActivity) getActivity()).user, name, details, AdventurerClass.values()[previousClassID]);
                     if (isNewQuest){
-//                        Server.createQuest(((MainActivity) getActivity()).user, new_quest);
+                        if (ownerType == OwnerType.User)
+                            Server.createQuest(((MainActivity) getActivity()).user, new_quest);
+                        else
+                            Server.createQuest(((MainActivity) getActivity()).user.getGuild(), new_quest);
                     }else{
                         new_quest.setId(quest.getId());
-//                        Server.updateQuest(new_quest);
+                        Server.updateQuest(new_quest);
                         isNewQuest=true;
                     }
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer, new QuestFragment()).commit();
+                    if (ownerType == OwnerType.User) {
+
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer, new QuestFragment()).commit();
+                    }else {
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer, new GuildFragment()).commit();
+                    }
+//                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer, new QuestFragment()).commit();
                 }
             }
         });
@@ -154,7 +166,9 @@ public class CreateQuestFragment extends Fragment {
 
         Bundle bundle = this.getArguments();
         try {
+            ownerType =  (OwnerType) bundle.getSerializable("ownerType");
             quest = (Quest) bundle.getSerializable("quest");
+
             fillData();
             isNewQuest = false;
         }catch (Exception e){}

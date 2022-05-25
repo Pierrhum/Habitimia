@@ -9,6 +9,8 @@ import fr.stefanova.HabitimiaServer.entities.Quest;
 public interface QuestRepository extends JpaRepository<Quest, Long> {
 
 	List<Quest> findAllByUserId(Long userId);
+
+	List<Quest> findAllByGuildId(Long guildId);
 	  
 }
 

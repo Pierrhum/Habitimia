@@ -23,6 +23,9 @@ public class Quest {
 	@ManyToOne
 	private User user;
 	
+	@ManyToOne
+	private Guild guild;
+	
 	@Column(name = "name")
 	private String name;
 	
@@ -32,6 +35,10 @@ public class Quest {
 	@Column(name = "difficulty")
 	@Enumerated(EnumType.STRING)
 	private AdventurerClass difficulty;
+	
+	@Column(name = "owner_type")
+	@Enumerated(EnumType.STRING)
+	private OwnerType ownerType;
 	
 
 	public Quest() {
@@ -43,6 +50,16 @@ public class Quest {
 		this.name = name;
 		this.details = details;
 		this.difficulty = difficulty;
+		this.ownerType = OwnerType.User;
+	}
+	
+	public Quest(Guild guild, String name, String details, AdventurerClass difficulty) {
+		super();
+		this.guild = guild;
+		this.name = name;
+		this.details = details;
+		this.difficulty = difficulty;
+		this.ownerType = OwnerType.Guild;
 	}
 
 	public Long getId() {
@@ -82,6 +99,11 @@ public class Quest {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
+	public Guild getGuild() {
+		return guild;
+	}
+	public void setGuild(Guild guild) {
+		this.guild = guild;
+	}
 
 }

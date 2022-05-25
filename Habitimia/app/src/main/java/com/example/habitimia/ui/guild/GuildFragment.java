@@ -18,7 +18,9 @@ import com.example.habitimia.data.adapter.QuestAdapter;
 import com.example.habitimia.data.model.Quest;
 import com.example.habitimia.ui.MainActivity;
 import com.example.habitimia.ui.home.HomeFragment;
+import com.example.habitimia.util.RecyclerItemGuildQuestTouchHelper;
 import com.example.habitimia.util.RecyclerItemTouchHelper;
+import com.example.habitimia.util.Server;
 
 import org.w3c.dom.Text;
 
@@ -109,7 +111,7 @@ public class GuildFragment extends Fragment {
         GuildRecyclerView.setAdapter(adapter);
 
         ItemTouchHelper itemTouchHelper = new
-                ItemTouchHelper(new RecyclerItemTouchHelper(adapter));
+                ItemTouchHelper(new RecyclerItemGuildQuestTouchHelper(adapter));
         itemTouchHelper.attachToRecyclerView(GuildRecyclerView);
 
         Quest dummy_quest = new Quest();
@@ -126,7 +128,7 @@ public class GuildFragment extends Fragment {
         questList.add(dummy_quest);
         questList.add(dummy_quest);
 
-//        questList = Server.getQuests(((MainActivity) getActivity()).user);
+        questList = Server.getQuests(((MainActivity) getActivity()).user.getGuild());
 
         adapter.setTasks(questList);
 

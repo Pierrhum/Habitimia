@@ -6,6 +6,7 @@ import android.widget.Toast;
 import com.example.habitimia.data.model.AdventurerClass;
 import com.example.habitimia.data.model.Daily;
 import com.example.habitimia.data.model.Guild;
+import com.example.habitimia.data.model.OwnerType;
 import com.example.habitimia.data.model.Quest;
 import com.example.habitimia.data.model.Repetition;
 import com.example.habitimia.data.model.Statistics;
@@ -205,7 +206,30 @@ public class Server {
     }
 
     public static Quest createQuest(User user,Quest quest){
-        String request_params = "userId=" + user.getId()
+        String request_params ="ownerId=" + user.getId()
+                + "&" +
+                "ownerType=" + OwnerType.User
+                + "&" +
+                "name=" +quest.getName()
+                + "&" +
+                "details=" +quest.getDetails()
+                + "&" +
+                "difficulty=" +quest.getDifficulty()
+                ;
+        JSONObject response = Server.sendRequest("create-quest", request_params);
+
+        if (response == null){
+            return null;
+        }
+        Quest new_quest = new Quest(response);
+
+        return new_quest;
+    }
+
+    public static Quest createQuest(Guild guild,Quest quest){
+        String request_params ="ownerId=" + guild.getId()
+                + "&" +
+                "ownerType=" + OwnerType.Guild
                 + "&" +
                 "name=" +quest.getName()
                 + "&" +
@@ -248,7 +272,32 @@ public class Server {
     }
 
     public static List<Quest> getQuests(User user){
-        String request_params = "userId=" + user.getId();                ;
+        String request_params = "ownerId=" + user.getId()
+                + "&" +
+                "ownerType=" + OwnerType.User;                ;
+        JSONArray response = Server.sendRequestForList("all-quests", request_params);
+
+        if (response == null){
+            return null;
+        }
+        List<Quest> quests = new ArrayList<>();
+        try {
+            for(int i = 0; i < response.length(); i++){
+                JSONObject quest = response.getJSONObject(i);
+                quests.add(new Quest(quest));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return quests;
+    }
+
+    public static List<Quest> getQuests(Guild guild){
+        String request_params = "ownerId=" + guild.getId()
+                + "&" +
+                "ownerType=" + OwnerType.Guild;                ;
         JSONArray response = Server.sendRequestForList("all-quests", request_params);
 
         if (response == null){

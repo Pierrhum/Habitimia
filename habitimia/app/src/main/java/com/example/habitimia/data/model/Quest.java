@@ -10,7 +10,11 @@ public class Quest implements Serializable {
 
     private Long id;
 
+    private OwnerType ownerType;
+
     private User user;
+
+    private Guild guild;
 
     private String name;
 
@@ -27,6 +31,15 @@ public class Quest implements Serializable {
         this.name = name;
         this.details = details;
         this.difficulty = difficulty;
+        this.ownerType = OwnerType.User;
+    }
+
+    public Quest(Guild guild, String name, String details, AdventurerClass difficulty) {
+        this.guild = guild;
+        this.name = name;
+        this.details = details;
+        this.difficulty = difficulty;
+        this.ownerType = OwnerType.Guild;
     }
 
     public Quest(JSONObject quest) {

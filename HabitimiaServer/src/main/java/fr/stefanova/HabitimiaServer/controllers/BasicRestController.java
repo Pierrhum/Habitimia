@@ -19,11 +19,14 @@ import fr.stefanova.HabitimiaServer.entities.AdventurerClass;
 import fr.stefanova.HabitimiaServer.entities.Avatar;
 import fr.stefanova.HabitimiaServer.entities.Daily;
 import fr.stefanova.HabitimiaServer.entities.Day;
+import fr.stefanova.HabitimiaServer.entities.Guild;
+import fr.stefanova.HabitimiaServer.entities.OwnerType;
 import fr.stefanova.HabitimiaServer.entities.Quest;
 import fr.stefanova.HabitimiaServer.entities.Repetition;
 import fr.stefanova.HabitimiaServer.entities.Statistics;
 import fr.stefanova.HabitimiaServer.entities.User;
 import fr.stefanova.HabitimiaServer.repo.DailyRepository;
+import fr.stefanova.HabitimiaServer.repo.GuildRepository;
 import fr.stefanova.HabitimiaServer.repo.QuestRepository;
 import fr.stefanova.HabitimiaServer.repo.RepetitionRepository;
 import fr.stefanova.HabitimiaServer.repo.StatisticsRepository;
@@ -42,6 +45,8 @@ public class BasicRestController {
 	RepetitionRepository repetitionRepository;
 	@Autowired
 	QuestRepository questRepository;
+	@Autowired
+	GuildRepository guildRepository;
 	
 	public BasicRestController() {
 		System.err.println("hello");
@@ -176,22 +181,34 @@ public class BasicRestController {
 	
 	
 	
-	
-	
 	@RequestMapping(value = "/all-quests", method = RequestMethod.GET, produces = {"application/json"})
-	public ResponseEntity<List<Quest> > allQuests(Long userId) {
-		List<Quest> quests = questRepository.findAllByUserId(userId);
+	public ResponseEntity<List<Quest> > allQuests(Long ownerId,OwnerType ownerType) {
+		List<Quest> quests = null;
+		if (ownerType == OwnerType.User) {
+			quests =questRepository.findAllByUserId(ownerId);
+		}else if (ownerType == OwnerType.Guild) {
+			quests = questRepository.findAllByGuildId(ownerId);
+		}
+
 		return new ResponseEntity<List<Quest> >(quests ,HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/create-quest", method = RequestMethod.GET, produces = {"application/json"})
-	public ResponseEntity<Object> createQuest(Long userId, 
+	public ResponseEntity<Object> createQuest(Long ownerId,
+												OwnerType ownerType,
 												String name,
 												String details,
 												AdventurerClass difficulty
 												) {
-		User user = userRepository.findById(userId).get();
-		Quest quest = new Quest(user, name, details, difficulty);
+		Quest quest = null;
+		if (ownerType == OwnerType.User) {
+			User user = userRepository.findById(ownerId).get();
+			quest = new Quest(user, name, details, difficulty);
+		}else if (ownerType == OwnerType.Guild) {
+			Guild guild = guildRepository.findById(ownerId).get();
+			quest = new Quest(guild, name, details, difficulty);
+		}
+
 		quest = questRepository.save(quest);
 		return new ResponseEntity<Object>(quest ,HttpStatus.OK);
 	}

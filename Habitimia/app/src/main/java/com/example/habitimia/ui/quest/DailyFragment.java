@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 
 import com.example.habitimia.R;
 import com.example.habitimia.data.model.Daily;
+import com.example.habitimia.data.model.User;
 import com.example.habitimia.ui.MainActivity;
 import com.example.habitimia.ui.home.HomeFragment;
 import com.example.habitimia.util.Server;
@@ -85,6 +86,9 @@ public class DailyFragment extends Fragment {
 
 //        dailies = Server.getDailies(((MainActivity) getActivity()).user);
 //        Daily daily = Server.updateDaily(dailies.get(0), "renaming test", null, null, null);
+//        List<User> usersFromGuild = Server.getAllUsersForGuild(((MainActivity) getActivity()).user.getGuild());
+//        User user_test = Server.register("Test", "", "123456", "MAGICIAN");
+//        User same = Server.updateUserHP(user_test, 122L);
         return view;
     }
 }

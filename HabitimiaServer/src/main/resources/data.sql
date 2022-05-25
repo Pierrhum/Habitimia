@@ -10,6 +10,8 @@ INSERT INTO user (username, email, password, avatar, statistics_id) VALUES ('Pie
 INSERT INTO guild (name) VALUES ('Dead End');
 UPDATE user SET guild_id = 1 WHERE id = 1;
 
+UPDATE user SET guild_id = 1 WHERE id = 2;
+
 -- daily for user 1
 INSERT INTO daily (name, user_id, details, difficulty) VALUES ('Emails', 1, 'Check all 3 mail-boxes', 'D');
 INSERT INTO repetition ( daily_id, day) values (1, 'MONDAY');

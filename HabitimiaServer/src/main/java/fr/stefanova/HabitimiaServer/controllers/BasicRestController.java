@@ -224,6 +224,17 @@ public class BasicRestController {
 		return new ResponseEntity<Object>(null ,HttpStatus.OK);
 	}
 	
+	@Transactional
+	@RequestMapping(value = "/all-guild-members", method = RequestMethod.GET, produces = {"application/json"})
+	public ResponseEntity<Object> allGuildQuest(Long guildId) {
+		List<User> users = userRepository.findAllUsersFromGuild(guildId);
+		for (User user:users) {
+//			Statistics stats = statisticsRepository.findUserId(user.getId());
+//			user.setStatistics(stats);
+		}
+		return new ResponseEntity<Object>(users ,HttpStatus.OK);
+	}
+	
 
 
 }

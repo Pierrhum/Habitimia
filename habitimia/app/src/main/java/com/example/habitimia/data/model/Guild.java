@@ -1,5 +1,8 @@
 package com.example.habitimia.data.model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class Guild {
@@ -10,14 +13,23 @@ public class Guild {
 
     public Guild()
     {
-        this.id=-1l;
+        this.id=1l;
         this.name="Dead End";
     }
 
     public Guild(ArrayList<User> members) {
-        this.id=-1l;
+        this.id=1l;
         this.name="Dead End";
         this.members = new ArrayList<User>(members);
+    }
+
+    public Guild(JSONObject guild) {
+        try {
+            this.id = guild.getLong("id");
+            this.name = guild.getString("name");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public Long getId() {

@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import com.example.habitimia.data.model.AdventurerClass;
 import com.example.habitimia.data.model.Daily;
+import com.example.habitimia.data.model.Guild;
 import com.example.habitimia.data.model.Quest;
 import com.example.habitimia.data.model.Repetition;
 import com.example.habitimia.data.model.Statistics;
@@ -165,16 +166,7 @@ public class Server {
         if (response == null){
             return null;
         }
-        Statistics stats = null;
-        User user = null;
-        try {
-            JSONObject statsJSON = response.getJSONObject("statistics");
-            stats = new Statistics(statsJSON);
-            user = new User(response);
-            user.setStatistics(stats);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        User user = new User(response);
 
         return user;
     }
@@ -193,16 +185,7 @@ public class Server {
         if (response == null){
             return null;
         }
-        Statistics stats = null;
-        User user = null;
-        try {
-            JSONObject statsJSON = response.getJSONObject("statistics");
-            stats = new Statistics(statsJSON);
-            user = new User(response);
-            user.setStatistics(stats);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        User user = new User(response);
 
         return user;
     }
@@ -216,16 +199,7 @@ public class Server {
         if (response == null){
             return null;
         }
-        Statistics stats = null;
-        User updated_user = null;
-        try {
-            JSONObject statsJSON = response.getJSONObject("statistics");
-            stats = new Statistics(statsJSON);
-            updated_user = new User(response);
-            updated_user.setStatistics(stats);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        User updated_user = new User(response);
 
         return updated_user;
     }
@@ -237,7 +211,6 @@ public class Server {
         if (response == null){
             return null;
         }
-        Statistics stats = null;
         List<Quest> quests = new ArrayList<>();
         try {
             for(int i = 0; i < response.length(); i++){
@@ -355,5 +328,25 @@ public class Server {
         return users;
     }
 
+    public static List<User> getAllUsersForGuild(Guild guild){
+        String request_params = "guildId=" + guild.getId();                ;
+        JSONArray response = Server.sendRequestForList("all-guild-members", request_params);
+
+        if (response == null){
+            return null;
+        }
+        List<User> users = new ArrayList<>();
+        try {
+            for(int i = 0; i < response.length(); i++){
+                JSONObject user = response.getJSONObject(i);
+                users.add(new User(user));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return users;
+    }
 
 }

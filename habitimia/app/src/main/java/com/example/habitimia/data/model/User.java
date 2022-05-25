@@ -38,10 +38,12 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public User(JSONObject statsJSON) {
+    public User(JSONObject user) {
         try {
-            this.id = statsJSON.getLong("id");
-            this.username = statsJSON.getString("username");
+            this.id = user.getLong("id");
+            this.username = user.getString("username");
+            this.statistics = new Statistics(user.getJSONObject("statistics"));
+            this.guild = new Guild(user.getJSONObject("guild"));
 
         } catch (JSONException e) {
             e.printStackTrace();

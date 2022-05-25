@@ -24,6 +24,12 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- TODO: Home -->
+    <string name="beginner">Beginner</string>
+    <string name="advanced">Advanced</string>
+    <string name="expert">Expert</string>
+
+
     <!-- TODO: Quests -->
     <string name="quests">Quests</string>
     <string name="create_quest">Create Quest</string>

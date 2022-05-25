@@ -3,15 +3,27 @@ package com.example.habitimia.ui.guild;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.habitimia.R;
+import com.example.habitimia.data.adapter.QuestAdapter;
+import com.example.habitimia.data.model.Quest;
 import com.example.habitimia.ui.MainActivity;
 import com.example.habitimia.ui.home.HomeFragment;
+import com.example.habitimia.util.RecyclerItemTouchHelper;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,6 +42,13 @@ public class GuildFragment extends Fragment {
     private String mParam2;
 
     private ImageButton Back;
+    private TextView Name;
+    private TextView Members;
+
+    private RecyclerView GuildRecyclerView;
+    private QuestAdapter adapter;
+
+    private List<Quest> questList;
 
     public GuildFragment() {
         // Required empty public constructor
@@ -68,6 +87,11 @@ public class GuildFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_guild, container, false);
         Back = (ImageButton) view.findViewById(R.id.back_guild);
+        Name = (TextView) view.findViewById(R.id.guildName);
+        Members = (TextView) view.findViewById(R.id.guildMembers);
+
+        Name.setText(((MainActivity) getActivity()).user.getGuild().getName());
+        Members.setText("" + ((MainActivity) getActivity()).user.getGuild().getMembers().size());
 
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +100,36 @@ public class GuildFragment extends Fragment {
             }
         });
         ((MainActivity) getActivity()).setBackgroundColor(getResources().getColor(R.color.white));
+
+        questList = new ArrayList<>();
+        GuildRecyclerView = view.findViewById(R.id.GuildRecyclerView);
+        GuildRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        adapter = new QuestAdapter(((MainActivity) getActivity()));
+        GuildRecyclerView.setAdapter(adapter);
+
+        ItemTouchHelper itemTouchHelper = new
+                ItemTouchHelper(new RecyclerItemTouchHelper(adapter));
+        itemTouchHelper.attachToRecyclerView(GuildRecyclerView);
+
+        Quest dummy_quest = new Quest();
+        dummy_quest.setId(1l);
+        dummy_quest.setName("Dummy Quest");
+
+        questList.add(dummy_quest);
+        questList.add(dummy_quest);
+        questList.add(dummy_quest);
+        questList.add(dummy_quest);
+        questList.add(dummy_quest);
+        questList.add(dummy_quest);
+        questList.add(dummy_quest);
+        questList.add(dummy_quest);
+        questList.add(dummy_quest);
+
+//        questList = Server.getQuests(((MainActivity) getActivity()).user);
+
+        adapter.setTasks(questList);
+
         return view;
     }
 }

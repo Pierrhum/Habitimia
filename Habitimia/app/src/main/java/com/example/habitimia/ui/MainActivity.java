@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.habitimia.R;
 import com.example.habitimia.data.model.AdventurerClass;
+import com.example.habitimia.data.model.Guild;
 import com.example.habitimia.data.model.Statistics;
 import com.example.habitimia.data.model.User;
 import com.example.habitimia.ui.arena.ArenaFragment;
@@ -34,6 +35,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Objects;
 
@@ -68,6 +71,12 @@ public class MainActivity extends AppCompatActivity {
         user.getStatistics().setAdventurerClass(AdventurerClass.A);
         user.getStatistics().setHP(10L);
         user.getStatistics().setExperience(0L);
+
+        ArrayList<User> guildMembers = new ArrayList<User>();
+        guildMembers.add(user);
+        guildMembers.add(new User());
+        user.setGuild(new Guild(guildMembers));
+
         Root = (ConstraintLayout) findViewById(R.id.MainRoot);
         FAB = (FloatingActionButton) findViewById(R.id.fab);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomnavigationbar);

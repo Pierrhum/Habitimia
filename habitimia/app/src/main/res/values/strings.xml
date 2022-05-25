@@ -48,4 +48,6 @@
 
     <!-- TODO: Guild -->
     <string name="guild">Guild</string>
+    <string name="join_chat">Join Chat</string>
+    <string name="members">Members</string>
 </resources>

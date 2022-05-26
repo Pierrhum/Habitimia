@@ -7,11 +7,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.example.habitimia.R;
 import com.example.habitimia.ui.MainActivity;
@@ -19,6 +22,7 @@ import com.example.habitimia.ui.arena.RankingFragment;
 import com.example.habitimia.ui.home.HomeFragment;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,6 +42,15 @@ public class ChatFragment extends Fragment {
 
     private ImageButton Back;
     private LinearLayout ChatContent;
+
+    private ScrollView ScrollBox;
+    private EditText ChatText;
+    private ImageButton Send;
+
+
+    ArrayList<String> messages = new ArrayList<>();
+    ArrayList<String> authors = new ArrayList<>();
+    ArrayList<Boolean> isSelf = new ArrayList<>();
 
     public ChatFragment() {
         // Required empty public constructor
@@ -76,7 +89,11 @@ public class ChatFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
         Back = (ImageButton) view.findViewById(R.id.back_chat);
-        ChatContent = view.findViewById(R.id.ChatLinearLayout);
+        Send = (ImageButton) view.findViewById(R.id.SendButton);
+        ChatText = (EditText) view.findViewById(R.id.ChatText);
+        ScrollBox = (ScrollView) view.findViewById(R.id.ChatScrollBox);
+        ChatContent = (LinearLayout) view.findViewById(R.id.ChatLinearLayout);
+
 
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +103,6 @@ public class ChatFragment extends Fragment {
             }
         });
 
-        ArrayList<String> messages = new ArrayList<>();
         messages.add("Pls fix the dryer already");
         messages.add("Thanks for the reminder Ian, but I think you are fully capable of doing it yourself so gl, bro");
         messages.add("k.");
@@ -97,7 +113,6 @@ public class ChatFragment extends Fragment {
         messages.add("Thanks for the reminder Ian, but I think you are fully capable of doing it yourself so gl, bro");
         messages.add("k.");
 
-        ArrayList<String> authors = new ArrayList<>();
         authors.add("Ian");
         authors.add("Self");
         authors.add("Ian");
@@ -108,7 +123,6 @@ public class ChatFragment extends Fragment {
         authors.add("Self");
         authors.add("Ian");
 
-        ArrayList<Boolean> isSelf = new ArrayList<>();
         isSelf.add(false);
         isSelf.add(true);
         isSelf.add(false);
@@ -118,6 +132,29 @@ public class ChatFragment extends Fragment {
         isSelf.add(false);
         isSelf.add(true);
         isSelf.add(false);
+
+        ShowMessages(messages, authors, isSelf);
+
+        Send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(ChatText.getText().toString() != "") {
+                    messages.add(ChatText.getText().toString());
+                    authors.add("Self");
+                    isSelf.add(true);
+                    AddMessage(ChatText.getText().toString(), "Self", true);
+                    (new Handler()).postDelayed(ChatFragment.this::ScrollDown, 100);
+                }
+            }
+        });
+        (new Handler()).postDelayed(this::ScrollDown, 100);
+        ((MainActivity) getActivity()).setBottomBarVisibility(false);
+
+        return view;
+    }
+
+    private void ShowMessages(ArrayList<String> messages, ArrayList<String> authors, ArrayList<Boolean> isSelf) {
+        ChatContent.removeAllViews();
 
         // Ajout des messages dans le chat box
         FragmentManager fragMan = getFragmentManager();
@@ -131,9 +168,21 @@ public class ChatFragment extends Fragment {
         }
 
         fragTransaction.commit();
+    }
 
-        ((MainActivity) getActivity()).setBottomBarVisibility(false);
+    private void AddMessage(String message, String author, boolean isSelf) {
+        // Ajout des messages dans le chat box
+        FragmentManager fragMan = getFragmentManager();
+        FragmentTransaction fragTransaction = fragMan.beginTransaction();
 
-        return view;
+        MessageFragment messageFragment = MessageFragment.newInstance(message, author, isSelf);
+
+        fragTransaction.add(ChatContent.getId(), messageFragment , "messageFragment" + ChatContent.getChildCount());
+
+        fragTransaction.commit();
+    }
+
+    private void ScrollDown() {
+        ScrollBox.fullScroll(ScrollView.FOCUS_DOWN);
     }
 }

@@ -67,12 +67,14 @@ public class BasicRestController {
 		return new ResponseEntity<Object>( userRepository.findByUsernameAndPassword(username, password) ,HttpStatus.OK);
 	}
 	
+	@Transactional
 	@RequestMapping(value = "/register", method = RequestMethod.GET, produces = {"application/json"})
 	public ResponseEntity<Object> register(String username, String email, String password, String avatar) {
-		
+		Guild guild = guildRepository.getById(1L);
 		Statistics stats = new Statistics();
 		statisticsRepository.save(stats);
 		User user = new User(username, email, password, Avatar.valueOf(avatar), stats);
+		user.setGuild(guild);
 		userRepository.save(user);
 		//user with stats
 		User user_created = userRepository.findTop1ByOrderByIdDesc();

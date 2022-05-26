@@ -48,13 +48,13 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder> 
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                    builder.setTitle("Complete quest");
-                    builder.setMessage("You have completed your quest?");
+                    builder.setTitle("Complete daily");
+                    builder.setMessage("You have completed your daily?");
                     builder.setPositiveButton("Claim loot",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    deleteItem(p);
+//                                    deleteItem(p);
 //                                    activity.user = Server.updateUserHP(activity.user,Long.valueOf(item.getDifficulty().ordinal() ));
                                     MyNotification.createNotification(activity, getContext(),
                                             "Congrats! You have claimed "

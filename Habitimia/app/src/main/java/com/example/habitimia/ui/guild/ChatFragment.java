@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.habitimia.R;
 import com.example.habitimia.data.model.Message;
+import com.example.habitimia.data.model.User;
 import com.example.habitimia.ui.MainActivity;
 import com.example.habitimia.ui.arena.RankingFragment;
 import com.example.habitimia.ui.home.HomeFragment;
@@ -153,7 +154,7 @@ public class ChatFragment extends Fragment {
 //                    authors.add("Self");
 //                    isSelf.add(true);
                     Message m = new Message(ChatText.getText().toString(), ((MainActivity) getActivity()).user);
-                    AddMessage(m);
+                    AddMessage(m, true);
                     ChatText.setText("");
                     (new Handler()).postDelayed(ChatFragment.this::ScrollDown, 100);
                 }
@@ -190,9 +191,10 @@ public class ChatFragment extends Fragment {
 
         for(int fragCount=0; fragCount < messages.size(); fragCount++) {
             Message m = messages.get(fragCount);
+//            boolean self = ((MainActivity) getActivity()).user.getId().equals(m.getUser().getId());
             MessageFragment messageFragment = MessageFragment.newInstance(m.getText(),
                                                         m.getUser().getUsername(),
-                                                    m.getUser().getId()==((MainActivity) getActivity()).user.getId());
+                                                    m.getUser().getId().equals(((MainActivity) getActivity()).user.getId()));
 
             fragTransaction.add(ChatContent.getId(), messageFragment , "messageFragment" + fragCount);
 
@@ -212,21 +214,22 @@ public class ChatFragment extends Fragment {
 
         fragTransaction.commit();
     }
-    private void AddMessage(Message m) {
+    private void AddMessage(Message m, boolean isSelf) {
 
         Server.addMessage(m);
         // Ajout des messages dans le chat box
-//        FragmentManager fragMan = getFragmentManager();
-//        FragmentTransaction fragTransaction = fragMan.beginTransaction();
-//
-//
-//        MessageFragment messageFragment = MessageFragment.newInstance(m.getText(),
-//                m.getUser().getUsername(),
-//                m.getUser().getId()==((MainActivity) getActivity()).user.getId());
-//
-//        fragTransaction.add(ChatContent.getId(), messageFragment , "messageFragment" +  ChatContent.getChildCount());
-//
-//        fragTransaction.commit();
+        FragmentManager fragMan = getFragmentManager();
+        FragmentTransaction fragTransaction = fragMan.beginTransaction();
+
+
+        MessageFragment messageFragment = MessageFragment.newInstance(m.getText(),
+                m.getUser().getUsername(),
+                m.getUser().getId().equals(((MainActivity) getActivity()).user.getId()));
+//        User user = ((MainActivity) getActivity()).user;
+//        boolean self = ((MainActivity) getActivity()).user.getId() == m.getUser().getId();
+        fragTransaction.add(ChatContent.getId(), messageFragment , "messageFragment" +  ChatContent.getChildCount());
+
+        fragTransaction.commit();
         ((MainActivity) getActivity()).LoadFragment(new ChatFragment());
 
     }

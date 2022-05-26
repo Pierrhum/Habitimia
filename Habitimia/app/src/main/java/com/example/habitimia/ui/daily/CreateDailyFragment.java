@@ -174,11 +174,11 @@ public class CreateDailyFragment extends Fragment {
                             days.add(Day.values()[i]);
                     }
                     if (isNewDaily){
-//                            Server.createDaily(((MainActivity) getActivity()).user, new_daily, days);
+                            Server.createDaily(((MainActivity) getActivity()).user, new_daily, days);
 
                     }else{
                         new_daily.setId(daily.getId());
-//                        Server.updateDaily(new_daily, days);
+                        Server.updateDaily(new_daily, days);
                         isNewDaily=true;
                     }
 

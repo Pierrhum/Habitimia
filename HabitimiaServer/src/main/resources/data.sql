@@ -1,9 +1,9 @@
 -- first user
-INSERT INTO statistics (adventurer_class, HP, battles_won, all_battles, experience) VALUES ('A', 10, 0, 0, 0);
+INSERT INTO statistics (adventurer_class, HP, battles_won, all_battles, experience) VALUES ('A', 10, 3, 4, 3);
 INSERT INTO user (username, email, password, avatar, statistics_id) VALUES ('Mia', 'mia@love.pierre', '123456', 'MAGICIAN', 1);
 
 -- second user
-INSERT INTO statistics (adventurer_class, HP, battles_won, all_battles, experience) VALUES ('A', 10, 0, 0, 0);
+INSERT INTO statistics (adventurer_class, HP, battles_won, all_battles, experience) VALUES ('A', 10, 3, 2, 3);
 INSERT INTO user (username, email, password, avatar, statistics_id) VALUES ('Pierre', 'pierre@love.mia', '123456',  'WARRIOR', 2);
 
 -- guild
@@ -58,3 +58,18 @@ INSERT INTO message (guild_id, user_id, text, date) VALUES (1, 1, 'My glasses :(
 INSERT INTO message (guild_id, user_id, text, date) VALUES (1, 1, 'Can you get them for me?', '2022-05-24');
 INSERT INTO message (guild_id, user_id, text, date) VALUES (1, 2, 'Alright, from where', '2022-05-24');
 INSERT INTO message (guild_id, user_id, text, date) VALUES (1, 1, 'Maastricht', '2022-05-26');
+
+
+-- more users
+INSERT INTO statistics (adventurer_class, HP, battles_won, all_battles, experience) VALUES ('A', 10, 5, 6,5 );
+INSERT INTO user (username, email, password, avatar, statistics_id) VALUES ('Gogo', 'mia@love.pierre', '123456', 'MAGICIAN', 3);
+
+
+INSERT INTO statistics (adventurer_class, HP, battles_won, all_battles, experience) VALUES ('A', 10, 3, 2, 4);
+INSERT INTO user (username, email, password, avatar, statistics_id) VALUES ('Bennito', 'pierre@love.mia', '123456',  'WARRIOR', 4);
+
+INSERT INTO statistics (adventurer_class, HP, battles_won, all_battles, experience) VALUES ('A', 20, 3, 2, 6);
+INSERT INTO user (username, email, password, avatar, statistics_id) VALUES ('GindaMAN', 'pierre@love.mia', '123456',  'WARRIOR', 5);
+
+INSERT INTO statistics (adventurer_class, HP, battles_won, all_battles, experience) VALUES ('A', 20, 3, 2, 6);
+INSERT INTO user (username, email, password, avatar, statistics_id) VALUES ('Mariu', 'pierre@love.mia', '123456',  'WARRIOR', 6);

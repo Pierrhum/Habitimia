@@ -30,6 +30,7 @@ import java.util.List;
 
 public class Server {
 
+    public static String IPAddress = "http://10.192.94.214:8080/";
     public static JSONObject sendRequest(String endpoint, String params) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                 .permitAll().build();
@@ -38,7 +39,7 @@ public class Server {
         HttpURLConnection urlConnection = null;
         URL url = null;
         try {
-            url = new URL("http://10.192.94.214:8080/" + endpoint
+            url = new URL(IPAddress + endpoint
                     + "?" + params); // 10.0.2.2 10.192.94.54
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -104,7 +105,7 @@ public class Server {
         HttpURLConnection urlConnection = null;
         URL url = null;
         try {
-            url = new URL("http://10.192.94.214:8080/" + endpoint
+            url = new URL(IPAddress + endpoint
                     + "?" + params); // 10.0.2.2 10.192.94.54
         } catch (MalformedURLException e) {
             e.printStackTrace();

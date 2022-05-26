@@ -27,3 +27,10 @@ INSERT INTO quest (name, user_id, details, difficulty) VALUES ('Frodo has a b-da
 -- quests for guild 1
 INSERT INTO quest (name, guild_id, details, difficulty) VALUES ('Write the report', 1, 'Buy food.', 'C');
 INSERT INTO quest (name, guild_id, details, difficulty) VALUES ('Go to the beach', 1, 'Buy some presents.', 'B');
+
+
+-- messages in guild chat
+INSERT INTO message (guild_id, user_id, text, date) VALUES (1, 1, 'My glasses :(', '2022-05-22');
+INSERT INTO message (guild_id, user_id, text, date) VALUES (1, 1, 'Can you get them for me?', '2022-05-24');
+INSERT INTO message (guild_id, user_id, text, date) VALUES (1, 2, 'Alright, from where', '2022-05-24');
+INSERT INTO message (guild_id, user_id, text, date) VALUES (1, 1, 'Maastricht', '2022-05-26');

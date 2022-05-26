@@ -1,8 +1,11 @@
 package fr.stefanova.HabitimiaServer.controllers;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +25,7 @@ import fr.stefanova.HabitimiaServer.entities.Avatar;
 import fr.stefanova.HabitimiaServer.entities.Daily;
 import fr.stefanova.HabitimiaServer.entities.Day;
 import fr.stefanova.HabitimiaServer.entities.Guild;
+import fr.stefanova.HabitimiaServer.entities.Message;
 import fr.stefanova.HabitimiaServer.entities.OwnerType;
 import fr.stefanova.HabitimiaServer.entities.Quest;
 import fr.stefanova.HabitimiaServer.entities.Repetition;
@@ -33,6 +37,7 @@ import fr.stefanova.HabitimiaServer.repo.QuestRepository;
 import fr.stefanova.HabitimiaServer.repo.RepetitionRepository;
 import fr.stefanova.HabitimiaServer.repo.StatisticsRepository;
 import fr.stefanova.HabitimiaServer.repo.UserRepository;
+import fr.stefanova.HabitimiaServer.repo.MessageRepository;
 
 @RestController
 public class BasicRestController {
@@ -48,7 +53,9 @@ public class BasicRestController {
 	@Autowired
 	QuestRepository questRepository;
 	@Autowired
-	GuildRepository guildRepository;
+	GuildRepository guildRepository;	
+	@Autowired
+	MessageRepository messageRepository;
 	
 	public BasicRestController() {
 		System.err.println("hello");
@@ -290,6 +297,39 @@ public class BasicRestController {
 		return new ResponseEntity<Object>(users ,HttpStatus.OK);
 	}
 	
+	@Transactional
+	@RequestMapping(value = "/all-messages-for-past-week", method = RequestMethod.GET, produces = {"application/json"})
+	public ResponseEntity<List<Message> > allMessagesForPastWeek(Long guildId) {
+		Calendar cal = new GregorianCalendar();
+		cal.add(Calendar.DAY_OF_MONTH, -7);
+		Date sevenDaysAgo = cal.getTime();
+		
+		List<Message> messages = messageRepository.findByGuildIdAndDateAfter(guildId, sevenDaysAgo);
+
+		return new ResponseEntity<List<Message> >(messages ,HttpStatus.OK);
+	}
+	
+	@Transactional
+	@RequestMapping(value = "/all-messages-for-today", method = RequestMethod.GET, produces = {"application/json"})
+	public ResponseEntity<List<Message> > allMessagesForToday(Long guildId) {
+		Calendar cal = new GregorianCalendar();
+		cal.add(Calendar.DAY_OF_MONTH, -1);
+		Date sevenDaysAgo = cal.getTime();
+		
+		List<Message> messages = messageRepository.findByGuildIdAndDateAfter(guildId, sevenDaysAgo);
+
+		return new ResponseEntity<List<Message> >(messages ,HttpStatus.OK);
+	}
+	
+//	@Transactional
+//	@RequestMapping(value = "/last-message", method = RequestMethod.GET, produces = {"application/json"})
+//	public ResponseEntity<Message> LastMessage(Long guildId) {
+//
+//		
+//		Message message = messageRepository.findByGuildIdTop(guildId);
+//
+//		return new ResponseEntity<Message>(message ,HttpStatus.OK);
+//	}
 
 
 }

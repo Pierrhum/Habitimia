@@ -7,6 +7,7 @@ import com.example.habitimia.data.model.AdventurerClass;
 import com.example.habitimia.data.model.Daily;
 import com.example.habitimia.data.model.Day;
 import com.example.habitimia.data.model.Guild;
+import com.example.habitimia.data.model.Message;
 import com.example.habitimia.data.model.OwnerType;
 import com.example.habitimia.data.model.Quest;
 import com.example.habitimia.data.model.Repetition;
@@ -68,7 +69,8 @@ public class Server {
             e.printStackTrace();
         }
         StringBuilder sb = new StringBuilder();
-
+        if (br == null)
+            return null;
         String line = "";
         while (true) {
             try {
@@ -102,7 +104,7 @@ public class Server {
         HttpURLConnection urlConnection = null;
         URL url = null;
         try {
-            url = new URL("http://10.192.94.187:8080/" + endpoint
+            url = new URL("http://10.192.94.214:8080/" + endpoint
                     + "?" + params); // 10.0.2.2 10.192.94.54
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -133,7 +135,8 @@ public class Server {
             e.printStackTrace();
         }
         StringBuilder sb = new StringBuilder();
-
+        if (br == null)
+            return null;
         String line = "";
         while (true) {
             try {
@@ -506,5 +509,45 @@ public class Server {
         return users;
     }
 
+    public static List<Message> getMessagesForPastWeek(Guild guild){
+        String request_params = "guildId=" + guild.getId();                ;
+        JSONArray response = Server.sendRequestForList("all-messages-for-past-week", request_params);
 
+        if (response == null){
+            return null;
+        }
+        List<Message> messages = new ArrayList<>();
+        try {
+            for(int i = 0; i < response.length(); i++){
+                JSONObject message = response.getJSONObject(i);
+                messages.add(new Message(message));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return messages;
+    }
+
+    public static List<Message> getMessagesForPastDay(Guild guild){
+        String request_params = "guildId=" + guild.getId();                ;
+        JSONArray response = Server.sendRequestForList("all-messages-for-today", request_params);
+
+        if (response == null){
+            return null;
+        }
+        List<Message> messages = new ArrayList<>();
+        try {
+            for(int i = 0; i < response.length(); i++){
+                JSONObject message = response.getJSONObject(i);
+                messages.add(new Message(message));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return messages;
+    }
 }

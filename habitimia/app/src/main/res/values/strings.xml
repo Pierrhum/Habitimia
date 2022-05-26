@@ -56,5 +56,8 @@
     <string name="guild">Guild</string>
     <string name="join_chat">Join Chat</string>
     <string name="members">Members</string>
+
+    <!-- TODO: Chat -->
+    <string name="chat">Chat</string>
     <string name="type_message">Type message here</string>
 </resources>

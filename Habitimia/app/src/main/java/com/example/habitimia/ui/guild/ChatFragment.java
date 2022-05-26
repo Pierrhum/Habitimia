@@ -7,8 +7,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.example.habitimia.R;
+import com.example.habitimia.ui.MainActivity;
+import com.example.habitimia.ui.home.HomeFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +28,8 @@ public class ChatFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private ImageButton Back;
 
     public ChatFragment() {
         // Required empty public constructor
@@ -61,6 +66,19 @@ public class ChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false);
+        View view = inflater.inflate(R.layout.fragment_chat, container, false);
+        Back = (ImageButton) view.findViewById(R.id.back_chat);
+
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).LoadFragment(new GuildFragment());
+                ((MainActivity) getActivity()).setBottomBarVisibility(true);
+            }
+        });
+
+        ((MainActivity) getActivity()).setBottomBarVisibility(false);
+
+        return view;
     }
 }

@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="19dp"
             android:layout_marginTop="16dp"
-            android:text="@string/guild"
+            android:text="@string/chat"
             android:textColor="@color/text_red"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -136,7 +136,6 @@
 
         <EditText
             android:id="@+id/ChatText"
-            android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="30dp"
@@ -145,7 +144,7 @@
             android:hint="@string/type_message"
             android:inputType="textPersonName"
             android:paddingStart="30dp"
-            android:paddingEnd="30dp"
+            android:paddingEnd="65dp"
             app:layout_constraintBottom_toBottomOf="@id/ChatPicture_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/ChatPicture_btn"
@@ -164,6 +163,18 @@
             app:iconSize="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/background_bottom" />
+
+        <ImageButton
+            android:id="@+id/SendButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="#0001EBCD"
+            android:scaleType="fitCenter"
+            android:src="@drawable/send_btn"
+            app:layout_constraintBottom_toBottomOf="@id/ChatText"
+            app:layout_constraintEnd_toEndOf="@id/ChatText"
+            app:layout_constraintTop_toTopOf="@id/ChatText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

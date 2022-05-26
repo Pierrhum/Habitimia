@@ -3,12 +3,16 @@ package com.example.habitimia.data.model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Guild {
+public class Guild implements Serializable {
     private Long id;
 
     private String name;
+
+
+
     private ArrayList<User> members;
 
     public Guild()
@@ -50,5 +54,9 @@ public class Guild {
 
     public ArrayList<User> getMembers() {
         return this.members;
+    }
+
+    public void setMembers(ArrayList<User> members) {
+        this.members = members;
     }
 }

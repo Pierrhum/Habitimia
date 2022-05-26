@@ -101,58 +101,14 @@ public class LoginActivity extends AppCompatActivity {
                  * Sinon : erreur : Mot de passe incorrect
                  */
                 //1
-                String request_params = "username=" + usernameEditText.getText().toString()
-                                        + "&" +
-                                         "password=" + passwordEditText.getText().toString();
-
-//                JSONObject response = Server.sendRequest("login", request_params);
-                JSONObject response = null;
-                JSONArray response_all_params = null;
-                try {
-                    response = new JSONObject(
-                            "{\"id\": \"1\",\n" +
-                            "\"username\": \"Mia\",\n" +
-                            "\"email\": \"mia@love.pierre\",\n" +
-                            "\"password\": \"123456\",\n" +
-                            "\"avatar\": \"MAGICIAN\",\n" +
-                            "\"statistics\": {\n" +
-                            "   \"id\": \"1\",\n" +
-                            "   \"adventurerClass\": \"A\",\n" +
-                            "   \"battlesWon\": 0,\n" +
-                            "   \"allBattles\": 0,\n" +
-                            "   \"hp\": 10\n" +
-                            "    },\n" +
-                            "\"guild\": {\n" +
-                            "   \"id\": 1,\n" +
-                            "   \"name\": \"Dead End\"\n" +
-                            "    }\n" +
-                            "}");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                if (response == null){
-                    Integer errorString = R.string.invalid_password_or_username;
-                    showLoginFailed(errorString);
-                }else{
-
-                    Statistics stats = null;
-                    User user = null;
-                    try {
-                        JSONObject statsJSON = response.getJSONObject("statistics");
-                        stats = new Statistics(statsJSON);
-                        user = new User(response);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    user.setStatistics(stats);
-
+//                    User user = Server.login("Mia", "123456");
 //                    user = Server.login(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+                    User user = new User("Mia");
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra("user",  user);
                     startActivity(intent);
                     finish();
-                }
+//                }
 
             }
         });

@@ -34,19 +34,21 @@ public class Repetition {
 		super();
 	}
 
-	public Repetition(User user, Daily daily, Day day) {
-		super();
-//		this.user = user;
-		this.daily = daily;
-		this.day = day;
-	}
-	
 	public Repetition(Daily daily, Day day) {
 		super();
 //		this.user = user;
 		this.daily = daily;
 		this.day = day;
 	}
+
+	public Repetition(Long id, Daily daily, Day day) {
+		super();
+		this.id = id;
+		this.daily = daily;
+		this.day = day;
+	}
+	
+
 	public Long getId() {
 		return id;
 	}

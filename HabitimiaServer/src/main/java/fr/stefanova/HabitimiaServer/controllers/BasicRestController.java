@@ -1,6 +1,11 @@
 package fr.stefanova.HabitimiaServer.controllers;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +25,7 @@ import fr.stefanova.HabitimiaServer.entities.Avatar;
 import fr.stefanova.HabitimiaServer.entities.Daily;
 import fr.stefanova.HabitimiaServer.entities.Day;
 import fr.stefanova.HabitimiaServer.entities.Guild;
+import fr.stefanova.HabitimiaServer.entities.Message;
 import fr.stefanova.HabitimiaServer.entities.OwnerType;
 import fr.stefanova.HabitimiaServer.entities.Quest;
 import fr.stefanova.HabitimiaServer.entities.Repetition;
@@ -31,6 +37,7 @@ import fr.stefanova.HabitimiaServer.repo.QuestRepository;
 import fr.stefanova.HabitimiaServer.repo.RepetitionRepository;
 import fr.stefanova.HabitimiaServer.repo.StatisticsRepository;
 import fr.stefanova.HabitimiaServer.repo.UserRepository;
+import fr.stefanova.HabitimiaServer.repo.MessageRepository;
 
 @RestController
 public class BasicRestController {
@@ -46,7 +53,9 @@ public class BasicRestController {
 	@Autowired
 	QuestRepository questRepository;
 	@Autowired
-	GuildRepository guildRepository;
+	GuildRepository guildRepository;	
+	@Autowired
+	MessageRepository messageRepository;
 	
 	public BasicRestController() {
 		System.err.println("hello");
@@ -100,6 +109,40 @@ public class BasicRestController {
 		return new ResponseEntity<List<Daily> >(dailies ,HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/all-dailies-for-day", method = RequestMethod.GET, produces = {"application/json"})
+	public ResponseEntity<List<Daily> > allDailiesForDay(Long userId, Day day) {
+		List<Daily> dailies = dailyRepository.findAllByUserId(userId);
+		List<Daily> dailies_for_day = new ArrayList<>();
+		for (Daily daily: dailies) {
+			boolean hasDay = false;
+			List<Repetition> repetitions = repetitionRepository.findAllByDailyId(daily.getId());
+			for (Repetition repetition: repetitions) {
+				repetition.setDaily(null);
+				if (repetition.getDay() == day) {
+					hasDay= true;
+					daily.setRepetitions(repetitions);
+				}
+			}
+			if (hasDay)
+				dailies_for_day.add(daily);
+
+		}
+//		for (Daily daily: dailies) {
+//			boolean hasDay = false;
+//			List<Repetition> repetitions = repetitionRepository.findByDailyId(daily.getId());
+//			for (Repetition repetition: repetitions) {
+//				if (repetition.getDay() == day)
+//					hasDay= true;
+//			}
+//			if (hasDay)
+//				daily.setRepetitions(repetitions);
+//			else {}
+////				dailies.remove(daily);
+//		}
+		
+		return new ResponseEntity<List<Daily> >(dailies_for_day ,HttpStatus.OK);
+	}
+	
 	@RequestMapping(value = "/create-daily", method = RequestMethod.GET, produces = {"application/json"})
 	public ResponseEntity<Object> createDailies(Long userId, 
 												String name,
@@ -109,15 +152,17 @@ public class BasicRestController {
 												) {
 		User user = userRepository.findById(userId).get();
 		Daily daily = new Daily(user, name, details, difficulty);
+		List<Repetition> savedRepetitions = new ArrayList<>();
 		daily = dailyRepository.save(daily);
 		for (Day day:days) {
-			Repetition repetition = new Repetition(user, daily, day);
-			repetitionRepository.save(repetition);	
-			repetition.setDaily(null);
-			daily.getRepetitions().add(repetition);
+			Repetition repetition = new Repetition(daily, day);
+			Repetition saved = repetitionRepository.save(repetition);	
+//			repetition.setDaily(null);
+			savedRepetitions.add(new Repetition(saved.getId(), null, day));
 		}
+		daily.setRepetitions(savedRepetitions);
 		
-
+		List<Repetition> repetitions = repetitionRepository.findAll();
 		return new ResponseEntity<Object>(daily ,HttpStatus.OK);
 	}
 	
@@ -142,24 +187,24 @@ public class BasicRestController {
 		}
 		daily = dailyRepository.save(daily);
 		if (days.size() != 0) {
+			
 			repetitionRepository.deleteAllByDailyId(dailyId);
 			daily.setRepetitions(new ArrayList<>());
 			for (Day day:days) {
-				Repetition repetition = new Repetition(daily.getUser(), daily, day);
-				repetitionRepository.save(repetition);	
-				repetition.setDaily(null);
-				daily.getRepetitions().add(repetition);
+				Repetition repetition = new Repetition(daily, day);
+				Repetition saved = repetitionRepository.save(repetition);	
+//				repetition.setDaily(null);
+//				daily.getRepetitions().add(new Repetition(saved.getId(), null, day));
 			}
 		}else {
-			List<Repetition> repetitions = repetitionRepository.findByDailyId(daily.getId());
-			for (Repetition repetition: repetitions) {
-				repetition.setDaily(null);
-			}
-			daily.setRepetitions(repetitions);
+			
+//			List<Repetition> repetitions = repetitionRepository.findByDailyId(daily.getId());
+//			for (Repetition repetition: repetitions) {
+//				repetition.setDaily(null);
+//			}
+//			daily.setRepetitions(repetitions);
 		}
-		
-		
-//		daily = dailyRepository.findById(daily.getId()).get();
+
 		return new ResponseEntity<Object>(daily ,HttpStatus.OK);
 	}
 	
@@ -252,6 +297,39 @@ public class BasicRestController {
 		return new ResponseEntity<Object>(users ,HttpStatus.OK);
 	}
 	
+	@Transactional
+	@RequestMapping(value = "/all-messages-for-past-week", method = RequestMethod.GET, produces = {"application/json"})
+	public ResponseEntity<List<Message> > allMessagesForPastWeek(Long guildId) {
+		Calendar cal = new GregorianCalendar();
+		cal.add(Calendar.DAY_OF_MONTH, -7);
+		Date sevenDaysAgo = cal.getTime();
+		
+		List<Message> messages = messageRepository.findByGuildIdAndDateAfter(guildId, sevenDaysAgo);
+
+		return new ResponseEntity<List<Message> >(messages ,HttpStatus.OK);
+	}
+	
+	@Transactional
+	@RequestMapping(value = "/all-messages-for-today", method = RequestMethod.GET, produces = {"application/json"})
+	public ResponseEntity<List<Message> > allMessagesForToday(Long guildId) {
+		Calendar cal = new GregorianCalendar();
+		cal.add(Calendar.DAY_OF_MONTH, -1);
+		Date sevenDaysAgo = cal.getTime();
+		
+		List<Message> messages = messageRepository.findByGuildIdAndDateAfter(guildId, sevenDaysAgo);
+
+		return new ResponseEntity<List<Message> >(messages ,HttpStatus.OK);
+	}
+	
+	@Transactional
+	@RequestMapping(value = "/last-message", method = RequestMethod.GET, produces = {"application/json"})
+	public ResponseEntity<Message> LastMessage(Long guildId) {
+
+		List<Message> messages = messageRepository.findByGuildId(guildId);
+		Message message = messages.get(messages.size()-1);
+
+		return new ResponseEntity<Message>(message ,HttpStatus.OK);
+	}
 
 
 }

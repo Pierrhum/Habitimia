@@ -321,15 +321,15 @@ public class BasicRestController {
 		return new ResponseEntity<List<Message> >(messages ,HttpStatus.OK);
 	}
 	
-//	@Transactional
-//	@RequestMapping(value = "/last-message", method = RequestMethod.GET, produces = {"application/json"})
-//	public ResponseEntity<Message> LastMessage(Long guildId) {
-//
-//		
-//		Message message = messageRepository.findByGuildIdTop(guildId);
-//
-//		return new ResponseEntity<Message>(message ,HttpStatus.OK);
-//	}
+	@Transactional
+	@RequestMapping(value = "/last-message", method = RequestMethod.GET, produces = {"application/json"})
+	public ResponseEntity<Message> LastMessage(Long guildId) {
+
+		List<Message> messages = messageRepository.findByGuildId(guildId);
+		Message message = messages.get(messages.size()-1);
+
+		return new ResponseEntity<Message>(message ,HttpStatus.OK);
+	}
 
 
 }

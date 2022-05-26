@@ -13,7 +13,8 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
 	
 	List<Message> findByGuildIdAndDateAfter(Long guildId, Date sevenDaysAgo);
 
-	Message findTopByGuildIdByOrderByIdDesc(Long guildId);
+
+	List<Message> findByGuildId(Long guildId);
 
 //	List<Message> findAllWhereDateGreaterThan(Date sevenDaysAgo);
 

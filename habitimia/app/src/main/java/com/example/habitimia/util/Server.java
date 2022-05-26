@@ -38,7 +38,7 @@ public class Server {
         HttpURLConnection urlConnection = null;
         URL url = null;
         try {
-            url = new URL("http://10.192.94.187:8080/" + endpoint
+            url = new URL("http://10.192.94.214:8080/" + endpoint
                     + "?" + params); // 10.0.2.2 10.192.94.54
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -547,6 +547,18 @@ public class Server {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        return messages;
+    }
+
+    public static Message getLastMessage(Guild guild){
+        String request_params = "guildId=" + guild.getId();
+        JSONObject response = Server.sendRequest("last-message", request_params);
+
+        if (response == null){
+            return null;
+        }
+        Message messages =new Message(response);
 
         return messages;
     }

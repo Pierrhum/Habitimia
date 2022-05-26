@@ -3,15 +3,22 @@ package com.example.habitimia.ui.guild;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.example.habitimia.R;
 import com.example.habitimia.ui.MainActivity;
+import com.example.habitimia.ui.arena.RankingFragment;
 import com.example.habitimia.ui.home.HomeFragment;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,6 +37,7 @@ public class ChatFragment extends Fragment {
     private String mParam2;
 
     private ImageButton Back;
+    private LinearLayout ChatContent;
 
     public ChatFragment() {
         // Required empty public constructor
@@ -68,6 +76,7 @@ public class ChatFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
         Back = (ImageButton) view.findViewById(R.id.back_chat);
+        ChatContent = view.findViewById(R.id.ChatLinearLayout);
 
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +85,52 @@ public class ChatFragment extends Fragment {
                 ((MainActivity) getActivity()).setBottomBarVisibility(true);
             }
         });
+
+        ArrayList<String> messages = new ArrayList<>();
+        messages.add("Pls fix the dryer already");
+        messages.add("Thanks for the reminder Ian, but I think you are fully capable of doing it yourself so gl, bro");
+        messages.add("k.");
+        messages.add("Pls fix the dryer already");
+        messages.add("Thanks for the reminder Ian, but I think you are fully capable of doing it yourself so gl, bro");
+        messages.add("k.");
+        messages.add("Pls fix the dryer already");
+        messages.add("Thanks for the reminder Ian, but I think you are fully capable of doing it yourself so gl, bro");
+        messages.add("k.");
+
+        ArrayList<String> authors = new ArrayList<>();
+        authors.add("Ian");
+        authors.add("Self");
+        authors.add("Ian");
+        authors.add("Ian");
+        authors.add("Self");
+        authors.add("Ian");
+        authors.add("Ian");
+        authors.add("Self");
+        authors.add("Ian");
+
+        ArrayList<Boolean> isSelf = new ArrayList<>();
+        isSelf.add(false);
+        isSelf.add(true);
+        isSelf.add(false);
+        isSelf.add(false);
+        isSelf.add(true);
+        isSelf.add(false);
+        isSelf.add(false);
+        isSelf.add(true);
+        isSelf.add(false);
+
+        // Ajout des messages dans le chat box
+        FragmentManager fragMan = getFragmentManager();
+        FragmentTransaction fragTransaction = fragMan.beginTransaction();
+
+        for(int fragCount=0; fragCount < messages.size(); fragCount++) {
+            MessageFragment messageFragment = MessageFragment.newInstance(messages.get(fragCount), authors.get(fragCount), isSelf.get(fragCount));
+
+            fragTransaction.add(ChatContent.getId(), messageFragment , "messageFragment" + fragCount);
+
+        }
+
+        fragTransaction.commit();
 
         ((MainActivity) getActivity()).setBottomBarVisibility(false);
 

@@ -26,17 +26,19 @@
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/activity_guild.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/activity_home.xml" value="0.264" />
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/activity_login.xml" value="0.264" />
-        <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/activity_register.xml" value="0.264" />
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/activity_splash.xml" value="0.264" />
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/content_guild.xml" value="0.22" />
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/fragment_arena.xml" value="0.1947463768115942" />
-        <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/fragment_chat.xml" value="0.2" />
+        <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/fragment_chat.xml" value="0.25" />
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/fragment_create_quest.xml" value="0.23324275362318841" />
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/fragment_first.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/fragment_guild.xml" value="0.23324275362318841" />
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/fragment_home.xml" value="0.2" />
+        <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/fragment_message.xml" value="0.23324275362318841" />
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/fragment_quest.xml" value="0.23324275362318841" />
+        <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/fragment_ranking.xml" value="0.23324275362318841" />
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/layout/fragment_second.xml" value="0.16032608695652173" />
         <entry key="..\:/Users/pierr/OneDrive/Bureau/Habitimia/Habitimia/app/src/main/res/menu/bottom_menu.xml" value="0.25" />
       </map>

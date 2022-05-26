@@ -4,6 +4,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 
 import android.app.AlarmManager;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton FAB;
     private android.hardware.SensorManager sensorManager;
 
+    private CoordinatorLayout BottomBar;
     private Fragment mOldFragment = null;
     private Fragment mCurrentFragment = new HomeFragment();
     private float mAccel;
@@ -90,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
 //        user.getGuild().setMembers((ArrayList<User>) Server.getAllUsersForGuild(user.getGuild()));
 
         Root = (ConstraintLayout) findViewById(R.id.MainRoot);
+        BottomBar = (CoordinatorLayout) findViewById(R.id.coordinator);
         FAB = (FloatingActionButton) findViewById(R.id.fab);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomnavigationbar);
         bottomNavigationView.setBackground(null);
@@ -233,4 +236,6 @@ public class MainActivity extends AppCompatActivity {
     public void UpdateFABIcon(int resId) {
         FAB.setImageResource(resId);
     }
+
+    public void setBottomBarVisibility(boolean visible) { BottomBar.setVisibility(visible? View.VISIBLE : View.GONE); }
 }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    tools:context=".ui.guild.MessageFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/MessageAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="Ian"
+        android:textColor="@color/text_red"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@id/MessageBox"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/MessageBox"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/member_message"
+        android:backgroundTint="@color/light_gray"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/MessageAuthor" />
+
+    <TextView
+        android:id="@+id/MessageText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Thanks for the reminder Ian, but I think you are fully capable of doing it yourself so gl, bro"
+        android:textAllCaps="false"
+        android:textColor="@color/dark_gray"
+        android:textSize="20sp"
+        app:autoSizeTextType="none"
+        app:layout_constraintBottom_toBottomOf="@id/MessageBox"
+        app:layout_constraintEnd_toEndOf="@id/MessageBox"
+        app:layout_constraintStart_toStartOf="@id/MessageBox"
+        app:layout_constraintTop_toTopOf="@id/MessageBox" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

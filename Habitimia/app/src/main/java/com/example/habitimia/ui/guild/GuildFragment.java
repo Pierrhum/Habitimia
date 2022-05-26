@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -45,6 +46,7 @@ public class GuildFragment extends Fragment {
     private String mParam2;
 
     private ImageButton Back;
+    private Button JoinChat;
     private TextView Name;
     private TextView Members;
 
@@ -90,6 +92,7 @@ public class GuildFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_guild, container, false);
         Back = (ImageButton) view.findViewById(R.id.back_guild);
+        JoinChat = (Button) view.findViewById(R.id.JoinChat);
         Name = (TextView) view.findViewById(R.id.guildName);
         Members = (TextView) view.findViewById(R.id.guildMembers);
 
@@ -102,6 +105,14 @@ public class GuildFragment extends Fragment {
                 ((MainActivity) getActivity()).LoadFragment(new HomeFragment());
             }
         });
+
+        JoinChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).LoadFragment(new ChatFragment());
+            }
+        });
+
         ((MainActivity) getActivity()).setBackgroundColor(getResources().getColor(R.color.white));
         ((MainActivity) getActivity()).UpdateFABIcon(R.drawable.ic_add);
 

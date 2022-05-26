@@ -562,4 +562,20 @@ public class Server {
 
         return messages;
     }
+
+    public static Message addMessage(Message m) {
+        String request_params = "guildId=" + m.getUser().getGuild().getId()
+                + "&" +
+                "userId=" + m.getUser().getId()
+                      +  "&" +
+                "text=" + m.getText() ;
+        JSONObject response = Server.sendRequest("add-message", request_params);
+
+        if (response == null){
+            return null;
+        }
+        Message message =new Message(response);
+
+        return message;
+    }
 }

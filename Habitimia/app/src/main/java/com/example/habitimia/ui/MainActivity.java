@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.habitimia.R;
 import com.example.habitimia.data.model.AdventurerClass;
 import com.example.habitimia.data.model.Guild;
+import com.example.habitimia.data.model.Message;
 import com.example.habitimia.data.model.OwnerType;
 import com.example.habitimia.data.model.Statistics;
 import com.example.habitimia.data.model.User;
@@ -148,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
         mAccelCurrent = SensorManager.GRAVITY_EARTH;
         mAccelLast = SensorManager.GRAVITY_EARTH;
 
+        Message last_message = Server.getLastMessage(user.getGuild());
 //        createTimedNotification(getApplicationContext());
 
         LoadFragment();

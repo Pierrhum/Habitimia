@@ -30,6 +30,11 @@ public class Message implements Serializable {
         }
     }
 
+    public Message(String text, User user) {
+        this.text = text;
+        this.user = user;
+    }
+
     public Long getId() {
         return id;
     }

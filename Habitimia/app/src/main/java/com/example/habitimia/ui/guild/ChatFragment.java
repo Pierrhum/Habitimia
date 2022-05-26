@@ -15,14 +15,18 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.example.habitimia.R;
+import com.example.habitimia.data.model.Message;
 import com.example.habitimia.ui.MainActivity;
 import com.example.habitimia.ui.arena.RankingFragment;
 import com.example.habitimia.ui.home.HomeFragment;
+import com.example.habitimia.util.Server;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,9 +52,13 @@ public class ChatFragment extends Fragment {
     private ImageButton Send;
 
 
-    ArrayList<String> messages = new ArrayList<>();
-    ArrayList<String> authors = new ArrayList<>();
-    ArrayList<Boolean> isSelf = new ArrayList<>();
+
+//    ArrayList<String> messages = new ArrayList<>();
+//    ArrayList<String> authors = new ArrayList<>();
+//    ArrayList<Boolean> isSelf = new ArrayList<>();
+
+    List<Message> messages = new ArrayList<>();
+    private TextView GuildName;
 
     public ChatFragment() {
         // Required empty public constructor
@@ -93,7 +101,8 @@ public class ChatFragment extends Fragment {
         ChatText = (EditText) view.findViewById(R.id.ChatText);
         ScrollBox = (ScrollView) view.findViewById(R.id.ChatScrollBox);
         ChatContent = (LinearLayout) view.findViewById(R.id.ChatLinearLayout);
-
+        GuildName = (TextView) view.findViewById(R.id.chatName);
+        GuildName.setText(((MainActivity) getActivity()).user.getGuild().getName());
 
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,47 +111,49 @@ public class ChatFragment extends Fragment {
                 ((MainActivity) getActivity()).setBottomBarVisibility(true);
             }
         });
+        messages = Server.getMessagesForPastWeek(((MainActivity) getActivity()).user.getGuild());
+//        messages.add("Pls fix the dryer already");
+//        messages.add("Thanks for the reminder Ian, but I think you are fully capable of doing it yourself so gl, bro");
+//        messages.add("k.");
+//        messages.add("Pls fix the dryer already");
+//        messages.add("Thanks for the reminder Ian, but I think you are fully capable of doing it yourself so gl, bro");
+//        messages.add("k.");
+//        messages.add("Pls fix the dryer already");
+//        messages.add("Thanks for the reminder Ian, but I think you are fully capable of doing it yourself so gl, bro");
+//        messages.add("k.");
+//
+//        authors.add("Ian");
+//        authors.add("Self");
+//        authors.add("Ian");
+//        authors.add("Ian");
+//        authors.add("Self");
+//        authors.add("Ian");
+//        authors.add("Ian");
+//        authors.add("Self");
+//        authors.add("Ian");
+//
+//        isSelf.add(false);
+//        isSelf.add(true);
+//        isSelf.add(false);
+//        isSelf.add(false);
+//        isSelf.add(true);
+//        isSelf.add(false);
+//        isSelf.add(false);
+//        isSelf.add(true);
+//        isSelf.add(false);
 
-        messages.add("Pls fix the dryer already");
-        messages.add("Thanks for the reminder Ian, but I think you are fully capable of doing it yourself so gl, bro");
-        messages.add("k.");
-        messages.add("Pls fix the dryer already");
-        messages.add("Thanks for the reminder Ian, but I think you are fully capable of doing it yourself so gl, bro");
-        messages.add("k.");
-        messages.add("Pls fix the dryer already");
-        messages.add("Thanks for the reminder Ian, but I think you are fully capable of doing it yourself so gl, bro");
-        messages.add("k.");
-
-        authors.add("Ian");
-        authors.add("Self");
-        authors.add("Ian");
-        authors.add("Ian");
-        authors.add("Self");
-        authors.add("Ian");
-        authors.add("Ian");
-        authors.add("Self");
-        authors.add("Ian");
-
-        isSelf.add(false);
-        isSelf.add(true);
-        isSelf.add(false);
-        isSelf.add(false);
-        isSelf.add(true);
-        isSelf.add(false);
-        isSelf.add(false);
-        isSelf.add(true);
-        isSelf.add(false);
-
-        ShowMessages(messages, authors, isSelf);
+//        ShowMessages(messages, authors, isSelf);
+        ShowMessages(messages);
 
         Send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(ChatText.getText().toString() != "") {
-                    messages.add(ChatText.getText().toString());
-                    authors.add("Self");
-                    isSelf.add(true);
-                    AddMessage(ChatText.getText().toString(), "Self", true);
+//                    messages.add(ChatText.getText().toString());
+//                    authors.add("Self");
+//                    isSelf.add(true);
+                    Message m = new Message(ChatText.getText().toString(), ((MainActivity) getActivity()).user);
+                    AddMessage(m);
                     ChatText.setText("");
                     (new Handler()).postDelayed(ChatFragment.this::ScrollDown, 100);
                 }
@@ -170,6 +181,25 @@ public class ChatFragment extends Fragment {
 
         fragTransaction.commit();
     }
+    private void ShowMessages(List<Message> messages) {
+        ChatContent.removeAllViews();
+
+        // Ajout des messages dans le chat box
+        FragmentManager fragMan = getFragmentManager();
+        FragmentTransaction fragTransaction = fragMan.beginTransaction();
+
+        for(int fragCount=0; fragCount < messages.size(); fragCount++) {
+            Message m = messages.get(fragCount);
+            MessageFragment messageFragment = MessageFragment.newInstance(m.getText(),
+                                                        m.getUser().getUsername(),
+                                                    m.getUser().getId()==((MainActivity) getActivity()).user.getId());
+
+            fragTransaction.add(ChatContent.getId(), messageFragment , "messageFragment" + fragCount);
+
+        }
+
+        fragTransaction.commit();
+    }
 
     private void AddMessage(String message, String author, boolean isSelf) {
         // Ajout des messages dans le chat box
@@ -182,8 +212,27 @@ public class ChatFragment extends Fragment {
 
         fragTransaction.commit();
     }
+    private void AddMessage(Message m) {
 
+        Server.addMessage(m);
+        // Ajout des messages dans le chat box
+//        FragmentManager fragMan = getFragmentManager();
+//        FragmentTransaction fragTransaction = fragMan.beginTransaction();
+//
+//
+//        MessageFragment messageFragment = MessageFragment.newInstance(m.getText(),
+//                m.getUser().getUsername(),
+//                m.getUser().getId()==((MainActivity) getActivity()).user.getId());
+//
+//        fragTransaction.add(ChatContent.getId(), messageFragment , "messageFragment" +  ChatContent.getChildCount());
+//
+//        fragTransaction.commit();
+        ((MainActivity) getActivity()).LoadFragment(new ChatFragment());
+
+    }
     private void ScrollDown() {
         ScrollBox.fullScroll(ScrollView.FOCUS_DOWN);
     }
+
+
 }

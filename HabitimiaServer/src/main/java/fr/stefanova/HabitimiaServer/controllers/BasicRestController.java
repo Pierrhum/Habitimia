@@ -1,5 +1,6 @@
 package fr.stefanova.HabitimiaServer.controllers;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -328,6 +329,22 @@ public class BasicRestController {
 		List<Message> messages = messageRepository.findByGuildId(guildId);
 		Message message = messages.get(messages.size()-1);
 
+		return new ResponseEntity<Message>(message ,HttpStatus.OK);
+	}
+	
+	@Transactional
+	@RequestMapping(value = "/add-message", method = RequestMethod.GET, produces = {"application/json"})
+	public ResponseEntity<Message> addMessage(Long guildId, 
+											Long userId,
+											String text) {
+		User user = userRepository.findById(userId).get();
+		Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = simpleDateFormat.format(date);
+        java.sql.Date dateSQL = java.sql.Date.valueOf(formattedDate);
+		Message message = new Message(user.getGuild(), user, text, dateSQL );
+		messageRepository.save(message);
+		List<Message> messages = messageRepository.findByGuildId(guildId);
 		return new ResponseEntity<Message>(message ,HttpStatus.OK);
 	}
 

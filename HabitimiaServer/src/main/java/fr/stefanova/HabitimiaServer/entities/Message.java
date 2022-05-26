@@ -30,6 +30,16 @@ public class Message {
 	public Long getId() {
 		return id;
 	}
+	
+	public Message() {}
+	
+	public Message(Guild guild, User user, String text, Date date) {
+		super();
+		this.guild = guild;
+		this.user = user;
+		this.text = text;
+		this.date = date;
+	}
 
 	public void setId(Long id) {
 		this.id = id;

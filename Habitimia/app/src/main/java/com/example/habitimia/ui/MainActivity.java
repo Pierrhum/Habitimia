@@ -153,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
 //        createTimedNotification(getApplicationContext());
 
         LoadFragment();
+        getWindow().setStatusBarColor(getResources().getColor(R.color.orange_btn));
     }
 
     @Override

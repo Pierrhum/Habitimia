@@ -104,8 +104,9 @@ public class ArenaFragment extends Fragment {
         users.add(u1);
         users.add(u2);
 
-//        users = Server.getUsers();
-
+        users = Server.getUsers();
+        users.add(u1);
+        users.add(u2);
         FragmentManager fragMan = getFragmentManager();
         FragmentTransaction fragTransaction = fragMan.beginTransaction();
 

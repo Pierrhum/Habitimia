@@ -137,7 +137,7 @@ public class DailyFragment extends Fragment {
         if (dow != null){
             day = Day.valueOf(dow.name());
         }
-//        dailiesList = Server.getDailiesForDay(((MainActivity) getActivity()).user, day);
+        dailiesList = Server.getDailiesForDay(((MainActivity) getActivity()).user, day);
 
         adapter.setTasks(dailiesList);
 

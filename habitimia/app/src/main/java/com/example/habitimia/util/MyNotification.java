@@ -63,6 +63,7 @@ public class MyNotification {
         builder.setContentTitle(title)
                 .setContentText(content)
                 .setSmallIcon(R.drawable.logo)
+                .setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL)
                 .setAutoCancel(true)
                 .setCategory(Notification.CATEGORY_ALARM)
                 .setDefaults((Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND | Notification.FLAG_SHOW_LIGHTS))

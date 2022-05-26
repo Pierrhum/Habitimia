@@ -148,14 +148,14 @@ public class CreateQuestFragment extends Fragment {
                     Quest new_quest = new Quest(((MainActivity) getActivity()).user, name, details, AdventurerClass.values()[previousClassID]);
                     if (isNewQuest){
                         if (ownerType == OwnerType.User) {
-//                            Server.createQuest(((MainActivity) getActivity()).user, new_quest);
+                            Server.createQuest(((MainActivity) getActivity()).user, new_quest);
                         }
                         else{
-//                            Server.createQuest(((MainActivity) getActivity()).user.getGuild(), new_quest);
+                            Server.createQuest(((MainActivity) getActivity()).user.getGuild(), new_quest);
                         }
                     }else{
                         new_quest.setId(quest.getId());
-//                        Server.updateQuest(new_quest);
+                        Server.updateQuest(new_quest);
                         isNewQuest=true;
                     }
                     if (ownerType == OwnerType.User) {
@@ -199,6 +199,7 @@ public class CreateQuestFragment extends Fragment {
     }
 
     private void fillData() {
+        Create.setText("Update");
         Name.setText(quest.getName());
         Details.setText(quest.getDetails());
         UpdateChosenClass(quest.getDifficulty().ordinal());

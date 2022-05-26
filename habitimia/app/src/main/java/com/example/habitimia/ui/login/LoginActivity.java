@@ -80,35 +80,38 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginResult == null) {
                     return;
                 }
-                loadingProgressBar.setVisibility(View.GONE);
-                if (loginResult.getError() != null) {
-                    showLoginFailed(loginResult.getError());
-                }
-                if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
-                }
-                setResult(Activity.RESULT_OK);
+                User user = Server.login(usernameEditText.getText().toString(), passwordEditText.getText().toString());
 
-                //Complete and destroy login activity once successful
-                /***
-                 * TODO : Connexion
-                 * 1 - Lire base de données
-                 * 2 - Récupérer données
-                 * Trouver la ligne où usernameEditText.getText().toString() == USER.Username
-                 * Si introuvable : erreur : Aucun compte associé à ce pseudo
-                 * Sinon si passwordEditText.getText().toString() == USER.password
-                 * Instancier User avec les données de la ligne et ouvrir intent HomeActivity
-                 * Sinon : erreur : Mot de passe incorrect
-                 */
-                //1
+                loadingProgressBar.setVisibility(View.GONE);
+                if (user == null) {
+                    showLoginFailed("Username or password incorrect.");
+                }else if (loginResult.getSuccess() != null) {
+//                    updateUiWithUser(loginResult.getSuccess());
+                    updateUiWithUser(new LoggedInUserView(user.getUsername()));
+
+                    setResult(Activity.RESULT_OK);
+
+                    //Complete and destroy login activity once successful
+                    /***
+                     * TODO : Connexion
+                     * 1 - Lire base de données
+                     * 2 - Récupérer données
+                     * Trouver la ligne où usernameEditText.getText().toString() == USER.Username
+                     * Si introuvable : erreur : Aucun compte associé à ce pseudo
+                     * Sinon si passwordEditText.getText().toString() == USER.password
+                     * Instancier User avec les données de la ligne et ouvrir intent HomeActivity
+                     * Sinon : erreur : Mot de passe incorrect
+                     */
+                    //1
 //                    User user = Server.login("Mia", "123456");
-//                    user = Server.login(usernameEditText.getText().toString(), passwordEditText.getText().toString());
-                    User user = new User("Mia");
+
+//                    User user = new User("Mia");
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    intent.putExtra("user",  user);
+                    intent.putExtra("user", user);
                     startActivity(intent);
                     finish();
 //                }
+                }
 
             }
         });
@@ -168,7 +171,7 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
 
-    private void showLoginFailed(@StringRes Integer errorString) {
+    private void showLoginFailed(String errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 }

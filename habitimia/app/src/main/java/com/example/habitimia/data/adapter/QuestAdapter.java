@@ -102,7 +102,7 @@ public class QuestAdapter extends RecyclerView.Adapter<QuestAdapter.ViewHolder> 
 
     public void deleteItem(int position) {
         Quest item = questList.get(position);
-//        Server.deleteQuest(item.getId().toString());
+        Server.deleteQuest(item.getId().toString());
         questList.remove(position);
         notifyItemRemoved(position);
     }

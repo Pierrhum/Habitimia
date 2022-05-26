@@ -17,5 +17,7 @@ public interface RepetitionRepository extends JpaRepository<Repetition, Long> {
 
 	List<Repetition> findByDaily(Daily daily);
 
+	List<Repetition> findAllByDailyId(Long id);
+
 }
 

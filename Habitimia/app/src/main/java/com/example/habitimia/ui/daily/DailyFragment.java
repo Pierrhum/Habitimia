@@ -1,8 +1,11 @@
-package com.example.habitimia.ui.quest;
+package com.example.habitimia.ui.daily;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +13,23 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.example.habitimia.R;
+import com.example.habitimia.data.adapter.DailyAdapter;
+import com.example.habitimia.data.adapter.QuestAdapter;
+import com.example.habitimia.data.model.AdventurerClass;
 import com.example.habitimia.data.model.Daily;
+import com.example.habitimia.data.model.Day;
+import com.example.habitimia.data.model.Quest;
 import com.example.habitimia.data.model.User;
 import com.example.habitimia.ui.MainActivity;
 import com.example.habitimia.ui.home.HomeFragment;
+import com.example.habitimia.util.RecyclerItemDailyTouchHelper;
+import com.example.habitimia.util.RecyclerItemTouchHelper;
 import com.example.habitimia.util.Server;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -36,7 +50,11 @@ public class DailyFragment extends Fragment {
 
 
     private ImageButton Back;
-    private List<Daily> dailies;
+    private User user;
+    private List<Daily> dailiesList;
+
+    private RecyclerView tasksRecyclerView;
+    private DailyAdapter adapter;
     public DailyFragment() {
         // Required empty public constructor
     }
@@ -85,7 +103,45 @@ public class DailyFragment extends Fragment {
         ((MainActivity) getActivity()).setBackgroundColor(getResources().getColor(R.color.white));
         ((MainActivity) getActivity()).UpdateFABIcon(R.drawable.ic_add);
 
-//        dailies = Server.getDailies(((MainActivity) getActivity()).user);
+        dailiesList = new ArrayList<>();
+
+        tasksRecyclerView = view.findViewById(R.id.tasksRecyclerView);
+        tasksRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        adapter = new DailyAdapter(((MainActivity) getActivity()));
+        tasksRecyclerView.setAdapter(adapter);
+
+        ItemTouchHelper itemTouchHelper = new
+                ItemTouchHelper(new RecyclerItemDailyTouchHelper(adapter));
+        itemTouchHelper.attachToRecyclerView(tasksRecyclerView);
+
+        Daily dummy_daily = new Daily();
+        dummy_daily.setId(1l);
+        dummy_daily.setName("Dummy Quest Name");
+        dummy_daily.setDetails("Dummy Quest Details");
+        dummy_daily.setDifficulty(AdventurerClass.B);
+
+        dailiesList.add(dummy_daily);
+        dailiesList.add(dummy_daily);
+        dailiesList.add(dummy_daily);
+
+//        String current_day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+        LocalDate date = null;
+        DayOfWeek dow = null;
+        Day day = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            date = LocalDate.now();
+            dow = date.getDayOfWeek();
+
+        }
+        if (dow != null){
+            day = Day.valueOf(dow.name());
+        }
+//        dailiesList = Server.getDailiesForDay(((MainActivity) getActivity()).user, day);
+
+        adapter.setTasks(dailiesList);
+
+
 //        Daily daily = Server.updateDaily(dailies.get(0), "renaming test", null, null, null);
 //        List<User> usersFromGuild = Server.getAllUsersForGuild(((MainActivity) getActivity()).user.getGuild());
 //        User user_test = Server.register("Test", "", "123456", "MAGICIAN");

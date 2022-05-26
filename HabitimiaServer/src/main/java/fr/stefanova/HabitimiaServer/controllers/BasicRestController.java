@@ -1,6 +1,8 @@
 package fr.stefanova.HabitimiaServer.controllers;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -100,6 +102,40 @@ public class BasicRestController {
 		return new ResponseEntity<List<Daily> >(dailies ,HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/all-dailies-for-day", method = RequestMethod.GET, produces = {"application/json"})
+	public ResponseEntity<List<Daily> > allDailiesForDay(Long userId, Day day) {
+		List<Daily> dailies = dailyRepository.findAllByUserId(userId);
+		List<Daily> dailies_for_day = new ArrayList<>();
+		for (Daily daily: dailies) {
+			boolean hasDay = false;
+			List<Repetition> repetitions = repetitionRepository.findAllByDailyId(daily.getId());
+			for (Repetition repetition: repetitions) {
+				repetition.setDaily(null);
+				if (repetition.getDay() == day) {
+					hasDay= true;
+					daily.setRepetitions(repetitions);
+				}
+			}
+			if (hasDay)
+				dailies_for_day.add(daily);
+
+		}
+//		for (Daily daily: dailies) {
+//			boolean hasDay = false;
+//			List<Repetition> repetitions = repetitionRepository.findByDailyId(daily.getId());
+//			for (Repetition repetition: repetitions) {
+//				if (repetition.getDay() == day)
+//					hasDay= true;
+//			}
+//			if (hasDay)
+//				daily.setRepetitions(repetitions);
+//			else {}
+////				dailies.remove(daily);
+//		}
+		
+		return new ResponseEntity<List<Daily> >(dailies_for_day ,HttpStatus.OK);
+	}
+	
 	@RequestMapping(value = "/create-daily", method = RequestMethod.GET, produces = {"application/json"})
 	public ResponseEntity<Object> createDailies(Long userId, 
 												String name,
@@ -109,15 +145,17 @@ public class BasicRestController {
 												) {
 		User user = userRepository.findById(userId).get();
 		Daily daily = new Daily(user, name, details, difficulty);
+		List<Repetition> savedRepetitions = new ArrayList<>();
 		daily = dailyRepository.save(daily);
 		for (Day day:days) {
-			Repetition repetition = new Repetition(user, daily, day);
-			repetitionRepository.save(repetition);	
-			repetition.setDaily(null);
-			daily.getRepetitions().add(repetition);
+			Repetition repetition = new Repetition(daily, day);
+			Repetition saved = repetitionRepository.save(repetition);	
+//			repetition.setDaily(null);
+			savedRepetitions.add(new Repetition(saved.getId(), null, day));
 		}
+		daily.setRepetitions(savedRepetitions);
 		
-
+		List<Repetition> repetitions = repetitionRepository.findAll();
 		return new ResponseEntity<Object>(daily ,HttpStatus.OK);
 	}
 	
@@ -142,24 +180,24 @@ public class BasicRestController {
 		}
 		daily = dailyRepository.save(daily);
 		if (days.size() != 0) {
+			
 			repetitionRepository.deleteAllByDailyId(dailyId);
 			daily.setRepetitions(new ArrayList<>());
 			for (Day day:days) {
-				Repetition repetition = new Repetition(daily.getUser(), daily, day);
-				repetitionRepository.save(repetition);	
-				repetition.setDaily(null);
-				daily.getRepetitions().add(repetition);
+				Repetition repetition = new Repetition(daily, day);
+				Repetition saved = repetitionRepository.save(repetition);	
+//				repetition.setDaily(null);
+//				daily.getRepetitions().add(new Repetition(saved.getId(), null, day));
 			}
 		}else {
-			List<Repetition> repetitions = repetitionRepository.findByDailyId(daily.getId());
-			for (Repetition repetition: repetitions) {
-				repetition.setDaily(null);
-			}
-			daily.setRepetitions(repetitions);
+			
+//			List<Repetition> repetitions = repetitionRepository.findByDailyId(daily.getId());
+//			for (Repetition repetition: repetitions) {
+//				repetition.setDaily(null);
+//			}
+//			daily.setRepetitions(repetitions);
 		}
-		
-		
-//		daily = dailyRepository.findById(daily.getId()).get();
+
 		return new ResponseEntity<Object>(daily ,HttpStatus.OK);
 	}
 	

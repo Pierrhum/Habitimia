@@ -4,10 +4,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Daily {
+public class Daily implements Serializable {
 
     private Long id;
 
@@ -21,13 +22,15 @@ public class Daily {
 
     private List<Repetition> repetitions = new ArrayList<>();
 
-    public Daily() {
+    public Daily(){
+        this.repetitions = new ArrayList<>();
     }
     public Daily(User user, String name, String details, AdventurerClass difficulty) {
         this.user = user;
         this.name = name;
         this.details = details;
         this.difficulty = difficulty;
+        this.repetitions = new ArrayList<>();
     }
 
     public Daily(JSONObject quest) {
@@ -36,6 +39,7 @@ public class Daily {
             this.name = quest.getString("name");
             this.details = quest.getString("details");
             this.difficulty = AdventurerClass.valueOf(quest.getString("difficulty"));
+            this.repetitions = new ArrayList<>();
             JSONArray repetitions_JSONArray =  new JSONArray(quest.getString("repetitions"));
             for(int i = 0; i < repetitions_JSONArray.length(); i++){
                 JSONObject repetition = repetitions_JSONArray.getJSONObject(i);

@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.example.habitimia.R;
 import com.example.habitimia.ui.MainActivity;
 import com.example.habitimia.ui.arena.ArenaFragment;
-import com.example.habitimia.ui.quest.DailyFragment;
+import com.example.habitimia.ui.daily.DailyFragment;
 import com.example.habitimia.ui.guild.GuildFragment;
 import com.example.habitimia.ui.quest.QuestFragment;
 

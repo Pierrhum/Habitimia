@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import com.example.habitimia.data.model.AdventurerClass;
 import com.example.habitimia.data.model.Daily;
+import com.example.habitimia.data.model.Day;
 import com.example.habitimia.data.model.Guild;
 import com.example.habitimia.data.model.OwnerType;
 import com.example.habitimia.data.model.Quest;
@@ -325,7 +326,7 @@ public class Server {
         return ;
     }
 
-    public static List<Daily> getDailies(User user){
+    public static List<Daily> getAllDailies(User user){
         String request_params = "userId=" + user.getId();                ;
         JSONArray response = Server.sendRequestForList("all-dailies", request_params);
 
@@ -346,35 +347,99 @@ public class Server {
         return dailies;
     }
 
-    public static Daily updateDaily(Daily daily,
-                                   String name,
-                                   String details,
-                                   AdventurerClass difficulty,
-                                   List<Repetition> repetitions){
-        String request_params = "dailyId=" + daily.getId();
-        if (name != null){
-            request_params += "&" +
-                    "name=" + name;
+    public static List<Daily> getDailiesForDay(User user, Day day){
+        String request_params = "userId=" + user.getId()
+                                + "&" +
+                                "day=" + day;;                ;
+        JSONArray response = Server.sendRequestForList("all-dailies-for-day", request_params);
+
+        if (response == null){
+            return null;
         }
-        if (details != null){
-            request_params += "&" +
-                    "details=" + details;
+        List<Daily> dailies = new ArrayList<>();
+        try {
+            for(int i = 0; i < response.length(); i++){
+                JSONObject daily = response.getJSONObject(i);
+                dailies.add(new Daily(daily));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        if (difficulty != null){
+
+        return dailies;
+    }
+
+    public static Daily createDaily(User user, Daily daily, List<Day> days) {
+        String request_params = "userId=" + user.getId();
+        if (daily.getName() != null){
             request_params += "&" +
-                    "difficulty=" + difficulty;
+                    "name=" + daily.getName();
+        }
+        if (daily.getDetails() != null){
+            request_params += "&" +
+                    "details=" + daily.getDetails();
+        }
+        if (daily.getDifficulty() != null){
+            request_params += "&" +
+                    "difficulty=" + daily.getDifficulty();
         }
         request_params += "&" +
                 "days=";
-        if (repetitions != null && repetitions.size() > 0){
+        if (days != null && days.size() > 0){
 
-            for (Repetition rep:repetitions){
-                request_params += rep + ",";
+            for (Day day:days){
+                request_params += day + ",";
             }
             request_params = request_params.substring(0, request_params.length() - 1);
         }
 
-        JSONObject response = Server.sendRequest("update-daily", request_params);
+        JSONObject response = Server.sendRequest("create-daily", request_params);
+
+        if (response == null){
+            return null;
+        }
+        Daily new_daily = null;
+        try {
+
+            new_daily = new Daily(response);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return new_daily;
+
+    }
+    public static Daily updateDaily(Daily daily,
+                                   List<Day> days){
+        String request_params = "dailyId=" + daily.getId();
+        if (daily.getName() != null){
+            request_params += "&" +
+                    "name=" + daily.getName();
+        }
+        if (daily.getDetails() != null){
+            request_params += "&" +
+                    "details=" + daily.getDetails();
+        }
+        if (daily.getDifficulty() != null){
+            request_params += "&" +
+                    "difficulty=" + daily.getDifficulty();
+        }
+        request_params += "&" +
+                "days=";
+        if (days != null && days.size() > 0){
+
+            for (Day day:days){
+                request_params += day + ",";
+            }
+            request_params = request_params.substring(0, request_params.length() - 1);
+        }
+        JSONObject response = null;
+        try {
+            response = Server.sendRequest("update-daily", request_params);
+        }catch (Exception e){}
+
 
         if (response == null){
             return null;
@@ -440,5 +505,6 @@ public class Server {
 
         return users;
     }
+
 
 }

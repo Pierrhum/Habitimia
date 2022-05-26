@@ -34,6 +34,7 @@ import com.example.habitimia.ui.quest.DailyFragment;
 import com.example.habitimia.ui.quest.QuestFragment;
 import com.example.habitimia.util.MyNotification;
 import com.example.habitimia.util.NotificationReceiver;
+import com.example.habitimia.util.Server;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -67,18 +68,19 @@ public class MainActivity extends AppCompatActivity {
             user = (User) intent.getSerializableExtra("user");
         setContentView(R.layout.activity_main);
 
-        user = new User();
-        user.setId(1L);
-        user.setUsername("Mia");
-        user.setStatistics(new Statistics());
-        user.getStatistics().setAdventurerClass(AdventurerClass.A);
-        user.getStatistics().setHP(10L);
-        user.getStatistics().setExperience(0L);
+//        user = new User();
+//        user.setId(1L);
+//        user.setUsername("Mia");
+//        user.setStatistics(new Statistics());
+//        user.getStatistics().setAdventurerClass(AdventurerClass.A);
+//        user.getStatistics().setHP(10L);
+//        user.getStatistics().setExperience(0L);
 
         ArrayList<User> guildMembers = new ArrayList<User>();
         guildMembers.add(user);
         guildMembers.add(new User());
         user.setGuild(new Guild(guildMembers));
+//        user.getGuild().setMembers((ArrayList<User>) Server.getAllUsersForGuild(user.getGuild()));
 
         Root = (ConstraintLayout) findViewById(R.id.MainRoot);
         FAB = (FloatingActionButton) findViewById(R.id.fab);
@@ -133,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
         mAccelCurrent = SensorManager.GRAVITY_EARTH;
         mAccelLast = SensorManager.GRAVITY_EARTH;
 
-        createTimedNotification(getApplicationContext());
+//        createTimedNotification(getApplicationContext());
 
         LoadFragment();
     }
@@ -178,26 +180,26 @@ public class MainActivity extends AppCompatActivity {
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
         }
     };
-
-    public void createTimedNotification (Context context) { //(Activity activity, Context context)
-        Intent myIntent = new Intent(context, NotificationReceiver. class ) ;
-        AlarmManager alarmManager = (AlarmManager) getSystemService( ALARM_SERVICE ) ;
-        PendingIntent pendingIntent = PendingIntent. getService ( this, 0 , myIntent , 0 ) ;
-        Calendar calendar = Calendar. getInstance () ;
-//        calendar.set(Calendar. SECOND , 0 ) ;
-//        calendar.set(Calendar. MINUTE , 0 ) ;
-//        calendar.set(Calendar. HOUR , 0 ) ;
-//        calendar.set(Calendar. AM_PM , Calendar. AM ) ;
-//        calendar.add(Calendar. DAY_OF_MONTH , 1 ) ;
-        SimpleDateFormat dateFormat = new SimpleDateFormat();
-        String date = dateFormat.format(calendar.getTimeInMillis());
-        alarmManager.setRepeating(AlarmManager. RTC_WAKEUP , calendar.getTimeInMillis() + (60 * 1000), 1000/*1000 * 60 * 60 * 24*/ , pendingIntent) ;
-
-        boolean isWorking = (PendingIntent.getBroadcast(MainActivity.this, 0, myIntent, PendingIntent.FLAG_NO_CREATE) != null);
-        if (isWorking) {
-        } else {}
-
-    }
+//
+//    public void createTimedNotification (Context context) { //(Activity activity, Context context)
+//        Intent myIntent = new Intent(context, NotificationReceiver. class ) ;
+//        AlarmManager alarmManager = (AlarmManager) getSystemService( ALARM_SERVICE ) ;
+//        PendingIntent pendingIntent = PendingIntent. getService ( this, 0 , myIntent , 0 ) ;
+//        Calendar calendar = Calendar. getInstance () ;
+////        calendar.set(Calendar. SECOND , 0 ) ;
+////        calendar.set(Calendar. MINUTE , 0 ) ;
+////        calendar.set(Calendar. HOUR , 0 ) ;
+////        calendar.set(Calendar. AM_PM , Calendar. AM ) ;
+////        calendar.add(Calendar. DAY_OF_MONTH , 1 ) ;
+//        SimpleDateFormat dateFormat = new SimpleDateFormat();
+//        String date = dateFormat.format(calendar.getTimeInMillis());
+//        alarmManager.setRepeating(AlarmManager. RTC_WAKEUP , calendar.getTimeInMillis() + (60 * 1000), 1000/*1000 * 60 * 60 * 24*/ , pendingIntent) ;
+//
+//        boolean isWorking = (PendingIntent.getBroadcast(MainActivity.this, 0, myIntent, PendingIntent.FLAG_NO_CREATE) != null);
+//        if (isWorking) {
+//        } else {}
+//
+//    }
 
     public void setBackgroundColor(@ColorInt int color) {
         Root.setBackgroundColor(color);

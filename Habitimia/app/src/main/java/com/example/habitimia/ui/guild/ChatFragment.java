@@ -143,6 +143,7 @@ public class ChatFragment extends Fragment {
                     authors.add("Self");
                     isSelf.add(true);
                     AddMessage(ChatText.getText().toString(), "Self", true);
+                    ChatText.setText("");
                     (new Handler()).postDelayed(ChatFragment.this::ScrollDown, 100);
                 }
             }
